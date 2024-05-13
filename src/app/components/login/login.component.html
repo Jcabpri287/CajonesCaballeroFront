@@ -1,0 +1,63 @@
+<div class="container-fluid ps-md-0">
+  <div class="row g-0">
+    <div class="d-none d-md-flex col-md-3 col-lg-7 bg-image"></div>
+    <div class="col-md-9 col-lg-5">
+      <div class="login d-flex align-items-center py-3">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-10 col-lg-9 mx-auto">
+              <h3 class="login-heading text-center mb-4">Bienvenido/a de vuelta!</h3>
+
+              <!-- Sign In Form -->
+              <form [formGroup]="loginForm" (ngSubmit)="login()" class="w-100 mx-auto">
+                <div class="mb-2 justify-content-center align-content-center z-2" style="margin-bottom: 100px;">
+                  <div class="position-relative">
+                  <input type="email" class="formInput" id="floatingInput" placeholder="Introduce tu email." formControlName="correo" >
+                  <div *ngIf="(loginForm.get('correo')?.errors?.['required'] ||  loginForm.get('correo')?.errors?.['email'] ) && loginForm.get('correo')?.touched" class="tiptool">
+                    <div class="icon">!</div>
+                    <div class="tooltiptext">
+                      <div style="margin-bottom: -15px;">
+                        <p *ngIf="(loginForm.get('correo')?.errors?.['required'])" style="font-size: 15px">Correo electrónico requerido</p>
+                        <p *ngIf="(loginForm.get('correo')?.errors?.['email'])">Correo electrónico inválido</p>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="my-3 justify-content-center align-content-center">
+                  <div class="position-relative">
+                  <input type="password" class="formInput" id="floatingPassword" placeholder="Introduce tu contraseña." formControlName="contraseña" >
+                  <div *ngIf="loginForm.get('contraseña')?.errors?.['required'] && loginForm.get('contraseña')?.touched" class="tiptool">
+                    <div class="icon">!</div>
+                    <div class="tooltiptext">
+                      <div style="margin-bottom: -15px;">
+                        <p *ngIf="(loginForm.get('contraseña')?.errors?.['required'])" style="font-size: 15px">Contraseña requerida</p>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+
+                <div class="form-check mb-2">
+                  <input class="form-check-input" type="checkbox" value="" id="rememberPasswordCheck" formControlName="rememberPassword">
+                  <label class="form-check-label" for="rememberPasswordCheck">
+                    Recordar credenciales
+                  </label>
+                </div>
+
+                <div class="d-grid mt-3">
+                  <button class="btn btn-lg btn-login text-uppercase fw-bold mb-1 botoncillo" type="submit" [disabled]="loginForm.invalid">Iniciar sesion</button>
+                  <div class="text-center mt-2">
+                    <a class="small enlace" href="register" style="text-decoration: none;">No estas registrado?</a>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

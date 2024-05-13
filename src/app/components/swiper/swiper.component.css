@@ -1,0 +1,22 @@
+/* swiper.component.css */
+/* Estilos para el contenedor del swiper */
+.swiper-container {
+  width: 100%;
+  height: 100%;
+}
+/* Estilos para los slides */
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  /* Otros estilos según necesites */
+}
+/* Estilos para los controles de navegación */
+.swiper-button-prev,
+.swiper-button-next {
+  /* Estilos para los botones de navegación */
+}
+/* Estilos para la paginación */
+.swiper-pagination {
+  /* Estilos para la paginación */
+}

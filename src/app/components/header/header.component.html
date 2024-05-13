@@ -1,0 +1,71 @@
+  <div class="container bg-transparent sticky-top " >
+  <nav class="navbar navbar-expand-lg text-dark mx-auto bg-transparent" id="mainNav">
+    <div class="container px-4 px-lg-5">
+      @if (checkSpecificUrl()) {
+        <a class="navbar-brand titulo" (click)="scrollToSection('Inicio')"><i class="fa-solid fa-cube"></i></a>
+      }@else {
+        <a class="navbar-brand titulo" href="/"><i class="fa-solid fa-cube"></i></a>
+      }
+      <div class="navbar-collapse d-none d-lg-block" id="navbarResponsive">
+        <ul class="navbar-nav ms-auto" *ngIf="checkSpecificUrl()">
+          <li class="nav-item botones"><a class="nav-link" (click)="scrollToSection('Inicio')">Inicio</a></li>
+          <li class="nav-item botones"><a class="nav-link" (click)="scrollToSection('Catalogo')">Catalogo</a></li>
+          <li class="nav-item botones"><a class="nav-link" (click)="scrollToSection('Personalizacion')">Personalizacion</a></li>
+          <li class="nav-item botones"><a class="nav-link" (click)="scrollToSection('Tutoriales')">Tutoriales</a></li>
+          <li class="nav-item botones"><a class="nav-link" (click)="scrollToSection('Contacto')">Ayuda</a></li>
+        </ul>
+      </div>
+      <button class="nav-item" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" style="border: 0px; background-color: transparent;">
+        <i class="fa-solid fa-ellipsis iconito" ></i>
+      </button>
+    </div>
+  </nav>
+
+  <div class="offcanvas offcanvas-end" style="background-color: rgba(37, 37, 37, 0.998); color: white;" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body py-0">
+      <ul class="navbar-nav" style="margin-left: 20px;">
+        <div class="d-block d-lg-none" *ngIf="checkUrl('/')">
+        <li class="nav-item" style="margin-bottom: -10px;"><a class="nav-link" href="#"><i class="fa-regular fa-circle" style="margin-right: 10px; font-size: 10px;"></i>Ir a</a></li>
+        <ul class="navbar-nav ms-5">
+          <li class="nav-item canvasList"  style="margin-bottom: -10px;cursor: pointer;"><a class="nav-link" (click)="scrollToSection('Inicio')"><i class="fa-solid fa-circle" style="margin-right: 10px; font-size: 10px;"></i>Inicio</a></li>
+          <li class="nav-item canvasList"  style="margin-bottom: -10px;cursor: pointer;"><a class="nav-link" (click)="scrollToSection('Catalogo')"><i class="fa-solid fa-circle" style="margin-right: 10px; font-size: 10px;"> </i>Catalogo</a></li>
+          <li class="nav-item canvasList"  style="margin-bottom: -10px;cursor: pointer;"><a class="nav-link" (click)="scrollToSection('Personalizacion')"><i class="fa-solid fa-circle" style="margin-right: 10px; font-size: 10px;"></i>Personalizacion</a></li>
+          <li class="nav-item canvasList"  style="margin-bottom: -10px;cursor: pointer;"><a class="nav-link" (click)="scrollToSection('Tutoriales')"><i class="fa-solid fa-circle" style="margin-right: 10px; font-size: 10px;"></i>Tutoriales</a></li>
+        </ul>
+      </div>
+        <li class="nav-item" style="margin-bottom: -10px;margin-top: 10px;"><a class="nav-link" href="#"><i class="fa-solid fa-store" style="margin-right: 10px; font-size: 15px;"></i>Productos</a></li>
+        <ul class="navbar-nav ms-5">
+          <li class="nav-item canvasList" [class.active]="checkUrl('/catalogo')" style="margin-bottom: -10px;"><a class="nav-link" href="/catalogo"><i class="fa-solid fa-circle" style="margin-right: 10px; font-size: 10px;"></i>Catálogo</a></li>
+          <li class="nav-item canvasList" [class.active]="checkUrl('/personalizar')" style="margin-bottom: -10px;"><a class="nav-link" href="/personalizar"><i class="fa-solid fa-circle" style="margin-right: 10px; font-size: 10px;"> </i>Personalizar</a></li>
+        </ul>
+        <li class="nav-item" style="margin-bottom: -10px;margin-top: 10px;"><a class="nav-link" href="#"><i class="fa-regular fa-user" style="margin-right: 10px; font-size: 15px;"></i>Cuenta</a></li>
+        @if (sesionIniciada()) {
+          <ul class="navbar-nav ms-5">
+            <li class="nav-item canvasList" [class.active]="checkUrl('/perfil')" style="margin-bottom: -10px;"><a class="nav-link" href="/perfil"><i class="fa-solid fa-circle" style="margin-right: 10px; font-size: 10px;"></i>Mi perfil</a></li>
+            <li class="nav-item canvasList" [class.active]="checkUrl('/carrito')" style="margin-bottom: -10px;"><a class="nav-link" href="/carrito"><i class="fa-solid fa-circle" style="margin-right: 10px; font-size: 10px;"></i>Carrito</a></li>
+            <li class="nav-item canvasList" [class.active]="checkUrl('/pedidos')" style="margin-bottom: -10px;"><a class="nav-link" href="/pedidos"><i class="fa-solid fa-circle" style="margin-right: 10px; font-size: 10px;"></i>Mis pedidos</a></li>
+            <li class="nav-item canvasList" style="margin-bottom: -10px; cursor: pointer;"><a class="nav-link" (click)="cerrarSesion()"><i class="fa-solid fa-circle" style="margin-right: 10px; font-size: 10px;"></i>Cerrar Sesion</a></li>
+          </ul>
+          }@else {
+            <ul class="navbar-nav ms-5">
+              <li class="nav-item canvasList" [class.active]="checkUrl('/login')" style="margin-bottom: -10px;"><a class="nav-link" href="login"><i class="fa-solid fa-circle" style="margin-right: 10px; font-size: 10px;"></i>Iniciar Sesion</a></li>
+              <li class="nav-item canvasList" [class.active]="checkUrl('/register')" style="margin-bottom: -10px;"><a class="nav-link" href="register"><i class="fa-solid fa-circle" style="margin-right: 10px; font-size: 10px;"></i>Registrarse</a></li>
+            </ul>        }
+        <li *ngIf="checkUrl('/')" class="nav-item" style="margin-bottom: -10px;margin-top: 10px; cursor: pointer;"><a class="nav-link" (click)="scrollToSection('Contacto')"><i class="fa-solid fa-circle-info" style="margin-right: 10px; font-size: 15px;"></i>Ayuda</a></li>
+        <ul *ngIf="checkUrl('/')" class="navbar-nav ms-5">
+          <li *ngIf="checkUrl('/')" class="nav-item canvasList" style="margin-bottom: -10px; cursor: pointer;"><a class="nav-link" (click)="scrollToSection('Contacto')"><i class="fa-solid fa-circle" style="margin-right: 10px; font-size: 10px;"></i>Preguntas frecuentes</a></li>
+          <li *ngIf="checkUrl('/')" class="nav-item canvasList" style="margin-bottom: -10px; cursor: pointer;"><a class="nav-link" (click)="scrollToSection('Contacto')"><i class="fa-solid fa-circle" style="margin-right: 10px; font-size: 10px;"> </i>Politica de devoluciones</a></li>
+          <li *ngIf="checkUrl('/')" class="nav-item canvasList" style="margin-bottom: -10px; cursor: pointer;"><a class="nav-link" (click)="scrollToSection('Contacto')"><i class="fa-solid fa-circle" style="margin-right: 10px; font-size: 10px;"></i>Terminos y condiciones</a></li>
+        </ul>
+        <li class="nav-item" style="margin-bottom: -10px;margin-top: 10px; cursor: pointer;"><a class="nav-link" (click)="scrollToSection('Contacto')"><i class="fa-regular fa-address-card" style="margin-right: 10px; font-size: 15px;"></i>Acerca de</a></li>
+        <ul class="navbar-nav ms-5">
+          <li class="nav-item canvasList" style="margin-bottom: -10px; cursor: pointer;"><a class="nav-link" href="https://www.linkedin.com/in/juanancaballero"><i class="fa-solid fa-circle" style="margin-right: 10px; font-size: 10px;"></i>Acerca del alumno</a></li>
+          <li class="nav-item canvasList" style="margin-bottom: -10px; cursor: pointer;"><a class="nav-link" href="https://www.iestrassierra.com/"><i class="fa-solid fa-circle" style="margin-right: 10px; font-size: 10px;"> </i>Acerca del IES Trassierra</a></li>
+        </ul>
+      </ul>
+    </div>
+  </div>
+</div>

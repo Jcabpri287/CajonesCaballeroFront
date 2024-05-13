@@ -1,0 +1,72 @@
+
+<div class="container mx-auto" style="min-height: 78vh; padding-top: 50px;">
+  <h1 style="font-size: 70px; margin: 20px 0px 50px 10px; font-weight: 800;">Tu carrito</h1>
+
+  @if (productosEnCarrito.length > 0) {
+    @for (item of productosEnCarrito; track $index) {
+      <div class="row flex justify-content-center align-baseline mx-auto">
+        <div class="row mb-3 " style="display: flex; justify-content: space-around; background-color: rgba(210, 209, 209, 0.373); padding: 10px 0px; border-radius: 5px;">
+          <div class="col-3 ms-3 col-lg-1" style="padding: 5px; border-radius: 15px;">
+            <div style="background-color: white; display: grid; place-items: center; border-radius: 5px; min-height: 105px;">
+              <img width="80%" [src]="item.producto.imagen_url" alt="">
+            </div>
+          </div>
+          <div class="col-8 d-none d-lg-block" style="padding: 5px; border-radius: 15px; ">
+            <div style="background-color: white; border-radius: 5px; padding: 10px; min-height: 105px;">
+              <p style="margin: 0px;"><u style="cursor: pointer;" (click)="verProducto(item.producto)">{{item.producto.nombre}}</u> | <b style="color: rgb(92, 129, 249);">{{item.producto.precio}}€</b> | <span style="font-size: 13px;">{{item.producto.fecha_lanzamiento | date}}</span> | <span >Actualmente en el carrito : {{item.cantidad}}</span></p>
+              <hr style="border: 1px solid rgb(92, 129, 249); margin: 5px 0px; ">
+              <p style="font-size: 13px; margin: 0px;">
+                {{item.producto.descripcion}}
+              </p>
+            </div>
+          </div>
+          <div class="col-1 col-lg-1" style="padding: 5px; border-radius: 15px; width: fit-content;">
+            <div style="background-color: white; border-radius: 5px; padding: 10px 15px; min-height: 105px; display: flex; flex-direction: column;">
+              <i class="fa-solid fa-plus" (click)="agregarProducto(item ,item.producto)" style="cursor: pointer;"></i>
+              <hr style="border: 1px solid black; width: 100%;">
+              <i class="fa-solid fa-minus" (click)="eliminarProducto(item ,item.producto)" style="cursor: pointer;"></i>
+            </div>
+          </div>
+          <div class="col-1 col-lg-1" style="padding: 5px; border-radius: 15px; width: fit-content;">
+            <div style="background-color: white; border-radius: 5px; padding: 10px; min-height: 105px; width: 100%;">
+              @if (item.producto.stock > 0) {
+                <p class="m-0 text-center mt-2" style="font-size: 15px; width: 100%;">Disponible</p>
+                <div style="width: 100%; display: flex; justify-content: center; margin-top: 10px;">
+                  <div style="width: 48%; height: 35px; display: flex; justify-content: center;">
+                    <label class="cl-checkbox" style="display: flex; justify-content: center;">
+                      <input [(ngModel)]="item.seleccionado" checked="" type="checkbox">
+                      <span style="margin-left: 10px;"></span>
+                    </label>
+                  </div>
+                </div>
+              }@else {
+                <p class="m-0 text-center mt-2">No disponible</p>
+              }
+            </div>
+          </div>
+          <div class="col-11 d-lg-none mx-auto" style="padding: 5px; border-radius: 15px; ">
+            <div style="background-color: white; border-radius: 5px; padding: 10px; min-height: 105px;">
+              <p style="margin: 0px;"><u style="cursor: pointer;" (click)="verProducto(item.producto)">{{item.producto.nombre}}</u> | <b style="color: rgb(92, 129, 249);">{{item.producto.precio}}€</b> | <span style="font-size: 13px;">{{item.producto.fecha_lanzamiento | date}}</span> | <span >Actualmente en el carrito : {{item.cantidad}}</span></p>
+              <hr style="border: 1px solid rgb(92, 129, 249); margin: 5px 0px; ">
+              <p style="font-size: 13px; margin: 0px;">
+                {{item.producto.descripcion}}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  }@else{
+    <p class="text-center">No hay productos en el carrito.</p>
+  }
+
+  <div class="mt-3 botones ahora mx-auto" (click)="comprarAhora()">
+    <div class="button-wrapper">
+      <div class="text">Comprar ahora</div>
+        <span class="icon">
+          <i class="fa-regular fa-credit-card"></i>
+        </span>
+      </div>
+  </div>
+</div>
+

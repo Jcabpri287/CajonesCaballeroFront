@@ -1,0 +1,144 @@
+<div class="container-fluid ps-md-0">
+  <div class="row g-0">
+    <div class="d-none d-md-flex col-md-3 col-lg-7 bg-image"></div>
+    <div class="col-md-9 col-lg-5">
+      <div class="login d-flex align-items-center py-3">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-10 col-lg-9 mx-auto">
+              <h3 class="login-heading text-center">Empieza ahora!</h3>
+              <!-- Sign In Form -->
+              <form autocomplete="off" class="w-100 mx-auto" [formGroup]="registerForm" (ngSubmit)="sendVerificationEmail()">
+                <div class="my-3">
+                  <div class="position-relative">
+                  <input type="text" class="formInput" id="floatingInput1" placeholder="Introduce tu nombre." formControlName="nombre">
+                  <div *ngIf="registerForm.get('nombre')?.errors?.['required'] && registerForm.get('nombre')?.touched" class="tiptool" style="margin-right: -5px;">
+                    <div class="icon">!</div>
+                    <div class="tooltiptext">
+                      <div style="margin-bottom: -15px;">
+                        <p *ngIf="(registerForm.get('nombre')?.errors?.['required'])" style="font-size: 15px">Nombre requerido</p>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+
+                <div class="my-3">
+                  <div class="position-relative">
+                  <input type="email" class="formInput" id="floatingInput2" placeholder="Introduce tu email." formControlName="correo">
+                  <div *ngIf="(registerForm.get('correo')?.errors?.['required'] || registerForm.get('correo')?.errors?.['email']) && registerForm.get('correo')?.touched" class="tiptool" style="margin-right: -5px;">
+                    <div class="icon">!</div>
+                    <div class="tooltiptext">
+                      <div style="margin-bottom: -15px;">
+                        <p *ngIf="(registerForm.get('correo')?.errors?.['required'])" style="font-size: 15px">Correo electrónico requerido</p>
+                        <p *ngIf="(registerForm.get('correo')?.errors?.['email'])" style="font-size: 15px">Debe ser un email</p>
+                      </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+
+                <div class="d-flex row my-3 justify-content-between">
+                <div class="col-6">
+                  <div class="position-relative">
+                  <input type="password" class="formInput" id="floatingPassword" placeholder="Introduce tu contraseña." formControlName="contraseña">
+                  <div *ngIf="(registerForm.get('contraseña')?.errors?.['required'] || registerForm.get('contraseña')?.errors?.['invalidPassword']) && registerForm.get('contraseña')?.touched" class="tiptool" style="margin-right: -5px;">
+                    <div class="icon">!</div>
+                    <div class="tooltiptext">
+                      <div style="margin-bottom: -20px; ">
+                        <p *ngIf="(registerForm.get('contraseña')?.errors?.['required'])" style="font-size: 15px">Contraseña requerida</p>
+                        <div *ngIf="(registerForm.get('contraseña')?.errors?.['invalidPassword'])" style="font-size: 15px">
+                          <p>Contraseña invalida.</p>
+                            <ul>
+                              <li>Debe contener al menos letra minúscula.</li>
+                              <li>Debe contener al menos una letra mayúscula.</li>
+                              <li>Debe contener al menos un dígito.</li>
+                              <li>Debe tener al menos 8 caracteres de longitud.</li>
+                            </ul>
+                        </div>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+
+                <div class="col-6">
+                  <div class="position-relative">
+                  <input type="password" class="formInput" id="floatingRePassword" placeholder="Repite tu contraseña." formControlName="repetirContrasenia">
+                  <div *ngIf="(registerForm.get('repetirContrasenia')?.errors?.['required'] || registerForm.get('repetirContrasenia')?.errors?.['passwordMismatch']) && registerForm.get('repetirContrasenia')?.touched" class="tiptool" style="margin-right: -5px;">
+                    <div class="icon">!</div>
+                    <div class="tooltiptext">
+                      <div style="margin-bottom: -20px; ">
+                        <p *ngIf="(registerForm.get('repetirContrasenia')?.errors?.['required'])" style="font-size: 15px">Campo requerido</p>
+                        <p *ngIf="(registerForm.get('repetirContrasenia')?.errors?.['passwordMismatch'])" style="font-size: 15px">Debe ser igual que la contraseña</p>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </div>
+
+                <div class="my-3">
+                  <div class="position-relative">
+                  <input type="text" class="formInput" id="floatingInput3" placeholder="Introduce tu direccion." formControlName="direccion">
+                  <div *ngIf="registerForm.get('direccion')?.errors?.['required'] && registerForm.get('direccion')?.touched" class="tiptool" style="margin-right: -5px;">
+                    <div class="icon">!</div>
+                    <div class="tooltiptext">
+                      <div style="margin-bottom: -15px;">
+                        <p *ngIf="(registerForm.get('direccion')?.errors?.['required'])" style="font-size: 15px">Dirección requerida</p>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="my-3">
+                  <div class="position-relative">
+                  <input type="text" class="formInput" id="floatingInput4" placeholder="Introduce tu teléfono." formControlName="telefono">
+                  <div *ngIf="(registerForm.get('telefono')?.errors?.['required'] || registerForm.get('telefono')?.errors?.['invalidNumber']) && registerForm.get('telefono')?.touched" class="tiptool" style="margin-right: -5px;">
+                    <div class="icon">!</div>
+                    <div class="tooltiptext">
+                      <div style="margin-bottom: -15px;">
+                        <p *ngIf="(registerForm.get('telefono')?.errors?.['required'])" style="font-size: 15px">Telefono requerido</p>
+                        <p *ngIf="(registerForm.get('telefono')?.errors?.['invalidNumber'])" style="font-size: 15px">Debe ser un número de teléfono</p>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="text-center mt-2  mb-4">
+                  <p class="small" href="register" style="text-decoration: none; text-align: start; margin-left: 10px;">Registrate completamente gratis para obtener acceso total en la web.</p>
+                </div>
+                <div class="d-grid mt-3">
+                  <button class="btn btn-lg btn-login text-uppercase fw-bold mb-1 botoncillo" type="submit">Registrarme</button>
+                  <div class="text-center mt-2">
+                    <a class="small enlace" href="login" style="text-decoration: none;">Tienes una cuenta?</a>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="position-absolute" style="box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.21); top: 45%; left: 50%; transform: translate(-50%, -50%);" *ngIf="showModal">
+    <div class="form" style="width: 500px; height: 300px;">
+      <div class="title">Verification Code</div>
+      <p class="message">Hemos enviado un codigo de verificacion a tu correo.</p>
+      <div class="inputs">
+        <input id="input1" type="text" maxlength="1" (input)="moveToNext($event, 1)">
+        <input id="input2" type="text" maxlength="1" (input)="moveToNext($event, 2)">
+        <input id="input3" type="text" maxlength="1" (input)="moveToNext($event, 3)">
+        <input id="input4" type="text" maxlength="1" (input)="moveToNext($event, 4)">
+        <input id="input5" type="text" maxlength="1" (input)="moveToNext($event, 5)">
+        <input id="input6" type="text" maxlength="1" (input)="moveToNext($event, 6)">
+      </div>
+      <button class="action" (click)="confirmVerificationCode()">Verificar cuenta</button>
+    </div>
+  </div>
+</div>
+
+
+

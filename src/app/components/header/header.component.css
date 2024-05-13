@@ -1,0 +1,62 @@
+.botones {
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  background-color: rgb(33,33,33);
+  margin: 0px 10px;
+  padding: 0px 10px;
+  border-radius: 30px;
+}
+
+.botones a {
+  color: white;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+.botones::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  z-index: 0;
+  background-color: rgb(92, 129, 249); /* Color azul */
+  transition: height 0.3s ease-in-out;
+}
+
+.botones:hover::before {
+  height: 100%;
+}
+
+.titulo{
+  color: rgb(33, 33, 33); cursor: pointer; font-size: 30px;font-weight: 600;
+  transition: 0.3s ease-in-out;
+}
+
+.titulo:hover{
+  color: rgb(88, 118, 227);
+}
+
+.canvasList:hover{
+  color: rgb(121, 147, 231);
+}
+
+.iconito{
+  color: white;
+  font-size: 20px;
+  background-color: rgb(92, 129, 249);
+  padding: 10px 12px;
+  border-radius: 50%;
+  transition: 0.3s all;
+}
+
+.iconito:hover{
+  transform: scale(1.1);
+}
+
+.active {
+  color: rgb(111, 134, 209);
+}

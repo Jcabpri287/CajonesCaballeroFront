@@ -1,0 +1,9 @@
+
+  <div style="font-family: 'MiFuente', sans-serif; background-color: rgb(238, 238, 238);">
+
+    <app-header *ngIf="!this.isHomePage()"></app-header>
+
+    <router-outlet/>
+      <app-spinner *ngIf="spinnerService.isVisible() | async"></app-spinner>
+      <app-footer/>
+</div>
