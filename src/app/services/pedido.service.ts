@@ -7,7 +7,7 @@ import { Observable, catchError, map, of } from 'rxjs';
 })
 
 export class pedidoService {
-  private url="http://localhost:3000";
+  private url="https://cajonescaballeroback.onrender.com";
   //inyectar HttpClient
   private http = inject(HttpClient);
 
