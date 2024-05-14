@@ -16,7 +16,7 @@
             "customWebpackConfig": {
               "path": "./custom-webpack.config.js"
             },
-            "outputPath": "/dist/tfgpage/browser",
+            "outputPath": "dist/tfgpage/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
