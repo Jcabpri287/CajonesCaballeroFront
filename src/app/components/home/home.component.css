@@ -39,7 +39,7 @@
 
 .containerTutoriales{
   width: 100%;
-  height: 70vh;
+  min-height: 70vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -71,6 +71,33 @@
   font-size: 24px;
   text-align: center;
 }
+
+.nombresCajon{
+  font-size: 13px;
+}
+
+.textoAtras{
+  font-size: 13px;
+  width: 90%;
+}
+
+@media (min-width: 400px) {
+  .nombresCajon{
+    font-size: 15px;
+  }
+
+}
+
+@media (min-width: 1200px) {
+  .nombresCajon{
+    font-size: 20px;
+  }
+  .textoAtras{
+    font-size: 15px;
+  }
+
+}
+
 
 .texto1
 {
@@ -169,10 +196,17 @@
   background-color: rgba(33, 33, 33, 0.555);
   color: white;
   border-radius: 50%;
-  height: 300px;
+  height: 200px;
   margin: 20px 0px;
   border:5px solid rgba(90, 125, 241, 0.246);
 }
+
+@media (min-width: 400px) {
+  .circulos{
+    height: 300px;
+  }
+}
+
 @media (min-width: 767px) {
   .circulos{
     height: 200px;
@@ -412,7 +446,7 @@
   justify-content: start;
   align-items: start;
   gap: 2rem;
-  width: 30rem; /* 96px * 4 */
+  width: 20rem; /* 96px * 4 */
   height: 12rem; /* 56px * 4 */
   transition: all 0.5s;
   border-radius: 1rem; /* 4px * 4 */
@@ -429,8 +463,8 @@
 .custom-image {
   position: absolute;
   bottom: -2.5rem; /* -10px * 4 */
-  right: -2.5rem; /* -10px * 4 */
-  width: 20%; /* 1/2 */
+  right: -0.5rem; /* -10px * 4 */
+  width: 30%; /* 1/2 */
   height: 50%; /* 1/2 */
   border-radius: 1rem; /* 4px * 4 */
   background-color: #2c2c2c; /* gray-800 */

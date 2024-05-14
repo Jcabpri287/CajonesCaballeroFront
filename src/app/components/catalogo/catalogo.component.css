@@ -8,6 +8,21 @@
   cursor: default;
   background-color: white;
   height: fit-content;
+  width: 80%;
+  margin: 0px auto 20px auto;
+}
+
+@media (min-width: 500px) {
+  .producto {
+    width: 45%;
+  }
+}
+
+@media (min-width: 1000px) {
+  .producto {
+    width: auto;
+    margin-bottom: 0px;
+  }
 }
 
 .producto:hover {
@@ -167,11 +182,22 @@ select{
   }
   .filtros1 {
     width: 80%;
+    border-radius: 10px 0px 0px 10px;
   }
   .filtros2 {
     width: fit-content;
     margin: 0;
     margin-right: -13px;
+    border-radius: 0px 10px 10px 0px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .filtros1 {
+    border-radius: 10px;
+  }
+  .filtros2 {
+    border-radius: 10px;
   }
 }
 .search_input {
@@ -204,5 +230,14 @@ select{
   font-size: 1.3em;
   margin-bottom: 7px;
 }
-
-
+.CatalogoH1{
+  text-align: center;
+  font-size: 70px;
+  margin: 100px 0px 80px 0px;
+  font-weight: 800;
+}
+@media (min-width: 500px) {
+  .CatalogoH1{
+    font-size: 100px;
+  }
+}

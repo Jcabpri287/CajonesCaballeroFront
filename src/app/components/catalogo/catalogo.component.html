@@ -1,6 +1,6 @@
 <div class="container-fluid flex justify-content-center container-catalogo">
   <div class="container">
-      <h1 style="text-align: center; font-size: 100px; margin: 100px 0px 80px 0px; font-weight: 800;">Catálogo</h1>
+      <h1 class="CatalogoH1">Catálogo</h1>
 
       <div class="filtros mb-3">
       <div class="filtros1 text-white mb-4 p-3 p-lg-2 px-lg-3 row" >
@@ -43,7 +43,7 @@
       </div>
     </div>
 
-      <div class="row gap-lg-4" style="display: flex; min-height: 40vh; justify-content: space-between;">
+      <div class="row gap-1 gap-lg-4" style="display: flex; min-height: 40vh; justify-content: space-between;">
         <ng-container *ngIf="(productos).length > 0; else noProducts">
         <div class="col-6 col-lg-2 producto"  *ngFor="let producto of getProductosPaginados()" (onclick)="verProducto(producto)">
           <div style="position: relative; background: url({{producto.imagen_url}});  background-size: contain; background-position: center; height: 170px;  background-repeat: no-repeat; background-color: rgba(188, 187, 187, 0.395); border-radius: 20px 20px 0px 0px; width: 100%;">

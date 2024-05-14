@@ -20,6 +20,16 @@ export class productoService {
     );
   }
 
+  getCuatroProductos():Observable<Producto[]>{
+    return this.http.get<Producto[]>(`${this.url}/productos`).pipe(
+      catchError(error => {
+        console.log(`Error al obtener los productos ${error}`);
+        return of([]);
+      }),
+      map(productos => productos.slice(0, 4))
+    );
+  }
+
   getProducto(id:string):Observable<Producto>{
     return this.http.get<Producto>(`${this.url}/productos/${id}`).pipe(
       map(res=>{
