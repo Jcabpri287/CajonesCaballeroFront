@@ -13,15 +13,15 @@
         "build": {
           "builder": "@angular-builders/custom-webpack:browser",
           "options": {
-          "customWebpackConfig": {
-          "path": "./custom-webpack.config.js"
-          },
-          "outputPath": "/opt/build/repo/dist/tfgpage/browser",
-          "index": "src/index.html",
-          "main": "src/main.ts",
-          "polyfills": [
-            "zone.js"
-          ],
+            "customWebpackConfig": {
+              "path": "./custom-webpack.config.js"
+            },
+            "outputPath": "/dist/tfgpage/browser",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
@@ -36,12 +36,7 @@
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/@popperjs/core/dist/umd/popper.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js"
-            ],
-            "server": "src/main.server.ts",
-            "prerender": true,
-            "ssr": {
-              "entry": "server.ts"
-            }
+            ]
           },
           "configurations": {
             "production": {
@@ -78,6 +73,14 @@
             }
           },
           "defaultConfiguration": "development"
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/tfgpage/server",
+            "main": "src/main.server.ts",
+            "tsConfig": "tsconfig.server.json"
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
