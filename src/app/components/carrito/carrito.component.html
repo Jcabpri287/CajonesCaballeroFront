@@ -1,6 +1,6 @@
 
 <div class="container mx-auto" style="min-height: 78vh; padding-top: 50px;">
-  <h1 style="font-size: 70px; margin: 20px 0px 50px 10px; font-weight: 800;">Tu carrito</h1>
+  <h1 class="CatalogoH1">Tu carrito</h1>
 
   @if (productosEnCarrito.length > 0) {
     @for (item of productosEnCarrito; track $index) {
@@ -56,17 +56,18 @@
         </div>
       </div>
     }
+    <div class="mt-3 botones ahora mx-auto" (click)="comprarAhora()">
+      <div class="button-wrapper">
+        <div class="text">Comprar ahora</div>
+          <span class="icon">
+            <i class="fa-regular fa-credit-card"></i>
+          </span>
+        </div>
+    </div>
   }@else{
     <p class="text-center">No hay productos en el carrito.</p>
   }
 
-  <div class="mt-3 botones ahora mx-auto" (click)="comprarAhora()">
-    <div class="button-wrapper">
-      <div class="text">Comprar ahora</div>
-        <span class="icon">
-          <i class="fa-regular fa-credit-card"></i>
-        </span>
-      </div>
-  </div>
+
 </div>
 

@@ -34,6 +34,12 @@ export const routes: Routes = [
       import('./components/personalizar/personalizar.component').then((c) => c.PersonalizarComponent),
   },
   {
+    path: 'personalizar/pintar',
+    canActivate: [PermissionsService],
+    loadComponent: () =>
+      import('./components/pintar/pintar.component').then((c) => c.PintarComponent),
+  },
+  {
     path: 'carrito',
     canActivate: [PermissionsService],
     loadComponent: () =>

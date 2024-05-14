@@ -248,6 +248,22 @@
   opacity: 1;
  }
 
+ .circulo2{
+  background: url("/assets/img/design/VideoTutorial2.png");
+  background-size: 190%;
+  background-position: center;
+  transition: 0.3s all;
+  opacity: 0.8;
+  cursor: pointer;
+ }
+
+ .circulo2:hover{
+   background: url("/assets/video/VideoTutorial2.gif");
+   background-size: 190%;
+   background-position: center;
+   opacity: 1;
+  }
+
 .opinion1{
   background: url("/assets/img/profile/Juanma.jpg");
   background-size: cover;

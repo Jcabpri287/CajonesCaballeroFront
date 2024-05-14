@@ -3,6 +3,18 @@
   display: inline-block;
  }
 
+ .CatalogoH1{
+  font-size: 40px;
+  margin: 50px 0px 80px 0px;
+  font-weight: 800;
+}
+@media (min-width: 500px) {
+  .CatalogoH1{
+    font-size: 70px;
+  }
+}
+
+
  /* Input */
  .cl-checkbox > input {
   appearance: none;
