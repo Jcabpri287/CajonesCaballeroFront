@@ -2,6 +2,10 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, ElementRef, NgZone, Renderer2, ViewC
 import { HeaderComponent } from '../header/header.component';
 import * as THREE from 'three';
 import { NgIf } from '@angular/common';
+import { productoService } from '../../services/producto.service';
+import { Producto } from '../../interfaces/producto';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -16,15 +20,55 @@ export class HomeComponent {
   showTerms: boolean = false;
   private isMouseDown: boolean = false;
   private mouseX: number = 0;
+  cuatroProductos?: Producto[];
 
 
   @ViewChild('rendererContainer', { static: true }) rendererContainer!: ElementRef<HTMLDivElement>;
 
-  constructor(private ngZone: NgZone, private renderer: Renderer2, private el: ElementRef) {}
+  constructor(private ngZone: NgZone, private renderer: Renderer2, private el: ElementRef, private productoService : productoService, private router: Router) {}
 
   toggleTerms(): void {
     this.showTerms = !this.showTerms;
   }
+
+  agregarAlCarrito(producto: any): void {
+    let carritoStr = sessionStorage.getItem('carrito');
+    if (carritoStr !== null) {
+      let carrito = JSON.parse(carritoStr);
+
+      let index = carrito.findIndex((item: any) => item.producto._id === producto._id);
+
+      if (index !== -1) {
+        carrito[index].cantidad++;
+      } else {
+        carrito.push({ producto: producto, cantidad: 1 });
+      }
+
+      sessionStorage.setItem('carrito', JSON.stringify(carrito));
+    } else {
+      let carrito = [{ producto: producto, cantidad: 1 }];
+      sessionStorage.setItem('carrito', JSON.stringify(carrito));
+    }
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      }
+    });
+
+    const messageWithLink = `<p style='margin-bottom:3px;'>Producto añadido al carrito satisfactoriamente.</p> <a href="/carrito">Ver carrito</a>`;
+
+    Toast.fire({
+      icon: "success",
+      iconColor: "#8ea7f7",
+      html: messageWithLink
+    });
+}
 
   scrollToSection(sectionId: string): void {
     const targetElement = document.getElementById(sectionId);
@@ -39,6 +83,14 @@ export class HomeComponent {
     this.ngZone.runOutsideAngular(() => {
       this.initThree();
     });
+    this.productoService.getCuatroProductos()
+      .subscribe(productos => {
+        this.cuatroProductos = productos;
+      });
+  }
+
+  verProducto(producto: Producto){
+    this.router.navigate(['producto'], { state: { producto } });
   }
 
   private initThree(): void {
