@@ -4,10 +4,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build && npm run copy-redirects",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:TFGPage": "node dist/tfgpage/server/server.mjs"
+    "serve:ssr:TFGPage": "node dist/tfgpage/server/server.mjs",
+    "copy-redirects": "npx fs-extra copy ./_redirects ./dist/tfgpage/browser/_redirects"
   },
   "private": true,
   "dependencies": {
@@ -60,6 +61,7 @@
     "@types/node": "^18.18.0",
     "@types/three": "^0.163.0",
     "angular-ui-swiper": "^2.3.8",
+    "fs-extra": "^11.2.0",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
