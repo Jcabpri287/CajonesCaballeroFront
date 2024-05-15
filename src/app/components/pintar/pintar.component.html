@@ -1,23 +1,24 @@
 
   <div class="container mx-auto" style="min-height: 77.3vh; padding-top: 30px;">
-    <h1 class="CatalogoH1">Personalizar</h1>
-    <div class="row justify-content-around mt-5">
+    <div class="row justify-content-around mt-3">
 
-      <div class="d-none d-lg-block col-lg-3 mb-4 mb-lg-0">
+      <div class="d-none d-lg-block col-lg-4 mb-4 mb-lg-0 mt-5">
         <div #rendererContainer style="background-color: transparent; height: 400px;">
         </div>
       </div>
 
-      <div class="col-12 col-lg-6 row mx-auto mx-lg-0 text-end mt-5 mt-lg-0">
+      <div class="col-12 col-lg-4 row mx-auto mx-lg-0 text-end mt-5 mt-lg-0">
         <div [ngStyle]="{ 'background': 'url(' + getTipoMaderaBackground() + ')' }"  style="background-size: cover; background-repeat: no-repeat; width: fit-content; padding: 10px; margin: 0px auto; border-radius: 10px; height: fit-content;">
           <canvas style="border-radius: 10px;" #canvas></canvas>
         </div>
 
       </div>
 
-      <div class="col-12 col-lg-3 mt-5 mt-lg-0">
+      <div class="col-12 col-lg-4 mt-5 mt-lg-0">
           <div class="row g-3">
-            <div class="col-12">
+            Texto
+            <hr style="margin: 7px 0px;">
+            <div class="col-8">
               <label class="form-label">Texto a insertar:</label>
               <div class="input-group">
                 <input [(ngModel)]="textoAInsertar" type="text" class="form-control">
@@ -25,7 +26,7 @@
               </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-4">
               <label class="form-label">Fuente del texto:</label>
               <select (change)="cambiarFuente()" [(ngModel)]="fuenteTexto" class="form-select">
                 <option value="Arial">Arial</option>
@@ -36,17 +37,17 @@
               </select>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-4">
               <label class="form-label">Color del texto:</label>
-              <input [(ngModel)]="colorTexto" type="color" (change)="cambiarColor()" class="form-control form-control-color mx-auto">
+              <input id="colorTexto" [(ngModel)]="colorTexto" type="color" (change)="cambiarColor()" class="form-control form-control-color mx-auto">
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-4">
               <label class="form-label">Grosor del texto:</label>
               <input [(ngModel)]="grosorTexto" type="range" min="1" max="800" (change)="cambiarGrosor()" class="form-range">
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-4">
               <label class="form-label">Justificación del texto:</label>
               <select (change)="cambiarJustificacion()" [(ngModel)]="justificacionTexto" class="form-select">
                 <option value="left">Izquierda</option>
@@ -54,22 +55,48 @@
                 <option value="right">Derecha</option>
               </select>
             </div>
+            Pintar
+            <hr style="margin: 7px 0px;">
+            <div class="btn-group mb-3" role="group" aria-label="Herramientas de dibujo">
+              <button type="button" class="btn btn-primary" (click)="activarPintura()">
+                <i class="fas fa-pencil-alt"></i> Pintar
+              </button>
+              <button type="button" class="btn btn-secondary" (click)="dibujarCirculo(100, 100, 50)">
+                <i class="far fa-circle"></i>
+              </button>
+              <button type="button" class="btn btn-secondary" (click)="dibujarRectangulo(200, 200, 100, 100)">
+                <i class="far fa-square"></i>
+              </button>
+              <button type="button" class="btn btn-secondary" (click)="dibujarTriangulo(300, 300, 50, 50)">
+                <i class="fas fa-caret-up"></i>
+              </button>
+            </div>
+            <div class="col-md-6 text-center">
+              <label class="form-label">Grosor de la linea:</label>
+              <input [(ngModel)]="grosorPincel" type="range" min="1" max="50" (change)="cambiarGrosorPintura()" class="form-range">
+            </div>
+            <div class="col-md-6 text-center">
+              <label class="form-label">Color de la linea:</label>
+              <input id="colorLinea" [(ngModel)]="colorLinea" type="color" (change)="cambiarColorPintura()" class="form-control form-control-color mx-auto">
+            </div>
 
+            Imagenes
+            <hr style="margin: 7px 0px;">
             <div class="col-12">
               <label class="form-label">Subir imagen:</label>
               <input type="file" (change)="onFileInputChange($event)" accept="image/*" class="form-control">
             </div>
 
+            <hr style="margin-top: 25px; margin-bottom: 10px;">
             <div class="col-12">
               <button (click)="borrarImagenSeleccionada()" class="btn btn-danger">Borrar</button>
             </div>
           </div>
         </div>
 
-      <div class="col-12 mt-3" style="display: flex; justify-content: center;">
-        <button class="boton" (click)="irAEleccion()"><i class="fa-solid fa-angle-up arriba"></i></button>
-        <button class="boton ms-3" (click)="irAVer()"><i class="fa-solid fa-angle-down abajo"></i></button>
-
+      <div class="col-12" style="display: flex; justify-content: center; margin-top: -50px;">
+        <button class="boton" (click)="irAEleccion()"><i class="fa-solid fa-angle-left arriba"></i></button>
+        <button class="boton ms-3" (click)="irAVer()"><i class="fa-solid fa-angle-right arriba"></i></button>
       </div>
     </div>
   </div>

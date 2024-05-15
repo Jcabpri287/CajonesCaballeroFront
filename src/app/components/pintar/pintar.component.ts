@@ -20,6 +20,7 @@ export class PintarComponent implements OnInit{
   textoSeleccionado: fabric.IText | null = null;
   fuenteTexto: string = 'Arial';
   colorTexto: string = '#000000';
+  colorLinea: string = '#000000';
   grosorPincel: number = 10;
   grosorTexto: number = 400;
   justificacionTexto: string = 'left';
@@ -69,6 +70,25 @@ export class PintarComponent implements OnInit{
         if (this.materials) {
           this.materials[1].map = textureFront;
           this.materials[1].needsUpdate = true;
+        }
+      });
+      this._canvas.on('mouse:down', (e: any) => {
+        if (this._canvas && this._canvas.isDrawingMode) {
+          this._canvas.freeDrawingBrush.width = this.grosorPincel;
+        }
+      });
+
+      this._canvas.on('mouse:move', (e: any) => {
+        if (this._canvas && this._canvas.isDrawingMode) {
+          this._canvas.freeDrawingBrush.width = this.grosorPincel;
+        }
+      });
+
+      this._canvas.on('object:selected', (e: any) => {
+        let objetoSeleccionado = e.target;
+        if (objetoSeleccionado !instanceof fabric.Textbox) {
+          objetoSeleccionado.sendToBack();
+          this._canvas?.requestRenderAll();
         }
       });
     }
@@ -233,6 +253,8 @@ export class PintarComponent implements OnInit{
       if (objetoSeleccionado instanceof fabric.Textbox) {
         objetoSeleccionado.set({ fill: this.colorTexto });
         this._canvas?.requestRenderAll();
+        this._canvas?.discardActiveObject().renderAll();
+
       }
     }
 
@@ -244,12 +266,136 @@ export class PintarComponent implements OnInit{
       }
     }
 
+    cambiarGrosorPintura(): void {
+      console.log(this.grosorPincel);
+      const objetoSeleccionado = this._canvas!.getActiveObject();
+      if (objetoSeleccionado instanceof fabric.Textbox) {
+        objetoSeleccionado.set({ strokeWidth: this.grosorPincel });
+        this._canvas?.requestRenderAll();
+      }
+    }
+
+    cambiarColorPintura(): void {
+      if (this._canvas) {
+        const objetoSeleccionado = this._canvas.getActiveObject();
+      if (objetoSeleccionado) {
+        objetoSeleccionado.set({ fill: this.colorLinea });
+        this._canvas.requestRenderAll();
+      }
+      this._canvas.freeDrawingBrush.color = this.colorLinea;
+      this._canvas.discardActiveObject().renderAll();
+      }
+    }
+
     cambiarJustificacion(): void {
       const objetoSeleccionado = this._canvas!.getActiveObject();
       if (objetoSeleccionado instanceof fabric.Textbox) {
         objetoSeleccionado.set({ textAlign: this.justificacionTexto });
         this._canvas?.requestRenderAll();
       }
+    }
+
+    onFileInputChange(event: Event): void {
+      const inputElement = event.target as HTMLInputElement;
+      if (inputElement.files && inputElement.files.length > 0) {
+        const file = inputElement.files[0];
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const img = new Image();
+          img.src = e.target!.result as string;
+          img.onload = () => {
+            const fabricImg = new fabric.Image(img);
+            fabricImg.scaleToWidth(200);
+            fabricImg.scaleToHeight(200 * (img.height / img.width));
+            this._canvas!.add(fabricImg);
+          };
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    borrarImagenSeleccionada(): void {
+        if (this._canvas) {
+            let objetoSeleccionado = this._canvas.getActiveObject();
+            if (objetoSeleccionado) {
+              if (objetoSeleccionado instanceof fabric.ActiveSelection) {
+                // Si es una selección activa, eliminar todos los objetos en la selección
+                objetoSeleccionado.getObjects().forEach((objeto) => {
+                  if (this._canvas) {
+                    this._canvas.remove(objeto);
+                  }
+                });
+              } else {
+                // Si es un único objeto, eliminarlo
+                this._canvas.remove(objetoSeleccionado);
+              }
+              this._canvas.discardActiveObject().renderAll();
+            }
+            const textureFront = this.actualizarTexturaCajon();
+            if (this.materials) {
+              this.materials[1].map = textureFront;
+              this.materials[1].needsUpdate = true;
+            }
+        }
+    }
+
+    activarPintura(): void {
+      if (this._canvas) {
+      this.dibujoActivo = !this.dibujoActivo;
+      this._canvas.isDrawingMode = this.dibujoActivo;
+      }
+    }
+
+    // Método para cambiar el grosor del pincel
+    cambiarGrosorPintar(grosor: number): void {
+  if (this._canvas) {
+  this._canvas.freeDrawingBrush.width = grosor;
+}
+    }
+
+    // Método para dibujar un círculo
+    dibujarCirculo(x: number, y: number, radio: number): void {
+  const circulo = new fabric.Circle({
+    left: x,
+    top: y,
+    radius: radio,
+    fill: this.colorLinea,
+    selectable: true
+  });
+  if (this._canvas) {
+    this._canvas.add(circulo);
+  }
+    }
+
+    // Método para dibujar un rectángulo
+    dibujarRectangulo(x: number, y: number, ancho: number, alto: number): void {
+  const rectangulo = new fabric.Rect({
+    left: x,
+    top: y,
+    width: ancho,
+    height: alto,
+    fill: this.colorLinea,
+    selectable: true
+  });
+  if (this._canvas) {
+
+  this._canvas.add(rectangulo);
+}
+    }
+
+    // Método para dibujar un triángulo
+    dibujarTriangulo(x: number, y: number, ancho: number, alto: number): void {
+  const triangulo = new fabric.Triangle({
+    left: x,
+    top: y,
+    width: ancho,
+    height: alto,
+    fill: this.colorLinea,
+    selectable: true
+  });
+  if (this._canvas) {
+    this._canvas.add(triangulo);
+  }
     }
 
     irAEleccion(){
@@ -288,42 +434,6 @@ export class PintarComponent implements OnInit{
       }
     }
 
-    onFileInputChange(event: Event): void {
-      const inputElement = event.target as HTMLInputElement;
-      if (inputElement.files && inputElement.files.length > 0) {
-        const file = inputElement.files[0];
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          const img = new Image();
-          img.src = e.target!.result as string;
-          img.onload = () => {
-            const fabricImg = new fabric.Image(img);
-            fabricImg.scaleToWidth(200);
-            fabricImg.scaleToHeight(200 * (img.height / img.width));
-            this._canvas!.add(fabricImg);
-          };
-        };
-        reader.readAsDataURL(file);
-      }
-    }
 
-    borrarImagenSeleccionada(): void {
-      const objetoSeleccionado = this._canvas!.getActiveObject();
-      if (objetoSeleccionado ) {
-        this._canvas!.remove(objetoSeleccionado);
-      }
-      const textureFront = this.actualizarTexturaCajon();
-        if (this.materials) {
-          this.materials[1].map = textureFront;
-          this.materials[1].needsUpdate = true;
-        }
-    }
-
-    activarPintura(): void {
-      if (this._canvas) {
-      this.dibujoActivo = !this.dibujoActivo;
-      this._canvas.isDrawingMode = this.dibujoActivo;
-      }
-    }
 
 }

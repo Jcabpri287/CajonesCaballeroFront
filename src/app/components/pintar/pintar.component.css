@@ -9,7 +9,6 @@
   }
 }
 .boton{
-  margin-top: 50px;
   color:white;
   padding: 3px 13px;
   border-radius: 50%;
@@ -25,12 +24,9 @@
 
 .boton i{
   font-size: 30px;
+  padding: 5px 0px;
 }
 
 .boton .abajo{
   margin-top: 10px;
-}
-
-.boton .arriba{
-  margin-bottom: 10px;
 }
