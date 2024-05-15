@@ -13,9 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "loader": {
-              ".node": "file"
-            },
+            
             "outputPath": "dist/tfgpage",
             "index": "src/index.html",
             "browser": "src/main.ts",
