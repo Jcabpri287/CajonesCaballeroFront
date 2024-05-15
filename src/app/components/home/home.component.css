@@ -243,7 +243,7 @@
 
 .circulo1:hover{
   background: url("/assets/video/VideoTutorial1.gif");
-  background-size: 190%;
+  background-size: 170%;
   background-position: center;
   opacity: 1;
  }
@@ -259,7 +259,7 @@
 
  .circulo2:hover{
    background: url("/assets/video/VideoTutorial2.gif");
-   background-size: 190%;
+   background-size: 170%;
    background-position: center;
    opacity: 1;
   }
@@ -275,7 +275,7 @@
 
    .circulo3:hover{
      background: url("/assets/video/VideoTutorial3.gif");
-     background-size: 190%;
+     background-size: 170%;
      background-position: center;
      opacity: 1;
     }
@@ -291,7 +291,7 @@
 
      .circulo4:hover{
        background: url("/assets/video/VideoTutorial4.gif");
-       background-size: 190%;
+       background-size: 170%;
        background-position: center;
        opacity: 1;
       }
