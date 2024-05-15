@@ -7,8 +7,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:TFGPage": "node dist/tfgpage/server/server.mjs",
-    "build": "ng build && npm run copy-redirects",
-    "copy-redirects": "npx fs-extra copy ./_redirects ./dist/tfgpage/browser/_redirects"
+    "build": "ng build"
   },
   "private": true,
   "dependencies": {
