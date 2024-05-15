@@ -146,7 +146,7 @@ export class RegisterComponent {
 
   submitVerificationCode() {
     console.log(this.verificationSentCode + this.registerForm.get('correo')?.value);
-    this.http.post<any>('http://localhost:3000/verify-code', { code: this.verificationSentCode ,email : this.registerForm.get('correo')?.value })
+    this.http.post<any>('https://cajonescaballeroback.onrender.com/verify-code', { code: this.verificationSentCode ,email : this.registerForm.get('correo')?.value })
       .subscribe(
         (response) => {
           console.log(response);
