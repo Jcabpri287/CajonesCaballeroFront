@@ -87,14 +87,14 @@
               <input type="file" (change)="onFileInputChange($event)" accept="image/*" class="form-control">
             </div>
 
-            <hr style="margin-top: 25px; margin-bottom: 10px;">
-            <div class="col-12">
+            <hr style="margin-top: 25px; margin-bottom: 10px;  ">
+            <div class="col-12" style="z-index: 3;">
               <button (click)="borrarImagenSeleccionada()" class="btn btn-danger">Borrar</button>
             </div>
           </div>
         </div>
 
-      <div class="col-12" style="display: flex; justify-content: center; margin-top: -50px;">
+      <div class="col-12" style="display: flex; justify-content: center; margin-top: -50px; z-index: 1;">
         <button class="boton" (click)="irAEleccion()"><i class="fa-solid fa-angle-left arriba"></i></button>
         <button class="boton ms-3" (click)="irAVer()"><i class="fa-solid fa-angle-right arriba"></i></button>
       </div>
