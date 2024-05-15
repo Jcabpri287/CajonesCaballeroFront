@@ -50,6 +50,8 @@ export class PintarComponent implements OnInit{
         isDrawingMode: this.dibujoActivo
       });
 
+
+
       if (this._canvas.isDrawingMode) {
         this._canvas.freeDrawingBrush.width = this.grosorPincel;
         this._canvas.freeDrawingBrush.color = this.colorTexto;
@@ -99,7 +101,11 @@ export class PintarComponent implements OnInit{
       if (navigationState && navigationState.producto) {
         this.tipoMadera = navigationState.producto.tipoMadera;
         this.tipoCuerdas = navigationState.producto.tipoCuerdas;
-        console.log(this.tipoCuerdas);
+        if (navigationState.producto.dataUrl) {
+          fabric.Image.fromURL(navigationState.producto.dataUrl, (img) => {
+            this._canvas?.add(img);
+          });
+        }
       }else{
         this.router.navigate(["/personalizar"]);
       }
@@ -401,14 +407,21 @@ export class PintarComponent implements OnInit{
     irAEleccion(){
       const producto = {
         tipoMadera: this.tipoMadera,
-        tipoCuerdas: this.tipoCuerdas
+        tipoCuerdas: this.tipoCuerdas,
+        dataUrl : this._canvas!.toDataURL()
       };
 
       this.router.navigate(['/personalizar'], { state: { producto } });
     }
 
     irAVer(){
-
+      const producto = {
+        tipoMadera: this.tipoMadera,
+        tipoCuerdas: this.tipoCuerdas,
+        dataUrl : this._canvas!.toDataURL()
+      };
+      console.log(producto.dataUrl);
+      this.router.navigate(['/personalizar/finalizar'], { state: { producto } });
     }
 
     getTipoMaderaBackground(): string {
@@ -433,7 +446,4 @@ export class PintarComponent implements OnInit{
           return 'assets/img/default.jpg';
       }
     }
-
-
-
 }

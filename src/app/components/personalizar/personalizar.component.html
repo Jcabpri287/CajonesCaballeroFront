@@ -10,7 +10,7 @@
       <div class="col-12 seleccion-madera">
         <h3 class="mb-4">Selecciona el tipo de madera:</h3>
         <div class="row">
-        <div class="col-3 mb-4 madera" *ngFor="let madera of tiposMadera">
+        <div class="col-4 col-md-3 mb-4 madera" *ngFor="let madera of tiposMadera">
         <input  [id]="madera.label" class="d-none" type="radio" name="tipoMadera" [value]="madera.value" [(ngModel)]="tipoMadera" (change)="actualizarCajon(madera.value)">
         <label class="labelsDeMadera" for="{{madera.label}}"  [ngClass]="{ 'input-selected': tipoMadera === madera.value, 'input-not-selected': tipoMadera !== madera.value }">
           <span class="tooltip">{{madera.label}}</span>

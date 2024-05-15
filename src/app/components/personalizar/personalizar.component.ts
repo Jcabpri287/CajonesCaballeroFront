@@ -17,6 +17,7 @@ import { SpinnerService } from '../../services/spinner-service.service';
 export class PersonalizarComponent implements OnInit, AfterViewInit{
   tipoMadera: string = 'okume'; // Madera por defecto
   tipoCuerdas: string = 'sin-cuerdas'; // Sin cuerdas por defecto
+  dataUrl?: Object;
 
   private isMouseDown: boolean = false;
   private mouseX: number = 0;
@@ -53,7 +54,7 @@ export class PersonalizarComponent implements OnInit, AfterViewInit{
       if (navigationState && navigationState.producto) {
         this.tipoMadera = navigationState.producto.tipoMadera;
         this.tipoCuerdas = navigationState.producto.tipoCuerdas;
-        console.log(this.tipoCuerdas);
+        this.dataUrl = navigationState.producto.dataUrl;
       }
     }else{
       this.router.navigate(["/personalizar"]);
@@ -199,7 +200,8 @@ export class PersonalizarComponent implements OnInit, AfterViewInit{
   irAPintar(){
   const producto = {
     tipoMadera: this.tipoMadera,
-    tipoCuerdas: this.tipoCuerdas
+    tipoCuerdas: this.tipoCuerdas,
+    dataUrl : this.dataUrl
   };
 
   this.router.navigate(['/personalizar/pintar'], { state: { producto } });

@@ -109,14 +109,14 @@
 }
 .texto1,.texto2
 {
-  font-size: 40px;
+  font-size: 30px;
   font-weight: 800;
   line-height: 50px;
 }
 @media (min-width: 593px) {
   .texto1,.texto2
   {
-    font-size: 60px;
+    font-size: 40px;
     font-weight: 800;
     line-height: 70px;
   }
@@ -263,6 +263,22 @@
    background-position: center;
    opacity: 1;
   }
+
+  .circulo3{
+    background: url("/assets/img/design/VideoTutorial3.png");
+    background-size: 190%;
+    background-position: center;
+    transition: 0.3s all;
+    opacity: 0.8;
+    cursor: pointer;
+   }
+
+   .circulo3:hover{
+     background: url("/assets/video/VideoTutorial3.gif");
+     background-size: 190%;
+     background-position: center;
+     opacity: 1;
+    }
 
 .opinion1{
   background: url("/assets/img/profile/Juanma.jpg");

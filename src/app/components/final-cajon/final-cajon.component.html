@@ -1,0 +1,51 @@
+
+<div class="container mx-auto" style="min-height: 77.3vh; padding-top: 30px;">
+  <div class="row justify-content-around mt-3">
+
+    <div class="col-12 col-lg-6 mb-4 mb-lg-0 mt-5">
+      <h1 class="CatalogoH1">Felicidades, has terminado tu cajon personalizado.</h1>
+
+      <div class="mt-3 botones ahora mt-5">
+        <div class="button-wrapper">
+          <div class="text">Comprar ahora</div>
+            <span class="icon">
+              <i class="fa-regular fa-credit-card"></i>
+            </span>
+          </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-6 mb-4 mb-lg-0 mt-5">
+      <div #rendererContainer style="background-color: transparent; height: 400px;">
+      </div>
+      <div class="container mt-3">
+        <div class="row justify-content-center">
+          <div class="col-auto">
+            <button class="btn y m-2" (click)="zoomIn()" style="background-color: rgb(92, 129, 249); color: white;">
+              <i class="fas fa-search-plus"></i> Acercar
+            </button>
+          </div>
+          <div class="col-auto">
+            <button class="btn m-2" (click)="zoomOut()"  style="background-color: rgb(92, 129, 249); color: white;">
+              <i class="fas fa-search-minus"></i> Alejar
+            </button>
+          </div>
+          <div class="col-auto">
+            <button class="btn m-2" (click)="goUp()"  style="background-color: rgb(92, 129, 249); color: white;">
+              <i class="fas fa-arrow-up"></i> Subir
+            </button>
+          </div>
+          <div class="col-auto">
+            <button class="btn m-2" (click)="goDown()"  style=" background-color: rgb(92, 129, 249); color: white;">
+              <i class="fas fa-arrow-down"></i> Bajar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div class="col-12" style="display: flex; justify-content: center; z-index: 1; margin-top: 65px;">
+      <button class="boton" (click)="irAVer()"><i class="fa-solid fa-angle-left arriba"></i></button>
+    </div>
+</div>

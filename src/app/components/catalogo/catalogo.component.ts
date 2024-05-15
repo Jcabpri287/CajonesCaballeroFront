@@ -19,7 +19,7 @@ import Swal from 'sweetalert2';
 })
 export class CatalogoComponent implements OnInit{
   minPrice: number = 0;
-  maxPrice: number = 500;
+  maxPrice: number = 50;
   ordenFecha: string = 'recientes';
   productos: Producto[] = [];
   productosIniciales: Producto[] = [];
