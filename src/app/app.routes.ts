@@ -63,6 +63,12 @@ export const routes: Routes = [
       import('./components/tutoriales/tutoriales.component').then((c) => c.TutorialesComponent),
   },
   {
+    path: 'personalizar/finalizar',
+    canActivate: [PermissionsService],
+      loadComponent: () =>
+      import('./components/final-cajon/final-cajon.component').then((c) => c.FinalCajonComponent),
+  },
+  {
     path: '**',
     loadComponent: () =>
       import('./components/pagina404/pagina404.component').then((c) => c.Pagina404Component),
