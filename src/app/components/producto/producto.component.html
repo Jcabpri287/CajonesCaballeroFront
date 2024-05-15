@@ -1,9 +1,11 @@
 
 <div class="container">
   <div class="row flex align-content-center justify-content-center" style="min-height: 78vh;">
-    <div class="col-12 offset-lg-1 mt-3 mt-lg-0 mb-2">
+    <div class="col-12 offset-lg-1 mt-3 mt-lg-0 mb-2" style="display: flex; align-items: end;">
       <a class="ms-1 text-primary" style="text-decoration: none;" href="/catalogo">< Volver al catalogo</a>
+        <h1 class="CatalogoH1">{{producto?.nombre}}</h1>
     </div>
+
     <div class="col-12 col-lg-3">
       <div class="d-none d-lg-block text-center"style="padding: 10px; height: 470px; border-radius:10px; background-color: rgb(92, 129, 249);">
         <p style="font-size: 23px;" class="mt-1 text-white">Comentarios</p>
@@ -94,7 +96,7 @@
         <p style="font-size: 13px; color: rgb(142, 167, 247)" class="m-0"><span style="color: white;">Marca :</span> {{nombreMarca}}</p>
       </div>
       <div class="div "style="border-radius: 10px; padding: 15px; color:white; background-color:rgb(61,61,61);box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.245);margin-top: 20px;">
-        <p style="font-size: 23px;" class="mt-1 ms-1">{{producto?.nombre}}</p>
+        <p style="font-size: 23px;" class="mt-1 ms-1">Descripcion</p>
         <hr style="border: 1px solid rgb(142, 167, 247); margin: 10px auto; width: 100%;">
         <p class="ms-1 me-1">
           {{producto?.descripcion}}
