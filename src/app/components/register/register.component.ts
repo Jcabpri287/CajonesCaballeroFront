@@ -114,7 +114,7 @@ export class RegisterComponent {
           iconColor: "#8ea7f7",
           title: "Usuario registrado correctamente"
         });
-        this.router.navigate(['/home']);
+        this.router.navigate(['/']);
       },
       error => {
         console.log(error.error.errors[0].msg);
