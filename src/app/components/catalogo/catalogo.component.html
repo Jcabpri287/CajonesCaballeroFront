@@ -43,7 +43,7 @@
       </div>
     </div>
 
-      <div class="row gap-1 gap-lg-4" style="display: flex; min-height: 40vh; justify-content: space-between;">
+      <div class="row gap-1 gap-lg-4" style="display: flex; min-height: 40vh; justify-content: start;">
         <ng-container *ngIf="(productos).length > 0; else noProducts">
         <div class="col-6 col-lg-2 producto"  *ngFor="let producto of getProductosPaginados()" (onclick)="verProducto(producto)">
           <div style="position: relative; background: url({{producto.imagen_url}});  background-size: contain; background-position: center; height: 170px;  background-repeat: no-repeat; background-color: rgba(188, 187, 187, 0.395); border-radius: 20px 20px 0px 0px; width: 100%;">

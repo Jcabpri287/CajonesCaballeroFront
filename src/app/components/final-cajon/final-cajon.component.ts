@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import * as THREE from 'three';
+import { StripeService } from '../../services/stripe.service';
 
 @Component({
   selector: 'app-final-cajon',
@@ -22,7 +23,7 @@ export class FinalCajonComponent implements OnInit {
   private cube?: THREE.Mesh;
   private materials?: THREE.MeshBasicMaterial[];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router , private stripeService: StripeService) {}
   @ViewChild('rendererContainer', { static: true }) rendererContainer!: ElementRef<HTMLDivElement>;
 
   ngOnInit(){
@@ -157,14 +158,45 @@ export class FinalCajonComponent implements OnInit {
   }
 
   goUp(): void {
-    if (this.camera) {
+    if (this.camera && this.camera.position.y > -3) {
       this.camera.position.y -= 0.1;
     }
   }
 
   goDown(): void {
-    if (this.camera) {
+    if (this.camera && this.camera.position.y < 3) {
       this.camera.position.y += 0.1;
     }
+  }
+
+  descargar(){
+    if (this.dataUrl) {
+      const dataURL = this.dataUrl;
+
+      const enlaceDescarga = document.createElement('a');
+      enlaceDescarga.download = 'diseñoPersonalizado.png';
+      enlaceDescarga.href = dataURL;
+      enlaceDescarga.click();
+    }
+  }
+
+  comprar():void {
+    let producto = {
+      nombre: "Cajon personalizado",
+      descripcion: "Venta de cajon personalizado",
+      precio:249.99,
+      tipoCuerdas : this.tipoCuerdas,
+      tipoMadera : this.tipoMadera,
+      cantidad: 1,
+      dataUrl: this.dataUrl
+    }
+
+    localStorage.setItem('compra', JSON.stringify(producto));
+
+    this.stripeService.procesarPago({
+      nombre: "Cajon personalizado",
+      descripcion: "Venta de cajon personalizado",
+      precio: 249.99
+    });
   }
 }
