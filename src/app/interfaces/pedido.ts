@@ -7,11 +7,11 @@ export interface OrdenCompra {
 }
 
 export interface ProductoOrden {
-  id: string;
+  id?: string;
   nombre: string;
   descripcion: string;
-  tipo_madera: string;
-  numero_cuerdas: number;
+  tipo_madera?: string;
+  numero_cuerdas?: number;
   cantidad: number;
   precio_unitario: number;
   total: number;

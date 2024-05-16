@@ -35,6 +35,7 @@ export class HeaderComponent {
     }).then((result) => {
       if (result.isConfirmed) {
         this.authService.logout();
+        this.router.navigate(['/']);
       }
     });
   }

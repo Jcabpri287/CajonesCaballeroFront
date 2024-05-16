@@ -10,6 +10,7 @@ import { usuarioService } from '../../services/usuario.service';
 import { FormsModule } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
 import Swal from 'sweetalert2';
+import { StripeService } from '../../services/stripe.service';
 
 @Component({
   selector: 'app-producto',
@@ -24,7 +25,7 @@ export class ProductoComponent {
   comentarios?: Comentario[];
   nuevoComentario: string = '';
 
-  constructor(private route: ActivatedRoute, private marcas : marcaService, private comentariosService : comentarioService, public loginService : LoginService) {}
+  constructor(private stripeService : StripeService,private route: ActivatedRoute, private marcas : marcaService, private comentariosService : comentarioService, public loginService : LoginService) {}
 
   ngOnInit(): void {
     if (typeof history !== 'undefined') {
@@ -115,5 +116,22 @@ export class ProductoComponent {
         });
       }
     }
+  }
+
+  comprar(productoRecibido : Producto):void {
+    let producto = {
+      nombre: productoRecibido.nombre,
+      descripcion: productoRecibido.descripcion,
+      precio: productoRecibido.precio,
+      cantidad: 1,
+      id : productoRecibido._id
+    }
+    localStorage.setItem('compra', JSON.stringify(producto));
+
+    this.stripeService.procesarPago({
+      nombre: producto.nombre,
+      descripcion: producto.descripcion,
+      precio: producto.precio
+    });
   }
 }
