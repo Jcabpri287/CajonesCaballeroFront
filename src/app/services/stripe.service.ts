@@ -23,7 +23,7 @@ export class StripeService {
     }
 
     try {
-      const response = await this.http.post<any>('http://localhost:3000/crear-sesion-pago', {
+      const response = await this.http.post<any>('https://cajonescaballeroback.onrender.com/crear-sesion-pago', {
         producto: {
           nombre: producto.nombre,
           descripcion: producto.descripcion,
