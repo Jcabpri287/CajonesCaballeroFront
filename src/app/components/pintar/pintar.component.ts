@@ -2,13 +2,14 @@ import { NgIf, NgStyle } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { fabric } from 'fabric';
 import * as THREE from 'three';
 
 @Component({
   selector: 'app-pintar',
   standalone: true,
-  imports: [NgStyle,FormsModule, NgIf],
+  imports: [NgStyle,FormsModule, NgIf, TranslateModule],
   templateUrl: './pintar.component.html',
   styleUrl: './pintar.component.css'
 })
@@ -24,6 +25,8 @@ export class PintarComponent implements OnInit{
   grosorPincel: number = 10;
   grosorTexto: number = 400;
   justificacionTexto: string = 'left';
+  botonPresionado : boolean = false;
+
   private isMouseDown: boolean = false;
   private mouseX: number = 0;
 
@@ -74,6 +77,7 @@ export class PintarComponent implements OnInit{
           this.materials[1].needsUpdate = true;
         }
       });
+
       this._canvas.on('mouse:down', (e: any) => {
         if (this._canvas && this._canvas.isDrawingMode) {
           this._canvas.freeDrawingBrush.width = this.grosorPincel;
@@ -446,4 +450,45 @@ export class PintarComponent implements OnInit{
           return 'assets/img/default.jpg';
       }
     }
-}
+
+    fondoNormal(): void {
+      this.botonPresionado = !this.botonPresionado;
+      if (this._canvas && this.tipoMadera) {
+        const backgroundUrl = this.getTipoMaderaBackground();
+        fabric.Image.fromURL(backgroundUrl, (img) => {
+          img.set({
+            scaleX: this._canvas!.width! / img.width!,
+            scaleY: this._canvas!.height! / img.height!
+          });
+          this._canvas?.setBackgroundImage(img, () => {
+            this._canvas?.renderAll();
+            const textureFront = this.actualizarTexturaCajon();
+            if (this.materials) {
+              this.materials[1].map = textureFront;
+              this.materials[1].needsUpdate = true;
+            }
+          });
+        });
+      }
+    }
+
+    fondoBlanco(): void {
+      this.botonPresionado = !this.botonPresionado;
+      if (this._canvas) {
+        const blankImage =
+          'data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=';
+        fabric.Image.fromURL(blankImage, (img) => {
+          this._canvas?.setBackgroundImage(img, () => {
+            if (this._canvas) {
+              this._canvas!.setBackgroundColor('white', this._canvas.renderAll.bind(this._canvas));
+            }
+            const textureFront = this.actualizarTexturaCajon();
+            if (this.materials) {
+              this.materials[1].map = textureFront;
+              this.materials[1].needsUpdate = true;
+            }
+          });
+        });
+      }
+    }
+  }

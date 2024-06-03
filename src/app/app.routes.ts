@@ -69,6 +69,44 @@ export const routes: Routes = [
       import('./components/final-cajon/final-cajon.component').then((c) => c.FinalCajonComponent),
   },
   {
+    path: 'exito',
+    canActivate: [PermissionsService],
+      loadComponent: () =>
+      import('./components/exito/exito.component').then((c) => c.ExitoComponent),
+  },
+  {
+    path: 'perfil',
+    canActivate: [PermissionsService],
+      loadComponent: () =>
+      import('./components/perfil/perfil.component').then((c) => c.PerfilComponent),
+  },
+  {
+    path: 'sobreNosotros',
+      loadComponent: () =>
+      import('./components/sobre-nosotros/sobre-nosotros.component').then((c) => c.SobreNosotrosComponent),
+  },
+  {
+    path: 'politica',
+      loadComponent: () =>
+      import('./components/politica/politica.component').then((c) => c.PoliticaComponent),
+  },
+  {
+    path: 'legal',
+      loadComponent: () =>
+      import('./components/legal/legal.component').then((c) => c.LegalComponent),
+  },
+  {
+    path: 'privacidad',
+      loadComponent: () =>
+      import('./components/privacidad/privacidad.component').then((c) => c.PrivacidadComponent),
+  },
+  {
+    path: 'cancelacion',
+    canActivate: [PermissionsService],
+      loadComponent: () =>
+      import('./components/cancelacion/cancelacion.component').then((c) => c.CancelacionComponent),
+  },
+  {
     path: '**',
     loadComponent: () =>
       import('./components/pagina404/pagina404.component').then((c) => c.Pagina404Component),

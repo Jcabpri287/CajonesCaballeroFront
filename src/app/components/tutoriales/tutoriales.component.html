@@ -1,1 +1,166 @@
-<p>tutoriales works!</p>
+<div class="container mx-auto" style="min-height: 77.3vh; padding-top: 50px; display: grid; place-items: center;">
+  <div class="container">
+    <div style="padding: 20px; background-color: rgba(0, 0, 0, 0.023); border-radius: 20px;">
+      <h1 class="mb-4 CatalogoH1 ms-5 pt-5">{{ 'tutorials.title' | translate }}</h1>
+      <p class="mb-5 w-75 ms-5" style="font-size: 18px;">
+        {{ 'tutorials.description' | translate }}
+      </p>
+    </div>
+
+    <div *ngIf="window.innerWidth > 576">
+    <h2 class="mb-2 tutoriales" style="margin-top: 30px;">{{ 'tutorials.basicTitle' | translate }} <span style="color:rgb(92, 129, 249);">{{ 'tutorials.basicHighlight' | translate }}</span></h2>
+    <div class="container">
+      <swiper [config]="config" style="padding: 20px;">
+        <ng-template swiperSlide *ngFor="let video of tutorialesFaciles">
+          <div class="carta">
+            <div class="video-thumbnail-container">
+              <a [href]="video.url" target="_blank">
+                <img [src]="getYoutubeThumbnail(video.id)" class="card-img-top video-thumbnail" alt="{{video.title}}" onerror="this.onerror=null; this.src='fallback-image-url.jpg';">
+              </a>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">
+                <a [href]="video.url" style="font-weight: 100;" target="_blank" class="text-decoration-none text-dark">{{video.title}}</a>
+              </h5>
+            </div>
+          </div>
+        </ng-template>
+      </swiper>
+    </div>
+
+    <h2 class="mt-5 mb-2 tutoriales">{{ 'tutorials.intermediateTitle' | translate }} <span style="color:rgb(92, 129, 249);">{{ 'tutorials.intermediateHighlight' | translate }}</span></h2>
+    <div class="container">
+      <swiper [config]="config" style="padding: 20px;">
+        <ng-template swiperSlide *ngFor="let video of tutorialesMedios">
+          <div class="carta">
+            <div class="video-thumbnail-container">
+              <a [href]="video.url" target="_blank">
+                <img [src]="getYoutubeThumbnail(video.id)" class="card-img-top video-thumbnail" alt="{{video.title}}" onerror="this.onerror=null; this.src='fallback-image-url.jpg';">
+              </a>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">
+                <a style="font-weight: 100;" [href]="video.url" target="_blank" class="text-decoration-none text-dark">{{video.title}}</a>
+              </h5>
+            </div>
+          </div>
+        </ng-template>
+      </swiper>
+    </div>
+
+    <h2 class="mt-5 mb-2 tutoriales">{{ 'tutorials.advancedTitle' | translate }} <span style="color:rgb(92, 129, 249);">{{ 'tutorials.advancedHighlight' | translate }}</span></h2>
+    <div class="container">
+      <swiper [config]="config" style="padding: 20px;">
+        <ng-template swiperSlide *ngFor="let video of tutorialesAvanzados">
+          <div class="carta">
+            <div class="video-thumbnail-container">
+              <a [href]="video.url" target="_blank">
+                <img [src]="getYoutubeThumbnail(video.id)" class="card-img-top video-thumbnail" alt="{{video.title}}" onerror="this.onerror=null; this.src='fallback-image-url.jpg';">
+              </a>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">
+                <a style="font-weight: 100;" [href]="video.url" target="_blank" class="text-decoration-none text-dark">{{video.title}}</a>
+              </h5>
+            </div>
+          </div>
+        </ng-template>
+      </swiper>
+    </div>
+
+    <h2 class="mt-5 mb-2 tutoriales">{{ 'tutorials.funTitle' | translate }} <span style="color:rgb(92, 129, 249);">{{ 'tutorials.funHighlight' | translate }}</span></h2>
+    <div class="container">
+      <swiper [config]="config" style="padding: 20px;">
+        <ng-template swiperSlide *ngFor="let video of tutorialesDivertidos">
+          <div class="carta">
+            <div class="video-thumbnail-container">
+              <a [href]="video.url" target="_blank">
+                <img [src]="getYoutubeThumbnail(video.id)" class="card-img-top video-thumbnail" alt="{{video.title}}" onerror="this.onerror=null; this.src='fallback-image-url.jpg';">
+              </a>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">
+                <a style="font-weight: 100;" [href]="video.url" target="_blank" class="text-decoration-none text-dark">{{video.title}}</a>
+              </h5>
+            </div>
+          </div>
+        </ng-template>
+      </swiper>
+    </div>
+  </div>
+
+    <div *ngIf="window.innerWidth < 576">
+    <h2 class="mb-2 tutoriales" style="margin-top: 30px;">{{ 'tutorials.basicTitle' | translate }} <span style="color:rgb(92, 129, 249);">{{ 'tutorials.basicHighlight' | translate }}</span></h2>
+    <div class="container">
+      <ng-container *ngFor="let video of tutorialesFaciles">
+        <div class="carta">
+          <div class="video-thumbnail-container">
+            <a [href]="video.url" target="_blank">
+              <img [src]="getYoutubeThumbnail(video.id)" class="card-img-top video-thumbnail" alt="{{video.title}}" onerror="this.onerror=null; this.src='fallback-image-url.jpg';">
+            </a>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">
+              <a [href]="video.url" style="font-weight: 100;" target="_blank" class="text-decoration-none text-dark">{{video.title}}</a>
+            </h5>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <h2 class="mt-5 mb-2 tutoriales">{{ 'tutorials.intermediateTitle' | translate }} <span style="color:rgb(92, 129, 249);">{{ 'tutorials.intermediateHighlight' | translate }}</span></h2>
+    <div class="container">
+      <ng-container *ngFor="let video of tutorialesMedios">
+        <div class="carta">
+          <div class="video-thumbnail-container">
+            <a [href]="video.url" target="_blank">
+              <img [src]="getYoutubeThumbnail(video.id)" class="card-img-top video-thumbnail" alt="{{video.title}}" onerror="this.onerror=null; this.src='fallback-image-url.jpg';">
+            </a>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">
+              <a [href]="video.url" style="font-weight: 100;" target="_blank" class="text-decoration-none text-dark">{{video.title}}</a>
+            </h5>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <h2 class="mt-5 mb-2 tutoriales">{{ 'tutorials.advancedTitle' | translate }} <span style="color:rgb(92, 129, 249);">{{ 'tutorials.advancedHighlight' | translate }}</span></h2>
+    <div class="container">
+      <ng-container *ngFor="let video of tutorialesAvanzados">
+        <div class="carta">
+          <div class="video-thumbnail-container">
+            <a [href]="video.url" target="_blank">
+              <img [src]="getYoutubeThumbnail(video.id)" class="card-img-top video-thumbnail" alt="{{video.title}}" onerror="this.onerror=null; this.src='fallback-image-url.jpg';">
+            </a>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">
+              <a [href]="video.url" style="font-weight: 100;" target="_blank" class="text-decoration-none text-dark">{{video.title}}</a>
+            </h5>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <h2 class="mt-5 mb-2 tutoriales">{{ 'tutorials.funTitle' | translate }} <span style="color:rgb(92, 129, 249);">{{ 'tutorials.funHighlight' | translate }}</span></h2>
+    <div class="container">
+      <ng-container *ngFor="let video of tutorialesDivertidos">
+        <div class="carta">
+          <div class="video-thumbnail-container">
+            <a [href]="video.url" target="_blank">
+              <img [src]="getYoutubeThumbnail(video.id)" class="card-img-top video-thumbnail" alt="{{video.title}}" onerror="this.onerror=null; this.src='fallback-image-url.jpg';">
+            </a>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">
+              <a [href]="video.url" style="font-weight: 100;" target="_blank" class="text-decoration-none text-dark">{{video.title}}</a>
+            </h5>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+</div>

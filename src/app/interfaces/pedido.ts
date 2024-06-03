@@ -3,18 +3,18 @@ export interface OrdenCompra {
   usuario_id: string;
   productos: ProductoOrden[];
   estado: string;
-  fecha: Date;
 }
 
 export interface ProductoOrden {
-  id?: string;
+  _id?: string;
   nombre: string;
   descripcion: string;
   tipo_madera?: string;
   numero_cuerdas?: number;
+  dataUrl?: string;
   cantidad: number;
   precio_unitario: number;
   total: number;
   estado: string;
-  fecha: Date;
+  imagen_url?: string;
 }

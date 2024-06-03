@@ -1,0 +1,14 @@
+.letrapequeña{
+  font-size: 12px;
+}
+.letragrande{
+  font-size: 16px;
+}
+.identificador{
+  font-size: 20px;
+}
+@media (min-width: 1000px) {
+  .identificador{
+    font-size: 30px;
+  }
+}

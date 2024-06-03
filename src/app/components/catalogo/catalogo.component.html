@@ -1,41 +1,41 @@
 <div class="container-fluid flex justify-content-center container-catalogo">
   <div class="container">
-      <h1 class="CatalogoH1">Catálogo</h1>
+      <h1 class="CatalogoH1">{{ 'CatalogTitle' | translate }}</h1>
 
       <div class="filtros mb-3">
       <div class="filtros1 text-white mb-4 p-3 p-lg-2 px-lg-3 row" >
           <div class="col-12 col-lg-4 form-group"  style="display: flex; justify-content: space-between; align-items: center;">
-            <label for="precioMin" class="text-white">Precio:</label>
+            <label for="precioMin" class="text-white">{{ 'Price' | translate }}</label>
             <div class="flex row mb-2 mb-lg-0" style="margin-left: 5px; display: flex; align-items: center;">
-              <input style="width: 30%; font-size: 13px;" class="col-5"  id="precioMin" type="number" placeholder="Precio mínimo" [(ngModel)]="minPrice" (ngModelChange)="aplicarFiltro()">
-              <label class="col-1" for="precioMax" class="text-white mx-2" style="width: fit-content;">a</label>
-              <input style="width: 30%; font-size: 13px;" class="col-5 mt-lg-0" id="precioMax" type="number" placeholder="Precio máximo" [(ngModel)]="maxPrice" (ngModelChange)="aplicarFiltro()">
+              <input style="width: 30%; font-size: 13px;" class="col-5"  id="precioMin" type="number" placeholder="{{ 'From' | translate }}" [(ngModel)]="minPrice" (ngModelChange)="aplicarFiltro()">
+              <label class="col-1" for="precioMax" class="text-white mx-2" style="width: fit-content;">{{ 'To' | translate }}</label>
+              <input style="width: 30%; font-size: 13px;" class="col-5 mt-lg-0" id="precioMax" type="number" placeholder="{{ 'To' | translate }}" [(ngModel)]="maxPrice" (ngModelChange)="aplicarFiltro()">
             </div>
             </div>
           <div class="col-12 col-md-6 col-lg-3 form-group mb-2 mb-lg-0" style="display: flex; justify-content: space-between; align-items: center;">
-              <label for="fecha" class="text-white">Fecha:</label>
+              <label for="fecha" class="text-white">{{ 'Date' | translate }}</label>
               <select style="width: 50%; font-size: 13px;" name="fecha" id="fecha" class="form-control" [(ngModel)]="ordenFecha" (ngModelChange)="aplicarFiltro()">
-                  <option value="recientes">Recientes</option>
-                  <option value="antiguos">Antiguos</option>
+                  <option value="recientes">{{ 'Recent' | translate }}</option>
+                  <option value="antiguos">{{ 'Old' | translate }}</option>
               </select>
           </div>
           <div class="col-12 col-md-6 col-lg-3 form-group mb-2 mb-lg-0"  style="display: flex; justify-content: space-between; align-items: center;">
-            <label for="marca" class="text-white">Categorias:</label>
+            <label for="marca" class="text-white">{{ 'Categories' | translate }}</label>
             <select  style="width: 50%; font-size: 13px;" name="marca" id="marca" class="form-control" [(ngModel)]="selectedCategory" (ngModelChange)="aplicarFiltro()">
-                <option value="todas">Todas</option>
-                <option value="Instrumentos musicales">Cajones</option>
-                <option value="Accesorios">Accesorios</option>
+                <option value="todas">{{ 'All' | translate }}</option>
+                <option value="Instrumentos musicales">{{ 'MusicalInstruments' | translate }}</option>
+                <option value="Accesorios">{{ 'Accessories' | translate }}</option>
             </select>
           </div>
           <div class="col-12 col-md-6 col-lg-2 form-check"  style="display: flex; justify-content: center;">
               <input type="checkbox" id="stock" name="stock" value="en-stock" class="form-check-input" (change)="aplicarFiltro()">
-              <label for="stock" class="form-check-label text-white ms-2">En stock</label>
+              <label for="stock" class="form-check-label text-white ms-2">{{ 'InStock' | translate }}</label>
           </div>
       </div>
 
         <div class="filtros2">
           <div style="display: flex; height: fit-content;">
-            <input [(ngModel)]="filtroNombre" (input)="aplicarFiltro()" class="search_input" placeholder="Buscar..." type="text" style="font-size: 13px; padding: 10; margin: 6px 0px;  height: 40px;">
+            <input [(ngModel)]="filtroNombre" (input)="aplicarFiltro()" class="search_input" placeholder="{{ 'Search' | translate }}" type="text" style="font-size: 13px; padding: 10; margin: 6px 0px;  height: 40px;">
               <div class="iconContainer">
                   <svg class="search_icon" viewBox="0 0 512 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="search_icon"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg>
               </div>
@@ -45,36 +45,37 @@
 
       <div class="row gap-1 gap-lg-4" style="display: flex; min-height: 40vh; justify-content: start;">
         <ng-container *ngIf="(productos).length > 0; else noProducts">
-        <div class="col-6 col-lg-2 producto"  *ngFor="let producto of getProductosPaginados()" (onclick)="verProducto(producto)">
-          <div style="position: relative; background: url({{producto.imagen_url}});  background-size: contain; background-position: center; height: 170px;  background-repeat: no-repeat; background-color: rgba(188, 187, 187, 0.395); border-radius: 20px 20px 0px 0px; width: 100%;">
+        <div class="col-6 col-lg-
+        2 producto"  *ngFor="let producto of getProductosPaginados()" >
+        <div style="position: relative; background: url({{producto.imagen_url}});  background-size: contain; background-position: center; height: 170px;  background-repeat: no-repeat; background-color: rgba(188, 187, 187, 0.395); border-radius: 20px 20px 0px 0px; width: 100%;">
+        </div>
+        <div class="p-2 ms-2" style="cursor: pointer;" (click)="verProducto(producto)">
+          @if (producto.stock > 0) {
+            <p style="font-size: 13px; color: rgb(142, 167, 247)" class="m-0">{{ 'RemainingInStock' | translate }} {{producto.stock}}</p>
+          }@else {
+            <p style="font-size: 13px; color: red;" class="m-0">{{ 'OutOfStock' | translate }}</p>
+          }
+          <p style="font-size: 20px;" class="m-0">{{producto.nombre}}</p>
+          <p style="font-size: 13px;" class="m-0">{{producto.fecha_lanzamiento | date}}</p>
+        </div>
+        <div class="w-100 row m-0">
+          <div class="col-6" style="height: 40px; background-color: rgb(44, 44, 44); border-radius: 0px 0px 0px 20px; display: grid; place-items: center; color: white;">
+            <p class="m-0" style="font-size: 15px;">{{producto.precio}} {{"precioSimbolo" | translate}}</p>
           </div>
-          <div class="p-2 ms-2" style="cursor: pointer;" (click)="verProducto(producto)">
-            @if (producto.stock > 0) {
-              <p style="font-size: 13px; color: rgb(142, 167, 247)" class="m-0">Quedan {{producto.stock}} en stock</p>
-            }@else {
-              <p style="font-size: 13px; color: red;" class="m-0">Sin stock</p>
-            }
-            <p style="font-size: 20px;" class="m-0">{{producto.nombre}}</p>
-            <p style="font-size: 13px;" class="m-0">{{producto.fecha_lanzamiento | date}}</p>
-          </div>
-          <div class="w-100 row m-0">
-            <div class="col-6" style="height: 40px; background-color: rgb(44, 44, 44); border-radius: 0px 0px 0px 20px; display: grid; place-items: center; color: white;">
-              <p class="m-0" style="font-size: 15px;">{{producto.precio}} €</p>
-            </div>
-            <div class="col-6 comprar" (click)="agregarAlCarrito(producto)">
-              <span class="tooltip">Anadir al carrito</span>
-              <i class="fa-solid fa-basket-shopping"></i>
-            </div>
+          <div class="col-6 comprar" (click)="agregarAlCarrito(producto)">
+            <span class="tooltip">{{ 'AddToCart' | translate }}</span>
+            <i class="fa-solid fa-basket-shopping"></i>
           </div>
         </div>
-        <div class="w-100" style="display: grid; place-content: center;">
-          <pagination [(ngModel)]="page" [totalItems]="totalItems" [itemsPerPage]="itemsPerPage" class="my-custom-pagination"></pagination>
-        </div>
-      </ng-container>
-
-        <ng-template #noProducts>
-          <p class="text-center  text-black" style="margin: 200px auto; width: fit-content;">No hay productos que coincidan con esos filtros.</p>
-        </ng-template>
       </div>
-  </div>
+      <div class="w-100" style="display: grid; place-content: center;">
+        <pagination [(ngModel)]="page" [totalItems]="totalItems" [itemsPerPage]="itemsPerPage" class="my-custom-pagination"></pagination>
+      </div>
+    </ng-container>
+
+      <ng-template #noProducts>
+        <p class="text-center  text-black" style="margin: 200px auto; width: fit-content;">{{ 'NoProductsMatch' | translate }}</p>
+      </ng-template>
+    </div>
+</div>
 </div>

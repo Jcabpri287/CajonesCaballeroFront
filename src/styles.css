@@ -2,6 +2,10 @@
 @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 @import '../node_modules/bootstrap-icons/font/bootstrap-icons.css';
 @import '../node_modules/@fortawesome/fontawesome-free/css/all.css';
+@import "../node_modules/swiper/swiper.min.css";
+@import "../node_modules/swiper/modules/pagination/pagination.min.css";
+@import "../node_modules/swiper/modules/navigation/navigation.min.css";
+
 @font-face {
   font-family: 'MiFuente';
   src: url('./assets/fonts/AtkinsonHyperlegible-Regular.ttf') format('truetype'),
@@ -21,5 +25,13 @@
   background: #555;
 }
 
-html, body { height: 100%; }
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html {
+  scroll-behavior: auto !important;
+}

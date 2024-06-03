@@ -243,7 +243,7 @@
 
 .circulo1:hover{
   background: url("/assets/video/VideoTutorial1.gif");
-  background-size: 170%;
+  background-size: 190%;
   background-position: center;
   opacity: 1;
  }
@@ -259,7 +259,7 @@
 
  .circulo2:hover{
    background: url("/assets/video/VideoTutorial2.gif");
-   background-size: 170%;
+   background-size: 190%;
    background-position: center;
    opacity: 1;
   }
@@ -275,7 +275,7 @@
 
    .circulo3:hover{
      background: url("/assets/video/VideoTutorial3.gif");
-     background-size: 170%;
+     background-size: 190%;
      background-position: center;
      opacity: 1;
     }
@@ -291,7 +291,7 @@
 
      .circulo4:hover{
        background: url("/assets/video/VideoTutorial4.gif");
-       background-size: 170%;
+       background-size: 190%;
        background-position: center;
        opacity: 1;
       }
@@ -700,4 +700,27 @@
   {
     width: 80%;
   }
+}
+.menu__link {
+  color: rgb(61, 61, 61);
+  line-height: 2;
+  position: relative;
+  text-decoration: none;
+}
+
+.menu__link::before {
+  content: '';
+  width: 0;
+  height: 3px;
+  border-radius: 2px;
+  background-color: rgb(92, 129, 249);
+  position: absolute;
+  bottom: -.25rem;
+  right: 0;
+  transition: right .4s, width .4s, left .4s;
+}
+
+.menu__link:hover::before {
+  width: 100%;
+  left: 0;
 }

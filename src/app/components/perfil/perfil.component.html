@@ -1,0 +1,56 @@
+<div class="container mx-auto" style="min-height: 76.3vh; padding-top: 70px;">
+  <h1 class="CatalogoH1 text-center">{{ 'UserProfile' | translate }}</h1>
+  <div class="d-flex justify-content-center">
+    <div class="çcol-12 col-lg-8" style="margin-top: 50px; padding: 30px; background-color: rgba(0, 0, 0, 0.023); border-radius: 20px;">
+      <h2 class="mb-4">{{ 'YourData' | translate }}:</h2>
+      <form [formGroup]="perfilForm" (ngSubmit)="onSubmit()" class="row g-3">
+        <div class="mb-3 col-11 col-lg-6 mx-auto">
+          <div class="position-relative">
+            <label for="nombre" class="form-label">{{ 'Name' | translate }}</label>
+            <input type="text" id="nombre" class="form-control" formControlName="nombre">
+            <div *ngIf="perfilForm.get('nombre')?.errors?.['required'] && perfilForm.get('nombre')?.touched" class="tiptool">
+              <div class="icon">!</div>
+              <div class="tooltiptext">
+                <p style="font-size: 15px">{{ 'RequiredName' | translate }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3 col-11 col-lg-6 mx-auto">
+          <div class="position-relative">
+            <label for="direccion" class="form-label">{{ 'Address' | translate }}</label>
+            <input type="text" id="direccion" class="form-control" formControlName="direccion">
+            <div *ngIf="perfilForm.get('direccion')?.errors?.['required'] && perfilForm.get('direccion')?.touched" class="tiptool">
+              <div class="icon">!</div>
+              <div class="tooltiptext">
+                <p style="font-size: 15px">{{ 'RequiredAddress' | translate }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3 col-11 mx-auto col-lg-6">
+          <div class="position-relative">
+            <label for="telefono" class="form-label">{{ 'PhoneNumber' | translate }}</label>
+            <input type="text" id="telefono" class="form-control" formControlName="telefono">
+            <div *ngIf="(perfilForm.get('telefono')?.errors?.['required'] || perfilForm.get('telefono')?.errors?.['invalidNumber']) && perfilForm.get('telefono')?.touched" class="tiptool">
+              <div class="icon">!</div>
+              <div class="tooltiptext">
+                <p *ngIf="(perfilForm.get('telefono')?.errors?.['required'])" style="font-size: 15px">{{ 'RequiredPhoneNumber' | translate }}</p>
+                <p *ngIf="(perfilForm.get('telefono')?.errors?.['invalidNumber'])" style="font-size: 15px">{{ 'InvalidPhoneNumber' | translate }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3 col-11 col-lg-6 mx-auto " style="margin-top: 40px;">
+          <div class="text-center">
+            <button type="submit" class="btn w-100 mt-2 my-0 botoncillo">{{ 'SaveChanges' | translate }}</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

@@ -2,11 +2,12 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import * as THREE from 'three';
 import { StripeService } from '../../services/stripe.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-final-cajon',
   standalone: true,
-  imports: [],
+  imports: [TranslateModule],
   templateUrl: './final-cajon.component.html',
   styleUrl: './final-cajon.component.css'
 })

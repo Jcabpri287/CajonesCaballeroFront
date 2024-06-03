@@ -6,11 +6,12 @@ import { NgClass, NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import * as THREE from 'three';
 import { SpinnerService } from '../../services/spinner-service.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-personalizar',
   standalone: true,
-  imports: [HeaderComponent, NgFor, FormsModule, NgClass],
+  imports: [HeaderComponent, NgFor, FormsModule, NgClass, TranslateModule],
   templateUrl: './personalizar.component.html',
   styleUrl: './personalizar.component.css'
 })
@@ -36,7 +37,7 @@ export class PersonalizarComponent implements OnInit, AfterViewInit{
 
   @ViewChild('rendererContainer', { static: true }) rendererContainer!: ElementRef<HTMLDivElement>;
 
-  constructor(private ngZone: NgZone,public spinnerService: SpinnerService, private el: ElementRef,  private router: Router) {}
+  constructor(private ngZone: NgZone,public spinnerService: SpinnerService, private el: ElementRef,  private router: Router, private translate: TranslateService) {}
 
   private renderer?: THREE.WebGLRenderer;
   private scene?: THREE.Scene;
@@ -67,15 +68,15 @@ export class PersonalizarComponent implements OnInit, AfterViewInit{
 
   mostrarAlerta() {
     Swal.fire({
-      title: 'Recomendación',
-      text: 'Te recomendamos usar un ordenador para disfrutar de esta función de la mejor manera posible.',
+      title: this.translate.instant('recomendacion.titulo'),
+      text: this.translate.instant('recomendacion.mensaje'),
       icon: 'info',
       iconColor: "#8ea7f7",
       showCancelButton: true,
-      confirmButtonText: 'Seguir',
+      confirmButtonText: this.translate.instant('recomendacion.confirmar'),
       confirmButtonColor: "#8ea7f7",
       cancelButtonColor: "#252525",
-      cancelButtonText: 'Volver atrás'
+      cancelButtonText: this.translate.instant('recomendacion.cancelar')  
     }).then((result) => {
       if (!result.isConfirmed) {
         this.router.navigate(['/'])
@@ -95,9 +96,6 @@ export class PersonalizarComponent implements OnInit, AfterViewInit{
 
       const textures = this.obtenerTexturaMadera(this.tipoMadera);
       this.materials = textures.map(texture => new THREE.MeshBasicMaterial({ map: texture }));
-
-      const textureFront = new THREE.TextureLoader().load('assets/img/design/tableroEnfrente.jpg');
-      this.materials[1] = new THREE.MeshBasicMaterial({ map: textureFront });
 
       const geometry = new THREE.BoxGeometry(1.8, 2.5, 1.5); // Ajusta el tamaño del cubo
       const cube = new THREE.Mesh(geometry, this.materials);
@@ -160,17 +158,10 @@ export class PersonalizarComponent implements OnInit, AfterViewInit{
     const textures = this.obtenerTexturaMadera(madera);
 
     // Asigna la textura específica para la cara frontal
-    const textureFront = new THREE.TextureLoader().load('assets/img/design/tableroEnfrente.jpg');
 
     // Actualiza todas las texturas, incluida la textura específica para la cara frontal
     this.materials?.forEach((material, index) => {
-        if (index === 1) {
-            // Si es la cara frontal, asigna la textura específica
-            material.map = textureFront;
-        } else {
-            // Para las demás caras, asigna las texturas según la selección de madera
             material.map = textures[index];
-        }
         material.needsUpdate = true;
     });
 

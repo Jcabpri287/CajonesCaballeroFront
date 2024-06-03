@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 })
 
 export class usuarioService {
-  private url="https://cajonescaballeroback.onrender.com";
+  private url="http://localhost:3000";
   constructor(private http: HttpClient) {}
 
   getUsuarios():Observable<Usuario[]>{
@@ -82,6 +82,7 @@ export class usuarioService {
   }
 
   updateUsuario(usuario:Usuario,id:string):Observable<boolean>{
+    console.log(id);
     return this.http.put<Usuario>(`${this.url}/usuarios/${id}`,usuario).pipe(
       map(res=>{
         return true;

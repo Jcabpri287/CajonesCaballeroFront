@@ -1,0 +1,35 @@
+.CatalogoH1{
+  font-size: 30px;
+  font-weight: 800;
+}
+@media (min-width: 500px) {
+  .CatalogoH1{
+    font-size: 50px;
+  }
+}
+
+.about-section {
+  padding: 60px 0;
+}
+
+.about-section h2 {
+  margin-bottom: 30px;
+}
+
+.card-img-top {
+  object-fit: cover;
+  height: 300px;
+}
+
+.card
+{
+  transition: 0.3s all;
+  cursor: pointer;
+  width: 100%;
+}
+
+.card:hover
+{
+  transform: scale(1.02);
+}
+

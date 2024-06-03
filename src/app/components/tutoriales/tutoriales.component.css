@@ -1,0 +1,100 @@
+.carta img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.carta {
+  background-color: #ffffff1d;
+  margin-bottom: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.162);
+  transition: all 0.3s ease;
+}
+
+.carta:hover {
+  transform: scale(1.06);
+}
+
+.tutoriales {
+  margin: 0px 0px 0px 40px;
+}
+
+.card-body {
+  text-align: center;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 20px;
+  color: #000;
+  padding-bottom: 20px;
+}
+
+.CatalogoH1 {
+  font-size: 30px;
+  font-weight: 800;
+}
+
+@media (min-width: 500px) {
+  .CatalogoH1 {
+    font-size: 70px;
+  }
+}
+
+.swiper-pagination {
+  bottom: -20px; /* Ajusta la posición vertical de la paginación */
+}
+
+.swiper-pagination-bullet {
+  width: 12px; /* Ancho de cada punto de la paginación */
+  height: 12px; /* Alto de cada punto de la paginación */
+  background-color: #fff; /* Color de fondo de cada punto */
+  opacity: 0.5; /* Opacidad de cada punto */
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1; /* Opacidad del punto activo */
+}
+
+.video-thumbnail-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 55.5%; /* 16:9 aspect ratio */
+  overflow: hidden;
+}
+
+.video-thumbnail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.swiper-container {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.video-thumbnail-container img {
+  width: 100%;
+  height: auto;
+}
+
+/* Tu CSS actual */
+
+@media (max-width: 576px) {
+  .swiper-container {
+    height: auto !important;
+  }
+}
+

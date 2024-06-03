@@ -1,22 +1,47 @@
-  <div class="container bg-transparent sticky-top " >
+<div class="container bg-transparent sticky-top">
   <nav class="navbar navbar-expand-lg text-dark mx-auto bg-transparent" id="mainNav">
     <div class="container px-4 px-lg-5">
-      @if (checkSpecificUrl()) {
-        <a class="navbar-brand titulo" (click)="scrollToSection('Inicio')"><i class="fa-solid fa-cube"></i></a>
-      }@else {
-        <a class="navbar-brand titulo" href="/"><i class="fa-solid fa-cube"></i></a>
-      }
+      <a *ngIf="checkSpecificUrl()" class="navbar-brand titulo" (click)="scrollToSection('Inicio')"><i class="fa-solid fa-cube"></i></a>
+      <a *ngIf="!checkSpecificUrl()" class="navbar-brand titulo"  [routerLink]="['/']"><i class="fa-solid fa-cube"></i></a>
       <div class="navbar-collapse d-none d-lg-block" id="navbarResponsive">
-        <ul class="navbar-nav ms-auto" *ngIf="checkSpecificUrl()">
-          <li class="nav-item botones"><a class="nav-link" (click)="scrollToSection('Inicio')">Inicio</a></li>
-          <li class="nav-item botones"><a class="nav-link" (click)="scrollToSection('Catalogo')">Catalogo</a></li>
-          <li class="nav-item botones"><a class="nav-link" (click)="scrollToSection('Personalizacion')">Personalizacion</a></li>
-          <li class="nav-item botones"><a class="nav-link" (click)="scrollToSection('Tutoriales')">Tutoriales</a></li>
-          <li class="nav-item botones"><a class="nav-link" (click)="scrollToSection('Contacto')">Ayuda</a></li>
+        <ul class="navbar-nav ms-auto d-none d-lg-flex">
+          <li class="nav-item botones" [class.current]="checkUrl('/')"><a class="nav-link" [routerLink]="['/']">{{ 'HOME' | translate }}</a></li>
+          <li class="nav-item botones" [class.current]="checkUrl('/catalogo') || checkUrl('/producto')"><a class="nav-link" [routerLink]="['/catalogo']">{{ 'CATALOG' | translate }}</a></li>
+          <li class="nav-item botones" [class.current]="checkUrl('/personalizar') || checkUrl('/personalizar/pintar') || checkUrl('/personalizar/finalizar')"><a class="nav-link"  [routerLink]="['/personalizar']">{{ 'CUSTOMIZATION' | translate }}</a></li>
+          <li class="nav-item botones" [class.current]="checkUrl('/tutoriales')"><a class="nav-link"  [routerLink]="['/tutoriales']">{{ 'TUTORIALS' | translate }}</a></li>
+          <li class="nav-item botones" [class.current]="checkUrl('/sobreNosotros')"><a class="nav-link"  [routerLink]="['/sobreNosotros']">{{ 'ABOUT_US' | translate }}</a></li>
         </ul>
       </div>
+      <div class="wrapper">
+        <input type="checkbox" id="toogle" class="hidden-trigger">
+        <label for="toogle" class="circle botonIdioma" style="display: grid; place-items: center; position: relative;">
+          <i class="fa-solid fa-language" style="font-size: 20px; color: white;"></i>
+          <span class="tooltip">{{ tooltipText | translate }}</span>
+        </label>
+
+        <div class="subs">
+          <button class="sub-circle">
+            <input value="es" name="sub-circle" type="radio" id="sub1" class="hidden-sub-trigger" (change)="cambiarIdioma($event)">
+            <label for="sub1" style="display: grid; place-items: center;">
+              <img src="assets/img/banderas/spain.svg" alt="" width="150%">
+            </label>
+          </button>
+          <button class="sub-circle">
+            <input value="en" name="sub-circle" type="radio" id="sub2" class="hidden-sub-trigger" (change)="cambiarIdioma($event)">
+            <label for="sub2" style="display: grid; place-items: center;">
+              <img src="assets/img/banderas/English.svg" alt="" width="200%">
+            </label>
+          </button>
+          <button class="sub-circle">
+            <input value="it" name="sub-circle" type="radio" id="sub3" class="hidden-sub-trigger" (change)="cambiarIdioma($event)">
+            <label for="sub3" style="display: grid; place-items: center;">
+              <img src="assets/img/banderas/Italy.png" alt="" width="130%">
+            </label>
+          </button>
+        </div>
+      </div>
       <button class="nav-item" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" style="border: 0px; background-color: transparent;">
-        <i class="fa-solid fa-ellipsis iconito" ></i>
+        <i class="fa-solid fa-ellipsis iconito"></i>
       </button>
     </div>
   </nav>
@@ -25,45 +50,43 @@
     <div class="offcanvas-header">
       <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-    <div class="offcanvas-body py-0">
-      <ul class="navbar-nav" style="margin-left: 20px;">
-        <div class="d-block d-lg-none" *ngIf="checkUrl('/')">
-        <li class="nav-item" style="margin-bottom: -10px;"><a class="nav-link" href="#"><i class="fa-regular fa-circle" style="margin-right: 10px; font-size: 10px;"></i>Ir a</a></li>
-        <ul class="navbar-nav ms-5">
-          <li class="nav-item canvasList"  style="margin-bottom: -10px;cursor: pointer;"><a class="nav-link" (click)="scrollToSection('Inicio')"><i class="fa-solid fa-circle" style="margin-right: 10px; font-size: 10px;"></i>Inicio</a></li>
-          <li class="nav-item canvasList"  style="margin-bottom: -10px;cursor: pointer;"><a class="nav-link" (click)="scrollToSection('Catalogo')"><i class="fa-solid fa-circle" style="margin-right: 10px; font-size: 10px;"> </i>Catalogo</a></li>
-          <li class="nav-item canvasList"  style="margin-bottom: -10px;cursor: pointer;"><a class="nav-link" (click)="scrollToSection('Personalizacion')"><i class="fa-solid fa-circle" style="margin-right: 10px; font-size: 10px;"></i>Personalizacion</a></li>
-          <li class="nav-item canvasList"  style="margin-bottom: -10px;cursor: pointer;"><a class="nav-link" (click)="scrollToSection('Tutoriales')"><i class="fa-solid fa-circle" style="margin-right: 10px; font-size: 10px;"></i>Tutoriales</a></li>
-        </ul>
-      </div>
-        <li class="nav-item" style="margin-bottom: -10px;margin-top: 10px;"><a class="nav-link" href="#"><i class="fa-solid fa-store" style="margin-right: 10px; font-size: 15px;"></i>Productos</a></li>
-        <ul class="navbar-nav ms-5">
-          <li class="nav-item canvasList" [class.active]="checkUrl('/catalogo')" style="margin-bottom: -10px;"><a class="nav-link" href="/catalogo"><i class="fa-solid fa-circle" style="margin-right: 10px; font-size: 10px;"></i>Catálogo</a></li>
-          <li class="nav-item canvasList" [class.active]="checkUrl('/personalizar')" style="margin-bottom: -10px;"><a class="nav-link" href="/personalizar"><i class="fa-solid fa-circle" style="margin-right: 10px; font-size: 10px;"> </i>Personalizar</a></li>
-        </ul>
-        <li class="nav-item" style="margin-bottom: -10px;margin-top: 10px;"><a class="nav-link" href="#"><i class="fa-regular fa-user" style="margin-right: 10px; font-size: 15px;"></i>Cuenta</a></li>
-        @if (sesionIniciada()) {
+    <div class="offcanvas-body p-0">
+      <ul class="navbar-nav">
+        <div class="d-block d-lg-none">
+          <li class="nav-item titulillo"><a class="nav-link" href="#">{{ 'GO_TO' | translate }}</a></li>
           <ul class="navbar-nav ms-5">
-            <li class="nav-item canvasList" [class.active]="checkUrl('/perfil')" style="margin-bottom: -10px;"><a class="nav-link" href="/perfil"><i class="fa-solid fa-circle" style="margin-right: 10px; font-size: 10px;"></i>Mi perfil</a></li>
-            <li class="nav-item canvasList" [class.active]="checkUrl('/carrito')" style="margin-bottom: -10px;"><a class="nav-link" href="/carrito"><i class="fa-solid fa-circle" style="margin-right: 10px; font-size: 10px;"></i>Carrito</a></li>
-            <li class="nav-item canvasList" [class.active]="checkUrl('/pedidos')" style="margin-bottom: -10px;"><a class="nav-link" href="/pedidos"><i class="fa-solid fa-circle" style="margin-right: 10px; font-size: 10px;"></i>Mis pedidos</a></li>
-            <li class="nav-item canvasList" style="margin-bottom: -10px; cursor: pointer;"><a class="nav-link" (click)="cerrarSesion()"><i class="fa-solid fa-circle" style="margin-right: 10px; font-size: 10px;"></i>Cerrar Sesion</a></li>
+            <li class="nav-item canvasList" style="cursor: pointer;"><a class="nav-link" [routerLink]="['/']">{{ 'HOME' | translate }}</a></li>
+            <li class="nav-item canvasList" style="cursor: pointer;"><a class="nav-link"  [routerLink]="['/catalogo']">{{ 'CATALOG' | translate }}</a></li>
+            <li class="nav-item canvasList" style="cursor: pointer;"><a class="nav-link"  [routerLink]="['/personalizar']">{{ 'CUSTOMIZATION' | translate }}</a></li>
+            <li class="nav-item canvasList" style="cursor: pointer;"><a class="nav-link"  [routerLink]="['/tutoriales']">{{ 'TUTORIALS' | translate }}</a></li>
+            <li class="nav-item canvasList" style="cursor: pointer;"><a class="nav-link"  [routerLink]="['/sobreNosotros']">{{ 'ABOUT_US' | translate }}</a></li>
           </ul>
-          }@else {
-            <ul class="navbar-nav ms-5">
-              <li class="nav-item canvasList" [class.active]="checkUrl('/login')" style="margin-bottom: -10px;"><a class="nav-link" href="login"><i class="fa-solid fa-circle" style="margin-right: 10px; font-size: 10px;"></i>Iniciar Sesion</a></li>
-              <li class="nav-item canvasList" [class.active]="checkUrl('/register')" style="margin-bottom: -10px;"><a class="nav-link" href="register"><i class="fa-solid fa-circle" style="margin-right: 10px; font-size: 10px;"></i>Registrarse</a></li>
-            </ul>        }
-        <li *ngIf="checkUrl('/')" class="nav-item" style="margin-bottom: -10px;margin-top: 10px; cursor: pointer;"><a class="nav-link" (click)="scrollToSection('Contacto')"><i class="fa-solid fa-circle-info" style="margin-right: 10px; font-size: 15px;"></i>Ayuda</a></li>
+        </div>
+        <li class="nav-item titulillo mt-3"><a class="nav-link">{{ 'ACCOUNT' | translate }}</a></li>
+        <ng-container *ngIf="sesionIniciada(); else notLoggedIn">
+          <ul class="navbar-nav ms-5">
+            <li class="nav-item canvasList" [class.active]="checkUrl('/perfil')"><a class="nav-link"  [routerLink]="['/perfil']">{{ 'MY_PROFILE' | translate }}</a></li>
+            <li class="nav-item canvasList" style="display: flex; align-items: center;" [class.active]="checkUrl('/carrito')"><a class="nav-link"  [routerLink]="['/carrito']">{{ 'CART' | translate }}</a>  <span style="background-color:rgb(84, 112, 204); padding: 3px 7px; font-size: 13px; border-radius: 50%; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-weight: bold; margin-left: 10px; min-width: 25px; text-align: center;">{{totalProductos}}</span> </li>
+            <li class="nav-item canvasList" [class.active]="checkUrl('/pedidos')"><a class="nav-link"  [routerLink]="['/pedidos']">{{ 'MY_ORDERS' | translate }}</a></li>
+            <li class="nav-item canvasList" style=" cursor: pointer;"><a class="nav-link" (click)="cerrarSesion()">{{ 'LOGOUT' | translate }}</a></li>
+          </ul>
+        </ng-container>
+        <ng-template #notLoggedIn>
+          <ul class="navbar-nav ms-5">
+            <li class="nav-item canvasList" [class.active]="checkUrl('/login')"><a class="nav-link"  [routerLink]="['/login']">{{ 'LOGIN' | translate }}</a></li>
+            <li class="nav-item canvasList" [class.active]="checkUrl('/register')"><a class="nav-link"  [routerLink]="['/register']">{{ 'REGISTER' | translate }}</a></li>
+          </ul>
+        </ng-template>
+        <li *ngIf="checkUrl('/')"  class="nav-item titulillo  mt-3"><a class="nav-link">{{ 'HELP' | translate }}</a></li>
         <ul *ngIf="checkUrl('/')" class="navbar-nav ms-5">
-          <li *ngIf="checkUrl('/')" class="nav-item canvasList" style="margin-bottom: -10px; cursor: pointer;"><a class="nav-link" (click)="scrollToSection('Contacto')"><i class="fa-solid fa-circle" style="margin-right: 10px; font-size: 10px;"></i>Preguntas frecuentes</a></li>
-          <li *ngIf="checkUrl('/')" class="nav-item canvasList" style="margin-bottom: -10px; cursor: pointer;"><a class="nav-link" (click)="scrollToSection('Contacto')"><i class="fa-solid fa-circle" style="margin-right: 10px; font-size: 10px;"> </i>Politica de devoluciones</a></li>
-          <li *ngIf="checkUrl('/')" class="nav-item canvasList" style="margin-bottom: -10px; cursor: pointer;"><a class="nav-link" (click)="scrollToSection('Contacto')"><i class="fa-solid fa-circle" style="margin-right: 10px; font-size: 10px;"></i>Terminos y condiciones</a></li>
+          <li *ngIf="checkUrl('/')" class="nav-item canvasList"><a class="nav-link" style="cursor: pointer;" (click)="scrollToSection('Contacto')">{{ 'FAQ' | translate }}</a></li>
+          <li *ngIf="checkUrl('/')" class="nav-item canvasList"><a class="nav-link" style="cursor: pointer;" (click)="scrollToSection('Contacto')">{{ 'RETURN_POLICY' | translate }}</a></li>
+          <li *ngIf="checkUrl('/')" class="nav-item canvasList"><a class="nav-link" style="cursor: pointer;" (click)="scrollToSection('Contacto')">{{ 'TERMS_AND_CONDITIONS' | translate }}</a></li>
         </ul>
-        <li class="nav-item" style="margin-bottom: -10px;margin-top: 10px; cursor: pointer;"><a class="nav-link" (click)="scrollToSection('Contacto')"><i class="fa-regular fa-address-card" style="margin-right: 10px; font-size: 15px;"></i>Acerca de</a></li>
+        <li class="nav-item titulillo mt-3"><a class="nav-link" (click)="scrollToSection('Contacto')">{{ 'ABOUT' | translate }}</a></li>
         <ul class="navbar-nav ms-5">
-          <li class="nav-item canvasList" style="margin-bottom: -10px; cursor: pointer;"><a class="nav-link" href="https://www.linkedin.com/in/juanancaballero"><i class="fa-solid fa-circle" style="margin-right: 10px; font-size: 10px;"></i>Acerca del alumno</a></li>
-          <li class="nav-item canvasList" style="margin-bottom: -10px; cursor: pointer;"><a class="nav-link" href="https://www.iestrassierra.com/"><i class="fa-solid fa-circle" style="margin-right: 10px; font-size: 10px;"> </i>Acerca del IES Trassierra</a></li>
+          <li class="nav-item canvasList"><a class="nav-link" href="https://www.linkedin.com/in/juanancaballero">{{ 'ABOUT_STUDENT' | translate }}</a></li>
+          <li class="nav-item canvasList"><a class="nav-link" href="https://www.iestrassierra.com/">{{ 'ABOUT_SCHOOL' | translate }}</a></li>
         </ul>
       </ul>
     </div>
