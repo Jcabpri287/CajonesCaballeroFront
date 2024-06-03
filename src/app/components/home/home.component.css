@@ -113,6 +113,11 @@
   font-weight: 800;
   line-height: 50px;
 }
+
+.divTexto{
+margin-top: -50px;
+}
+
 @media (min-width: 593px) {
   .texto1,.texto2
   {
@@ -128,6 +133,10 @@
     font-size: 65px;
     font-weight: 800;
     line-height: 70px;
+  }
+
+  .divTexto{
+    margin-top: 100px;
   }
 }
 
