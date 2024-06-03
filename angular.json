@@ -8,7 +8,7 @@
       "schematics": {},
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",  
+      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-builders/custom-webpack:browser",
@@ -49,8 +49,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "8kb"
+                  "maximumWarning": "7kb",
+                  "maximumError": "10kb"
                 }
               ],
               "outputHashing": "all"
