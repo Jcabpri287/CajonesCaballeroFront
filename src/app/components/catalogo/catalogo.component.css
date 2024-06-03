@@ -1,6 +1,7 @@
 .my-pagination ::ng-deep .ngx-pagination .current {
   background: rgb(61, 61, 61);
 }
+
 .producto {
   padding: 0px;
   border-radius: 20px;

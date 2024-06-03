@@ -1,0 +1,20 @@
+<!-- legal-notice.component.html -->
+
+<div class="container mx-auto" style="min-height: 77.3vh; padding-top: 50px; display: grid; place-items: center;">
+  <h1 class="mb-4 CatalogoH1">{{ 'LegalNotice' | translate }}</h1>
+  <div>
+    <p style="margin-bottom: 5px;"><span style="color: rgb(92, 129, 249);">{{ 'Owner' | translate }}</span> {{ 'OwnerDetails' | translate }}</p>
+    <p style="margin-bottom: 5px;"><span style="color: rgb(92, 129, 249);">{{ 'Address' | translate }}</span> {{ 'AddressDetails' | translate }}</p>
+    <p style="margin-bottom: 5px;"><span style="color: rgb(92, 129, 249);">{{ 'Contact' | translate }}</span> {{ 'ContactDetails' | translate }}</p>
+    <p style="margin-bottom: 10px;"><span style="color: rgb(92, 129, 249);">{{ 'TaxID' | translate }}</span>{{ 'TaxIDDetails' | translate }}</p>
+    <p>{{ 'ResponsibilityDisclaimer' | translate }}</p>
+    <p>{{ 'ThirdPartyLinks' | translate }}</p>
+    <p>{{ 'ContentOwnership' | translate }}</p>
+  </div>
+
+  <div class="container mx-auto my-5 text-center w-50" style="display: flex; justify-content: space-around;">
+    <a [routerLink]="['/politica']" class="menu__link">{{ 'CookiesPolicy' | translate }}</a>
+    <a [routerLink]="['/legal']" class="menu__link selected">{{ 'LegalNotice' | translate }}</a>
+    <a [routerLink]="['/privacidad']" class="menu__link">{{ 'PrivacyPolicy' | translate }}</a>
+  </div>
+</div>

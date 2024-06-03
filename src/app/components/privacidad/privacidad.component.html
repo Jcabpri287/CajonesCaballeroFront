@@ -1,0 +1,22 @@
+<div class="container mx-auto" style="min-height: 77.3vh; font-size: 14px; padding-top: 50px; display: grid; place-items: center;">
+  <h1 class="mb-4 CatalogoH1">{{ 'PrivacyPolicy' | translate }}</h1>
+  <div>
+    <b style="color: rgb(92, 129, 249);">{{ 'PrivacyPolicyTitle' | translate }}</b>
+    <p>{{ 'PrivacyPolicyDescription' | translate }}</p>
+
+    <b style="color: rgb(92, 129, 249);">{{ 'DataCollectionTitle' | translate }}</b>
+    <p>{{ 'DataCollectionDescription' | translate }}</p>
+
+    <b style="color: rgb(92, 129, 249);">{{ 'ThirdPartyDisclosureTitle' | translate }}</b>
+    <p>{{ 'ThirdPartyDisclosureDescription' | translate }}</p>
+
+    <b style="color: rgb(92, 129, 249);">{{ 'UserRightsTitle' | translate }}</b>
+    <p>{{ 'UserRightsDescription' | translate }}</p>
+  </div>
+
+  <div class="container mx-auto my-5 text-center w-50" style="display: flex; justify-content: space-around;">
+    <a [routerLink]="['/politica']" class="menu__link  ">{{ 'CookiePolicy' | translate }}</a>
+    <a [routerLink]="['/legal']" class="menu__link">{{ 'LegalNotice' | translate }}</a>
+    <a [routerLink]="['/privacidad']" class="menu__link selected">{{ 'PrivacyPolicy' | translate }}</a>
+  </div>
+</div>

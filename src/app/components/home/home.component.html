@@ -1,13 +1,13 @@
 <div class="container-flex containerHead" id="Inicio">
   <div class="container">
     <div class="row">
-      <div class="col-12 col-lg-6 text-start p-2" >
-       <div class="textDiv" style="box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.558);">
-          <p class="texto1">La mejor página para <span class="texto2">comprar</span>
-          y <span class="texto2">crear</span> cajones flamencos</p>
+      <div class="col-11 col-lg-6 text-start p-2 mx-auto" >
+       <div style="margin-top: 100px;">
+          <p class="texto1">{{ 'BEST_PAGE_FOR' | translate }} <span class="texto2">{{ 'BUY' | translate }}</span>
+          {{ 'AND' | translate }} <span class="texto2">{{ 'CREATE' | translate }}</span> {{ 'FLAMENCO_BOXES' | translate }}</p>
        </div>
       </div>
-      <div class="col-12 col-lg-6 mt-5 pt-5">
+      <div class="col-12 col-lg-6 mt-5 pt-3">
         <div #rendererContainer style="background-color: transparent; height: 400px;"></div>
       </div>
       <div class="col-12">
@@ -17,23 +17,24 @@
   </div>
 </div>
 
-<div class="container-flex">
+
+<div class="container-flex" id="Catalogo">
   <app-header/>
 
   <!-- Catalogo -->
-  <div class="container row mx-auto align-items-center"  id="Catalogo">
+  <div class="container row mx-auto align-items-center"  >
     <div class="col-12 col-lg-6 mt-5">
       <div class="row">
         @if (cuatroProductos && cuatroProductos.length > 3) {
           <div class="col-6 mx-auto">
-            <div class="flip-card div mx-auto corto" style="width: 90%; height: 300px; margin-bottom: 20px; border-radius: 30px; position: relative;">
+            <div (click)="irProducto(cuatroProductos[0])" class="flip-card div mx-auto corto" style="width: 90%; height: 300px; margin-bottom: 20px; border-radius: 30px; position: relative;">
               <div class="flip-card-inner">
                   <div class="flip-card-front">
                     <div style="position: absolute;padding: 10px; bottom: 20px;left: 20px;right: 20px; z-index: 100; color: white; background-color: rgba(0, 0, 0, 0.318); border-radius: 10px;">
                       <h1 class="nombresCajon">{{cuatroProductos[0].nombre}}</h1>
                     </div>
                     <div style="position: absolute;padding: 10px; bottom: 75px;left: 20px; z-index: 100; color: white; background-color: rgba(0, 0, 0, 0.318); border-radius: 10px;">
-                      <h1 class="nombresCajon">{{cuatroProductos[0].precio}}</h1>
+                      <h1 class="nombresCajon">{{cuatroProductos[0].precio}} {{"precioSimbolo" | translate}}</h1>
                     </div>
                     <div style="position: absolute; top: 0px; left: 10px;">
                       <img width="80%" style="filter: drop-shadow(0px 10px 15px rgba(0, 0, 0, 0.29));" [src]="cuatroProductos[0].imagen_url" alt="">
@@ -50,14 +51,14 @@
               </div>
           </div>
 
-            <div class="flip-card div mx-auto largo"  style="width: 90%; border-radius: 30px;height: 400px; border-radius: 30px; position: relative;">
+            <div (click)="irProducto(cuatroProductos[1])" class="flip-card div mx-auto largo"  style="width: 90%; border-radius: 30px;height: 400px; border-radius: 30px; position: relative;">
               <div class="flip-card-inner">
                   <div class="flip-card-front">
                     <div style="position: absolute;padding: 10px; bottom: 20px;left: 20px;right: 20px; z-index: 100; color: white; background-color: rgba(0, 0, 0, 0.318); border-radius: 10px;">
                       <h1 class="nombresCajon">{{cuatroProductos[1].nombre}}</h1>
                     </div>
                     <div style="position: absolute;padding: 10px; bottom: 75px;left: 20px; z-index: 100; color: white; background-color: rgba(0, 0, 0, 0.318); border-radius: 10px;">
-                      <h1 class="nombresCajon">{{cuatroProductos[1].precio}}</h1>
+                      <h1 class="nombresCajon">{{cuatroProductos[1].precio}} {{"precioSimbolo" | translate}}</h1>
                     </div>
                     <div style="position: absolute; top: 0px; right: 10px;">
                       <img width="80%" style="filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.475));" [src]="cuatroProductos[1].imagen_url" alt="">
@@ -76,14 +77,14 @@
           </div>
 
           <div class="col-6">
-            <div class="flip-card div mx-auto largo"  style="width: 90%; border-radius: 30px;height: 400px; border-radius: 30px; position: relative;">
+            <div (click)="irProducto(cuatroProductos[2])" class="flip-card div mx-auto largo"  style="width: 90%; border-radius: 30px;height: 400px; border-radius: 30px; position: relative;">
               <div class="flip-card-inner">
                   <div class="flip-card-front">
                     <div style="position: absolute;padding: 10px; bottom: 20px;left: 20px;right: 20px; z-index: 100; color: white; background-color: rgba(0, 0, 0, 0.318); border-radius: 10px;">
                       <h1 class="nombresCajon">{{cuatroProductos[2].nombre}}</h1>
                     </div>
                     <div style="position: absolute;padding: 10px; bottom: 75px;left: 20px; z-index: 100; color: white; background-color: rgba(0, 0, 0, 0.318); border-radius: 10px;">
-                      <h1 class="nombresCajon">{{cuatroProductos[2].precio}}</h1>
+                      <h1 class="nombresCajon">{{cuatroProductos[2].precio}} {{"precioSimbolo" | translate}}</h1>
                     </div>
                     <div style="position: absolute; top: 30px;">
                       <img width="100%" style="filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.475));" [src]="cuatroProductos[2].imagen_url" alt="">
@@ -100,14 +101,14 @@
               </div>
             </div>
 
-            <div class="flip-card div mx-auto corto" style="width: 90%; height: 300px; margin-top: 20px; border-radius: 30px; position: relative;">
+            <div (click)="irProducto(cuatroProductos[3])" class="flip-card div mx-auto corto" style="width: 90%; height: 300px; margin-top: 20px; border-radius: 30px; position: relative;">
             <div class="flip-card-inner">
                 <div class="flip-card-front">
                   <div style="position: absolute;padding: 10px; bottom: 20px;left: 20px;right: 20px; z-index: 100; color: white; background-color: rgba(0, 0, 0, 0.318); border-radius: 10px;">
                     <h1 class="nombresCajon">{{cuatroProductos[3].nombre}}</h1>
                   </div>
                   <div style="position: absolute;padding: 10px; bottom: 75px;left: 20px; z-index: 100; color: white; background-color: rgba(0, 0, 0, 0.318); border-radius: 10px;">
-                    <h1 class="nombresCajon">{{cuatroProductos[3].precio}}</h1>
+                    <h1 class="nombresCajon">{{cuatroProductos[3].precio}} {{"precioSimbolo" | translate}}</h1>
                   </div>
                   <div style="position: absolute; top: 5px; left: 10px;">
                     <img width="100%" style="filter: drop-shadow(0px 10px 15px rgba(0, 0, 0, 0.29));" [src]="cuatroProductos[3].imagen_url" alt="">
@@ -126,127 +127,7 @@
           </div>
         }@else {
           <div class="col-6 mx-auto">
-            <div class="flip-card div mx-auto corto" style="width: 90%; height: 300px; margin-bottom: 20px; border-radius: 30px; position: relative;">
-              <div class="flip-card-inner">
-                  <div class="flip-card-front">
-                    <div style="position: absolute;padding: 10px; bottom: 20px;left: 20px;right: 20px; z-index: 100; color: white; background-color: rgba(0, 0, 0, 0.318); border-radius: 10px;">
-                      <h1 class="nombresCajon">Nombre producto</h1>
-                    </div>
-                    <div style="position: absolute;padding: 10px; bottom: 75px;left: 20px; z-index: 100; color: white; background-color: rgba(0, 0, 0, 0.318); border-radius: 10px;">
-                      <h1 class="nombresCajon">24.99$</h1>
-                    </div>
-                    <div style="position: absolute; top: 0px; left: 10px;">
-                      <img width="80%" style="filter: drop-shadow(0px 10px 15px rgba(0, 0, 0, 0.29));" src="../../../assets/img/design/CajonFlamenco.png" alt="">
-                    </div>
-                  </div>
-                  <div class="flip-card-back">
-                    <div style="position: absolute; top: 0px; left: 10px;">
-                      <img width="80%"style="filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.475)); opacity: 0.3; transform: scaleX(-1);" src="../../../assets/img/design/CajonFlamenco.png" alt="">
-                    </div>
-                    <div style="position: absolute; top: 30px; left: 10px; right: 10px;">
-                      <p class="textoAtras">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, reiciendis officia consequatur obcaecati numquam sit natus nihil. Non pariatur hic tenetur minima ratione excepturi, ad voluptatum aliquam ex, esse eum?</p>
-                    </div>
-                    <div style="position: absolute; bottom: 30px; left: 30px; right: 30px;">
-                      <div style="display: flex; justify-content: space-between; color: black;">
-                        <div style="width: fit-content; padding: 5px 10px; border-radius: 10px; background-color: rgb(255, 255, 255);"><a href="" style="text-decoration: none; color: black;">Saber mas</a></div>
-                        <div style="width: fit-content; padding: 5px 10px; border-radius: 10px; background-color: rgb(255, 255, 255); cursor: pointer;color: black;"><i class="fa-solid fa-basket-shopping"></i></div>
-                      </div>
-                    </div>
-                  </div>
-              </div>
-          </div>
-
-            <div class="flip-card div mx-auto largo"  style="width: 90%; border-radius: 30px;height: 400px; border-radius: 30px; position: relative;">
-              <div class="flip-card-inner">
-                  <div class="flip-card-front">
-                    <div style="position: absolute;padding: 10px; bottom: 20px;left: 20px;right: 20px; z-index: 100; color: white; background-color: rgba(0, 0, 0, 0.318); border-radius: 10px;">
-                      <h1 class="nombresCajon">Nombre del cajon</h1>
-                    </div>
-                    <div style="position: absolute;padding: 10px; bottom: 75px;left: 20px; z-index: 100; color: white; background-color: rgba(0, 0, 0, 0.318); border-radius: 10px;">
-                      <h1 class="nombresCajon">24.99$</h1>
-                    </div>
-                    <div style="position: absolute; top: 0px; right: 10px;">
-                      <img width="80%" style="filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.475));" src="../../../assets/img/design/CajonFlamenco2.jpg" alt="">
-                    </div>
-                  </div>
-                  <div class="flip-card-back">
-                    <div style="position: absolute; top: 0px; right: 10px;">
-                      <img width="80%" style="filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.475)); opacity: 0.3; transform: scaleX(-1);" src="../../../assets/img/design/CajonFlamenco2.jpg" alt="">
-                    </div>
-                    <div style="position: absolute; top: 80px; left: 10px; right: 10px;">
-                     <p class="textoAtras">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, reiciendis officia consequatur obcaecati numquam sit natus nihil. Non pariatur hic tenetur minima ratione excepturi, ad voluptatum aliquam ex, esse eum?</p>
-                    </div>
-                    <div style="position: absolute; bottom: 30px; left: 30px; right: 30px;">
-                      <div style="display: flex; justify-content: space-between; color: white;">
-                        <div style="width: fit-content; padding: 5px 10px; border-radius: 10px; background-color: rgba(61, 84, 163, 0.747);"><a href="" style="text-decoration: none; color: white;">Saber mas</a></div>
-                        <div style="width: fit-content; padding: 5px 10px; border-radius: 10px; background-color: rgba(61, 84, 163, 0.747); cursor: pointer;"><i class="fa-solid fa-basket-shopping"></i></div>
-                      </div>
-                    </div>
-                  </div>
-              </div>
-          </div>
-          </div>
-
-          <div class="col-6">
-            <div class="flip-card div mx-auto largo"  style="width: 90%; border-radius: 30px;height: 400px; border-radius: 30px; position: relative;">
-              <div class="flip-card-inner">
-                  <div class="flip-card-front">
-                    <div style="position: absolute;padding: 10px; bottom: 20px;left: 20px;right: 20px; z-index: 100; color: white; background-color: rgba(0, 0, 0, 0.318); border-radius: 10px;">
-                      <h1 class="nombresCajon">Nombre del cajon</h1>
-                    </div>
-                    <div style="position: absolute;padding: 10px; bottom: 75px;left: 20px; z-index: 100; color: white; background-color: rgba(0, 0, 0, 0.318); border-radius: 10px;">
-                      <h1 class="nombresCajon">24.99$</h1>
-                    </div>
-                    <div style="position: absolute; top: 30px;">
-                      <img width="100%" style="filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.475));" src="../../../assets/img/design/CajonFlamenco4.jpg" alt="">
-                    </div>
-                  </div>
-                  <div class="flip-card-back">
-                    <div style="position: absolute;top: 30px;">
-                      <img width="100%" style=" filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.475)); opacity: 0.3; transform: scaleX(-1);" src="../../../assets/img/design/CajonFlamenco4.jpg" alt="">
-                    </div>
-                    <div style="position: absolute; top: 80px; left: 10px; right: 10px;">
-                     <p class="textoAtras">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, reiciendis officia consequatur obcaecati numquam sit natus nihil. Non pariatur hic tenetur minima ratione excepturi, ad voluptatum aliquam ex, esse eum?</p>
-                    </div>
-                    <div style="position: absolute; bottom: 30px; left: 30px; right: 30px;">
-                      <div style="display: flex; justify-content: space-between; color: white;">
-                        <div style="width: fit-content; padding: 5px 10px; border-radius: 10px; background-color: rgba(61, 84, 163, 0.747);"><a href="" style="text-decoration: none; color: white;">Saber mas</a></div>
-                        <div style="width: fit-content; padding: 5px 10px; border-radius: 10px; background-color: rgba(61, 84, 163, 0.747); cursor: pointer;"><i class="fa-solid fa-basket-shopping"></i></div>
-                      </div>
-                    </div>
-                  </div>
-              </div>
-            </div>
-
-            <div class="flip-card div mx-auto corto" style="width: 90%; height: 300px; margin-top: 20px; border-radius: 30px; position: relative;">
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
-                  <div style="position: absolute;padding: 10px; bottom: 20px;left: 20px;right: 20px; z-index: 100; color: white; background-color: rgba(0, 0, 0, 0.318); border-radius: 10px;">
-                    <h1 class="nombresCajon">Nombre del cajon</h1>
-                  </div>
-                  <div style="position: absolute;padding: 10px; bottom: 75px;left: 20px; z-index: 100; color: white; background-color: rgba(0, 0, 0, 0.318); border-radius: 10px;">
-                    <h1 class="nombresCajon">24.99$</h1>
-                  </div>
-                  <div style="position: absolute; top: 5px; left: 10px;">
-                    <img width="100%" style="filter: drop-shadow(0px 10px 15px rgba(0, 0, 0, 0.29));" src="../../../assets/img/design/CajonFlamenco3.jpg" alt="">
-                  </div>
-                </div>
-                <div class="flip-card-back">
-                  <div style="position: absolute; top: 5px; left: 10px;">
-                    <img width="100%"style="filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.475)); opacity: 0.3; transform: scaleX(-1);" src="../../../assets/img/design/CajonFlamenco3.jpg" alt="">
-                  </div>
-                  <div style="position: absolute; top: 25px; left: 10px; right: 10px;">
-                   <p class="textoAtras">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, reiciendis officia consequatur obcaecati numquam sit natus nihil. Non pariatur hic tenetur minima ratione excepturi, ad voluptatum aliquam ex, esse eum?</p>
-                  </div>
-                  <div style="position: absolute; bottom: 30px; left: 30px; right: 30px;">
-                    <div style="display: flex; justify-content: space-between; color: black;">
-                      <div style="width: fit-content; padding: 5px 10px; border-radius: 10px; background-color: rgb(255, 255, 255);"><a href="" style="text-decoration: none; color: black;">Saber mas</a></div>
-                      <div style="width: fit-content; padding: 5px 10px; border-radius: 10px; background-color: rgb(255, 255, 255); cursor: pointer;color: black;"><i class="fa-solid fa-basket-shopping"></i></div>
-                    </div>
-                  </div>
-                </div>
-            </div>
-            </div>
+            {{"errorInesperado" | translate}}
           </div>
         }
 
@@ -254,21 +135,21 @@
 
     </div>
     <div class="col-12 col-lg-6 text-center py-lg-5 my-lg-5 px-4 mt-5 mt-lg-0">
-      <h1 class="mb-2 fw-bold">Catálogo</h1>
-      <p style="width: 80%; margin: 10px auto; padding: 0px 0px 20px 0px;">Lorem ipsum, dolor sit amet consectetur adipisicing elit. A alias ducimus ea obcaecati! Earum adipisci, dignissimos magni in libero, explicabo quas illum enim, vero quo ex ut! Provident, sint unde.</p>
+      <h1 class="mb-2 fw-bold">{{ 'titulo' | translate }}</h1>
+      <p style="width: 90%; margin: 10px auto; padding: 0px 0px 20px 0px;">{{ 'descripcion' | translate }}</p>
       <div class="boton2">
-      <a href="/catalogo">Ir ahora</a>
-    </div>
+        <a [routerLink]="['/catalogo']">{{ 'boton' | translate }}</a>
+      </div>
     </div>
   </div>
 
   <!-- Personalizacion -->
   <div class="container row mx-auto align-items-center">
     <div class="col-12 col-md-7 text-center pt-md-5 mt-md-5 px-4 mt-5">
-      <h1 class="mb-2 fw-bold">Personalización</h1>
-      <p style="width: 80%; margin: 10px auto; padding: 0px 0px 20px 0px;">Lorem ipsum, dolor sit amet consectetur adipisicing elit. A alias ducimus ea obcaecati! Earum adipisci, dignissimos magni in libero, explicabo quas illum enim, vero quo ex ut! Provident, sint unde.</p>
+      <h1 class="mb-2 fw-bold">{{ 'Personalización' | translate }}</h1>
+      <p style="width: 80%; margin: 10px auto; padding: 0px 0px 20px 0px;">{{ 'PersonalizacionTexto' | translate }}</p>
       <div class="boton2">
-        <a  href="/personalizar">Ir ahora</a>
+        <a [routerLink]="['/personalizar']">{{ 'boton' | translate }}</a>
       </div>
     </div>
     <div class="col-12 col-md-5 text-center pt-md-5 mt-md-5 px-4 mt-5" id="Personalizacion">
@@ -330,7 +211,7 @@
   </div>
 
   <!-- Opiniones -->
-  <div class="container row mx-auto align-items-center pt-4 pt-lg-0">
+  <!-- <div class="container row mx-auto align-items-center pt-4 pt-lg-0">
     <div class="col-12 text-center pt-md-2 mt-md2 px-4 mt-2 my-5 my-md-0">
       <h1 class="mb-2 fw-bold">Opiniones</h1>
       <p class="w-75 mx-auto">Lorem ipsum, dolor sit amet consectetur adipisicing elit. A alias ducimus ea obcaecati! Earum adipisci, dignissimos magni in libero, explicabo quas illum enim, vero quo ex ut! Provident, sint unde.</p>
@@ -377,10 +258,10 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!-- Tutoriales -->
-  <div class="container-flex containerTutoriales py-5" style="margin-top: 150px;">
+  <div class="container-flex containerTutoriales py-5" style="margin-top: 50px;">
     <div class="container row mx-auto align-items-center">
   <div class="col-12 col-lg-6 text-center px-4 mx-auto" id="Tutoriales">
     <div class="cartaVideo mx-auto" >
@@ -423,10 +304,10 @@
     </div>
   </div>
   <div class="col-12 col-lg-6 text-center px-4 textoTutoriales mx-auto my-3" style="color: rgb(238, 238, 238);">
-    <h1 class="mb-2 fw-bold">Tutoriales</h1>
-    <p style="font-size: 17px; padding: 0px 0px 20px 0px;">Lorem ipsum, dolor sit amet consectetur adipisicing elit. A alias ducimus ea obcaecati! Earum adipisci, dignissimos magni in libero, explicabo quas illum enim, vero quo ex ut! Provident, sint unde.</p>
+    <h1 class="mb-2 fw-bold">{{"Tutoriales" | translate}}</h1>
+    <p style="font-size: 17px; padding: 0px 0px 20px 0px;">{{"TutorialesTexto" | translate}}</p>
     <div  class="boton2">
-      <a style="background-color: rgb(92, 129, 249); font-size: 17px;" href="/tutoriales">Ir ahora</a>
+      <a style="background-color: rgb(92, 129, 249); font-size: 17px;" [routerLink]="['/tutoriales']">{{ 'boton' | translate }}</a>
     </div>
   </div>
   </div>
@@ -436,41 +317,43 @@
   <!-- Contacto -->
   <div class="container row mx-auto" id="Contacto">
     <div class="col-12 col-lg-4 text-center pt-md-5 mt-md-5 px-1 mt-5">
-      <div style="background-color: rgb(61, 61, 61); color: white; border-radius: 20px; padding: 20px 5px; min-height: 360px;">
-        <h4 style="border-bottom: 1px solid white; width: fit-content; padding-bottom: 15px; margin: 0px auto;">Preguntas frecuentes</h4>
+      <div style="background-color: rgb(61, 61, 61); color: white; border-radius: 10px; padding: 20px 5px; min-height: 345px;">
+        <h4 style="border-bottom: 1px solid white; width: fit-content; padding-bottom: 15px; margin: 0px auto;">{{ 'FAQ' | translate }}</h4>
         <ul>
           <li style="margin-top: 20px;">
-            <strong >¿Cuál es el tiempo de envío?</strong>
-            <p style="margin: 10px 0px 20px 0px; padding: 0px 10px; font-size: 16px;">El tiempo de envío varía según la ubicación y el método de envío. Normalmente, procesamos los pedidos en 5 días y el tiempo de envío es de 7 a 14 días hábiles.</p>
+            <strong>{{ 'ShippingTime' | translate }}</strong>
+            <p style="margin: 10px 0px 20px 0px; padding: 0px 10px; font-size: 16px;">{{ 'ShippingTimeInfo' | translate }}</p>
           </li>
           <li>
-            <strong>¿Cómo puedo contactar al servicio al cliente?</strong>
-            <p style="margin: 10px 0px 0px 0px; padding: 0px 10px; font-size: 16px;">Puedes contactarnos por teléfono al 622446556. Estamos aquí para ayudarte con cualquier pregunta que tengas.</p>
+            <strong>{{ 'ContactCustomerService' | translate }}</strong>
+            <p style="margin: 10px 0px 0px 0px; padding: 0px 10px; font-size: 16px;">{{ 'ContactCustomerServiceInfo' | translate }}</p>
           </li>
         </ul>
-
       </div>
     </div>
     <div class="col-12 col-lg-4 text-center pt-md-5 mt-md-5 px-1 mt-5">
-      <div style="background-color: rgb(61, 61, 61); color: white; border-radius: 20px; padding: 20px 5px; min-height: 360px;">
-        <h4 style="border-bottom: 1px solid white; width: fit-content; padding-bottom: 15px; margin: 0px auto;">Política de devoluciones</h4>
-        <p style="margin-top: 20px; padding: 0px 10px; font-size: 16px;">En nuestra empresa, tenemos una política de devoluciones muy flexible para garantizar la satisfacción de nuestros clientes. Aceptamos devoluciones dentro de los 30 días posteriores a la recepción del producto, siempre y cuando se cumplan ciertas condiciones. Para obtener más información sobre nuestra política de devoluciones y cómo proceder con una devolución, por favor consulta nuestra página de políticas de devoluciones o contáctanos directamente.</p>
+      <div style="background-color: rgb(61, 61, 61); color: white; border-radius: 10px; padding: 20px 5px; min-height: 345px;">
+        <h4 style="border-bottom: 1px solid white; width: fit-content; padding-bottom: 15px; margin: 0px auto;">{{ 'ReturnPolicy' | translate }}</h4>
+        <p style="margin-top: 20px; padding: 0px 10px; font-size: 16px;">{{ 'ReturnPolicyInfo' | translate }}</p>
       </div>
     </div>
     <div class="col-12 col-lg-4 text-center pt-md-5 mt-md-5 px-1 mt-5">
-      <div style="background-color: rgb(61, 61, 61); color: white; border-radius: 20px; padding: 20px 5px; min-height: 360px; transition: all 0.3s ease;">
-        <h4 style="border-bottom: 1px solid white; width: fit-content; padding-bottom: 15px; margin: 0px auto;">Términos y condiciones</h4>
+      <div style="background-color: rgb(61, 61, 61); color: white; border-radius: 10px; padding: 20px 5px; min-height: 345px; transition: all 0.3s ease;">
+        <h4 style="border-bottom: 1px solid white; width: fit-content; padding-bottom: 15px; margin: 0px auto;">{{ 'TermsAndConditions' | translate }}</h4>
         <div>
-          <p style="margin-top: 20px; padding: 0px 10px; font-size: 16px;">
-              Al utilizar nuestro sitio web y/o realizar una compra, aceptas cumplir y estar sujeto a los siguientes términos y condiciones. Por favor, lee cuidadosamente estos términos antes de utilizar nuestro sitio web o realizar una compra.Nuestra empresa se reserva el derecho de modificar, alterar o actualizar estos términos en cualquier momento sin previo aviso.
-            </p>
-            <p *ngIf="showTerms" style="font-size: 16px;">
-              Se te notificará sobre cualquier cambio mediante la publicación de los términos actualizados en nuestro sitio web.
-              <br>
-              Es tu responsabilidad revisar estos términos periódicamente. El uso continuado de nuestro sitio web o la realización de compras después de la publicación de cualquier cambio constituye la aceptación de dichos cambios.
+          <p style="margin-top: 20px; padding: 0px 10px; font-size: 16px;">{{ 'TermsAndConditionsInfo' | translate }}</p>
+          <p *ngIf="showTerms" style="font-size: 16px;padding: 0px 10px;">
+            {{ 'TermsUpdateNotice' | translate }}<br>
           </p>
-      </div>
-      <a style="color: rgb(90, 125, 241); cursor: pointer; font-weight: bold;" (click)="toggleTerms()">{{ showTerms ? 'Ver menos' : 'Ver más' }}</a>
+        </div>
+        <a style="color: rgb(90, 125, 241); cursor: pointer; font-weight: bold;" (click)="toggleTerms()">{{ showTerms ? ('ShowLess' | translate) : ('ShowMore' | translate) }}</a>
       </div>
     </div>
   </div>
+
+  <div class="container mx-auto my-5 text-center w-25" style="display: flex; justify-content: space-around;">
+    <a [routerLink]="['/politica']" class="menu__link">{{ 'CookiePolicy' | translate }}</a>
+    <a [routerLink]="['/legal']" class="menu__link mx-2 mx-lg-0">{{ 'LegalNotice' | translate }}</a>
+    <a [routerLink]="['/privacidad']" class="menu__link">{{ 'PrivacyPolicy' | translate }}</a>
+</div>
+

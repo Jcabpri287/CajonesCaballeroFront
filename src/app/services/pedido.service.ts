@@ -1,15 +1,24 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, catchError, map, of } from 'rxjs';
+import { OrdenCompra } from '../interfaces/pedido';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class pedidoService {
-  private url="https://cajonescaballeroback.onrender.com";
+  private url="http://localhost:3000";
   //inyectar HttpClient
   private http = inject(HttpClient);
+
+  enviarOrdenCompra(orden: OrdenCompra): Observable<any> {
+    return this.http.post<any>(`${this.url}/pedidos`, orden);
+  }
+
+  confirmarPedido(data: { orden: OrdenCompra, email: string }): Observable<any> {
+    return this.http.post(`${this.url}/confirmar`, data);
+  }
 
   //getTareas():Observable<Tarea[]>{
   //  return this.http.get<Tarea[]>(`${this.url}/tareas`).pipe(
@@ -20,17 +29,15 @@ export class pedidoService {
   //  );
   //}
 
-  //getTarea(id:string):Observable<Tarea>{
-  //  return this.http.get<Tarea>(`${this.url}/tarea/${id}`).pipe(
-  //    map(res=>{
-  //      return res as Tarea;
-  //    }),
-  //    catchError(error=>{
-  //      console.log(`Error al obtener la tarea ${error}`);
-  //      return of ({} as Tarea)
-  //    })
-  //  );
-  //}
+  obtenerPedidosUsuario(usuarioId: string): Observable<OrdenCompra[]> {
+    console.log(usuarioId);
+    return this.http.get<OrdenCompra[]>(`${this.url}/pedidos/${usuarioId}`).pipe(
+      catchError(error => {
+        console.error('Error al obtener los pedidos del usuario:', error);
+        return of([] as OrdenCompra[]); // Devuelve un arreglo vacío en caso de error
+      })
+    );
+  }
 
   //addTarea(tarea:Tarea):Observable<boolean>{
   //  return this.http.post<Tarea>(`${this.url}/tarea`,tarea).pipe(

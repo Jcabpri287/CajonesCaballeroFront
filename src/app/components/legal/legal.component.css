@@ -1,0 +1,46 @@
+.CatalogoH1{
+  font-size: 40px;
+  margin: 0px;
+  font-weight: 800;
+}
+@media (min-width: 500px) {
+  .CatalogoH1{
+    margin-top: 45px;
+    font-size: 55px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .CatalogoH1{
+    margin-top: 45px;
+    font-size: 70px;
+  }
+}
+.menu__link {
+  color: rgb(61, 61, 61);
+  line-height: 2;
+  position: relative;
+  text-decoration: none;
+}
+
+.menu__link::before {
+  content: '';
+  width: 0;
+  height: 3px;
+  border-radius: 2px;
+  background-color: rgb(92, 129, 249);
+  position: absolute;
+  bottom: -.25rem;
+  right: 0;
+  transition: right .4s, width .4s, left .4s;
+}
+
+.menu__link:hover::before {
+  width: 100%;
+  left: 0;
+}
+
+.selected::before {
+  width: 100%;
+  left: 0;
+}

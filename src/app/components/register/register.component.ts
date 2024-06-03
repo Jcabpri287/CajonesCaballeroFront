@@ -1,18 +1,19 @@
 import { Component, inject } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
 import { usuarioService } from '../../services/usuario.service';
 import { LoginService } from '../../services/login.service';
 import { NgIf } from '@angular/common';
 import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [HeaderComponent, NgIf, ReactiveFormsModule, FormsModule],
+  imports: [HeaderComponent, NgIf, ReactiveFormsModule, FormsModule, TranslateModule, RouterLink],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
@@ -24,7 +25,7 @@ export class RegisterComponent {
   private authService = inject(LoginService)
   private userService = inject(usuarioService)
 
-  constructor(private formBuilder: FormBuilder,private router:Router, private http : HttpClient) {
+  constructor(private formBuilder: FormBuilder,private router:Router, private http : HttpClient, private translate: TranslateService) {
     this.registerForm = this.formBuilder.group({
       nombre: ['', Validators.required],
       correo: ['', [Validators.required, Validators.email]],
@@ -78,7 +79,7 @@ export class RegisterComponent {
             iconColor: "#8ea7f7",
             title: 'Error',
             confirmButtonColor: "#252525",
-            text: 'El correo ya existe.'
+            text: this.translate.instant('correo_existente')
           });
         }else{
           this.submitRegister()
@@ -112,7 +113,7 @@ export class RegisterComponent {
         Toast.fire({
           icon: "success",
           iconColor: "#8ea7f7",
-          title: "Usuario registrado correctamente"
+          title: this.translate.instant('registrado_correctamente')
         });
         this.router.navigate(['/']);
       },
@@ -168,7 +169,7 @@ export class RegisterComponent {
         iconColor: "#8ea7f7",
         title: 'Error',
         confirmButtonColor: "#252525",
-        text: 'Código de verificación erróneo.'
+        text: this.translate.instant('codigo_erroneo')
       });
     }
   }

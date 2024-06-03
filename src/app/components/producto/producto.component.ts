@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { Producto } from '../../interfaces/producto';
-import { ActivatedRoute } from '@angular/router';
-import { DatePipe } from '@angular/common';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { DatePipe, NgFor, NgIf } from '@angular/common';
 import { marcaService } from '../../services/marca.service';
 import { Comentario } from '../../interfaces/comentario';
 import { comentarioService } from '../../services/comentario.service';
@@ -11,11 +11,13 @@ import { FormsModule } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
 import Swal from 'sweetalert2';
 import { StripeService } from '../../services/stripe.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { SpinnerService } from '../../services/spinner-service.service';
 
 @Component({
   selector: 'app-producto',
   standalone: true,
-  imports: [HeaderComponent,DatePipe,FormsModule, DatePipe],
+  imports: [HeaderComponent,DatePipe,FormsModule, DatePipe, TranslateModule, NgIf, NgFor, RouterLink],
   templateUrl: './producto.component.html',
   styleUrl: './producto.component.css'
 })
@@ -24,8 +26,24 @@ export class ProductoComponent {
   nombreMarca?: string;
   comentarios?: Comentario[];
   nuevoComentario: string = '';
+  messageWithLink?: string;
 
-  constructor(private stripeService : StripeService,private route: ActivatedRoute, private marcas : marcaService, private comentariosService : comentarioService, public loginService : LoginService) {}
+  constructor(private stripeService : StripeService,private route: ActivatedRoute, private marcas : marcaService, private comentariosService : comentarioService, private translate: TranslateService, public loginService : LoginService, private spinner : SpinnerService) {
+    this.translate.onLangChange.subscribe(() => {
+      this.setMessageWithLink();
+    });
+    this.setMessageWithLink();
+  }
+
+  setMessageWithLink(): void {
+    if (this.translate.currentLang === 'es') {
+      this.messageWithLink = `<p style='margin-bottom:3px;'>Producto añadido al carrito satisfactoriamente.</p> <a href="/carrito">Ver carrito</a>`;
+    } else if (this.translate.currentLang === 'en') {
+      this.messageWithLink = `<p style='margin-bottom:3px;'>Product added to cart successfully.</p> <a href="/carrito">View cart</a>`;
+    }else{
+      this.messageWithLink = `<p style='margin-bottom:3px;'>Prodotto aggiunto al carrello con successo.</p> <a href="/carrito">Visualizza carrello</a>`;
+    }
+  }
 
   ngOnInit(): void {
     if (typeof history !== 'undefined') {
@@ -36,6 +54,7 @@ export class ProductoComponent {
       }
 
       if (this.producto?.marca_id) {
+        this.spinner.show();
         this.marcas.getMarca(this.producto?.marca_id)
         .subscribe(nombre => {
           this.nombreMarca = nombre.nombre;
@@ -44,13 +63,14 @@ export class ProductoComponent {
         this.comentariosService.getComentariosProducto(this.producto?._id)
         .subscribe(comentarios => {
           this.comentarios = comentarios;
+          this.spinner.hide();
         });
       }
     }
   }
 
     agregarAlCarrito(producto: any): void {
-      let carritoStr = sessionStorage.getItem('carrito');
+      let carritoStr = localStorage.getItem('carrito');
       if (carritoStr !== null) {
         let carrito = JSON.parse(carritoStr);
 
@@ -62,10 +82,10 @@ export class ProductoComponent {
           carrito.push({ producto: producto, cantidad: 1 });
         }
 
-        sessionStorage.setItem('carrito', JSON.stringify(carrito));
+        localStorage.setItem('carrito', JSON.stringify(carrito));
       } else {
         let carrito = [{ producto: producto, cantidad: 1 }];
-        sessionStorage.setItem('carrito', JSON.stringify(carrito));
+        localStorage.setItem('carrito', JSON.stringify(carrito));
       }
       const Toast = Swal.mixin({
         toast: true,
@@ -79,12 +99,10 @@ export class ProductoComponent {
         }
       });
 
-      const messageWithLink = `<p style='margin-bottom:3px;'>Producto añadido al carrito satisfactoriamente.</p> <a href="/carrito">Ver carrito</a>`;
-
       Toast.fire({
         icon: "success",
         iconColor: "#8ea7f7",
-        html: messageWithLink
+        html: this.messageWithLink
       });
   }
 
@@ -124,7 +142,8 @@ export class ProductoComponent {
       descripcion: productoRecibido.descripcion,
       precio: productoRecibido.precio,
       cantidad: 1,
-      id : productoRecibido._id
+      id : productoRecibido._id,
+      imagen_url :  productoRecibido.imagen_url
     }
     localStorage.setItem('compra', JSON.stringify(producto));
 

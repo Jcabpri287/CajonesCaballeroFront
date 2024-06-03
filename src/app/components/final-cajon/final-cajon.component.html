@@ -1,60 +1,59 @@
-
 <div class="container mx-auto" style="min-height: 77.3vh; padding-top: 30px;">
   <div class="row justify-content-around mt-3">
 
     <div class="col-12 col-lg-6 mb-4 mb-lg-0 mt-5">
-      <h1 class="CatalogoH1">Felicidades, has terminado tu cajon personalizado.</h1>
+      <h1 class="CatalogoH1">{{ 'CongratulationsCustomCajon' | translate }}</h1>
 
       <div class="row">
-      <div class="col-5 mt-3 botones ahora mt-5" (click)="comprar()">
-        <div class="button-wrapper">
-          <div class="text">Comprar ahora</div>
+        <div class="col-5 mt-3 botones ahora mt-5" (click)="comprar()">
+          <div class="button-wrapper">
+            <div class="text">{{ 'BuyNow' | translate }}</div>
             <span class="icon">
               <i class="fa-regular fa-credit-card"></i>
             </span>
           </div>
-      </div>
-      <div class="col-5 ms-3 mt-3 botones ahora mt-5" (click)="descargar()">
-        <div class="button-wrapper">
-          <div class="text">Descargar diseño</div>
-          <span class="icon">
-            <i class="fa-solid fa-download"></i>
-          </span>
+        </div>
+        <div class="col-5 ms-3 mt-3 botones ahora mt-5" (click)="descargar()">
+          <div class="button-wrapper">
+            <div class="text">{{ 'DownloadDesign' | translate }}</div>
+            <span class="icon">
+              <i class="fa-solid fa-download"></i>
+            </span>
+          </div>
+        </div>
       </div>
     </div>
-    </div>
-  </div>
+
     <div class="col-12 col-lg-6 mb-4 mb-lg-0 mt-5">
-      <div #rendererContainer style="background-color: transparent; height: 400px;">
-      </div>
+      <div #rendererContainer style="background-color: transparent; height: 400px;"></div>
       <div class="container mt-3">
         <div class="row justify-content-center">
           <div class="col-auto">
             <button class="btn y m-2" (click)="zoomIn()" style="background-color: rgb(92, 129, 249); color: white;">
-              <i class="fas fa-search-plus"></i> Acercar
+              <i class="fas fa-search-plus"></i> {{ 'ZoomIn' | translate }}
             </button>
           </div>
           <div class="col-auto">
             <button class="btn m-2" (click)="zoomOut()"  style="background-color: rgb(92, 129, 249); color: white;">
-              <i class="fas fa-search-minus"></i> Alejar
+              <i class="fas fa-search-minus"></i> {{ 'ZoomOut' | translate }}
             </button>
           </div>
           <div class="col-auto">
             <button class="btn m-2" (click)="goUp()"  style="background-color: rgb(92, 129, 249); color: white;">
-              <i class="fas fa-arrow-up"></i> Subir
+              <i class="fas fa-arrow-up"></i> {{ 'MoveUp' | translate }}
             </button>
           </div>
           <div class="col-auto">
             <button class="btn m-2" (click)="goDown()"  style=" background-color: rgb(92, 129, 249); color: white;">
-              <i class="fas fa-arrow-down"></i> Bajar
+              <i class="fas fa-arrow-down"></i> {{ 'MoveDown' | translate }}
             </button>
           </div>
         </div>
       </div>
     </div>
-    </div>
+  </div>
 
-    <div class="col-12" style="display: flex; justify-content: center; z-index: 1; margin-top: 65px;">
-      <button class="boton" (click)="irAVer()"><i class="fa-solid fa-angle-left arriba"></i></button>
-    </div>
+  <div class="col-12" style="display: flex; justify-content: center; z-index: 1; margin-top: 65px;">
+    <button class="boton" (click)="irAVer()"><i class="fa-solid fa-angle-left arriba"></i></button>
+  </div>
 </div>

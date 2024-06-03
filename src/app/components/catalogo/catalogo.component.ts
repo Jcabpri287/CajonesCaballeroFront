@@ -9,26 +9,53 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { SpinnerService } from '../../services/spinner-service.service';
+import { CarritoService } from '../../services/carrito.service';
 
 @Component({
   selector: 'app-catalogo',
   standalone: true,
-  imports: [HeaderComponent, NgFor, PaginationModule, DatePipe, ReactiveFormsModule, FormsModule, PriceFilterPipe, NgIf],
+  imports: [TranslateModule,HeaderComponent, NgFor, PaginationModule, DatePipe, ReactiveFormsModule, FormsModule, PriceFilterPipe, NgIf],
   templateUrl: './catalogo.component.html',
   styleUrl: './catalogo.component.css'
 })
 export class CatalogoComponent implements OnInit{
   minPrice: number = 0;
-  maxPrice: number = 50;
+  maxPrice: number = 500;
   ordenFecha: string = 'recientes';
   productos: Producto[] = [];
   productosIniciales: Producto[] = [];
   page: number = 1;
   itemsPerPage: number = 15;
-  constructor(private productoService: productoService,private cdRef: ChangeDetectorRef, private router: Router) {}
   totalItems: number = 0;
   selectedCategory: string = 'todas';
   filtroNombre: string = '';
+  messageWithLink?: string;
+
+  constructor(
+    private productoService: productoService,
+    private cdRef: ChangeDetectorRef,
+    private router: Router,
+    private translate: TranslateService,
+    private spinner: SpinnerService,
+    private carritoService: CarritoService // Inyecta CarritoService
+  ) {
+    this.translate.onLangChange.subscribe(() => {
+      this.setMessageWithLink();
+    });
+    this.setMessageWithLink();
+  }
+
+  setMessageWithLink(): void {
+    if (this.translate.currentLang === 'es') {
+      this.messageWithLink = `<p style='margin-bottom:3px;'>Producto añadido al carrito satisfactoriamente.</p> <a href="/carrito">Ver carrito</a>`;
+    } else if (this.translate.currentLang === 'en') {
+      this.messageWithLink = `<p style='margin-bottom:3px;'>Product added to cart successfully.</p> <a href="/carrito">View cart</a>`;
+    }else{
+      this.messageWithLink = `<p style='margin-bottom:3px;'>Prodotto aggiunto al carrello con successo.</p> <a href="/carrito">Visualizza carrello</a>`;
+    }
+  }
 
   getProductosPaginados(): Producto[] {
     const startIndex = (this.page - 1) * this.itemsPerPage;
@@ -42,29 +69,29 @@ export class CatalogoComponent implements OnInit{
   }
 
   obtenerProductos() {
-    this.productoService.getProductos()
-      .subscribe(productos => {
-        this.productos = productos;
-        this.productosIniciales = productos;
-        this.totalItems = productos.length;
-      });
+    this.spinner.show();
+    this.productoService.getProductos().subscribe(productos => {
+      this.productos = productos;
+      this.productosIniciales = productos;
+      this.totalItems = productos.length;
+      this.spinner.hide();
+    });
   }
 
   aplicarFiltro() {
-    let productosFiltrados =  this.productosIniciales.filter(producto =>
-      producto.precio >= this.minPrice && producto.precio <= this.maxPrice
-    );
-
-    productosFiltrados = productosFiltrados.filter(producto =>
+    let productosFiltrados = this.productosIniciales.filter(producto =>
       producto.nombre.toLowerCase().includes(this.filtroNombre.toLowerCase())
     );
 
     productosFiltrados = productosFiltrados.filter(producto =>
-        (this.selectedCategory === 'todas' || producto.categoria === this.selectedCategory) && // Filtra por categoría
-        producto.precio >= this.minPrice && producto.precio <= this.maxPrice &&
-        (!document.getElementById('stock') || (document.getElementById('stock') as HTMLInputElement).checked ? producto.stock > 0 : true)
+      producto.precio >= this.minPrice && producto.precio <= this.maxPrice
     );
 
+    productosFiltrados = productosFiltrados.filter(producto =>
+      (this.selectedCategory === 'todas' || producto.categoria === this.selectedCategory) && // Filtra por categoría
+      producto.precio >= this.minPrice && producto.precio <= this.maxPrice &&
+      (!document.getElementById('stock') || (document.getElementById('stock') as HTMLInputElement).checked ? producto.stock > 0 : true)
+    );
 
     if (this.ordenFecha === 'recientes') {
       productosFiltrados.sort((a, b) => new Date(b.fecha_lanzamiento).getTime() - new Date(a.fecha_lanzamiento).getTime());
@@ -75,31 +102,15 @@ export class CatalogoComponent implements OnInit{
     this.totalItems = productosFiltrados.length;
     this.productos = productosFiltrados;
     this.page = 1;
-    this.cdRef.detectChanges();
   }
 
-  verProducto(producto: Producto){
+  verProducto(producto: Producto) {
     this.router.navigate(['producto'], { state: { producto } });
   }
 
-  agregarAlCarrito(producto: any): void {
-    let carritoStr = sessionStorage.getItem('carrito');
-    if (carritoStr !== null) {
-      let carrito = JSON.parse(carritoStr);
+  agregarAlCarrito(producto: Producto): void {
+    this.carritoService.agregarProducto(producto); // Usa el servicio para añadir el producto
 
-      let index = carrito.findIndex((item: any) => item.producto._id === producto._id);
-
-      if (index !== -1) {
-        carrito[index].cantidad++;
-      } else {
-        carrito.push({ producto: producto, cantidad: 1 });
-      }
-
-      sessionStorage.setItem('carrito', JSON.stringify(carrito));
-    } else {
-      let carrito = [{ producto: producto, cantidad: 1 }];
-      sessionStorage.setItem('carrito', JSON.stringify(carrito));
-    }
     const Toast = Swal.mixin({
       toast: true,
       position: "top-end",
@@ -112,12 +123,10 @@ export class CatalogoComponent implements OnInit{
       }
     });
 
-    const messageWithLink = `<p style='margin-bottom:3px;'>Producto añadido al carrito satisfactoriamente.</p> <a href="/carrito">Ver carrito</a>`;
-
     Toast.fire({
       icon: "success",
       iconColor: "#8ea7f7",
-      html: messageWithLink
+      html: this.messageWithLink
     });
-}
+  }
 }
