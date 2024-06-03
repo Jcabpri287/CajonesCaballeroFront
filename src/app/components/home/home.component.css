@@ -361,6 +361,42 @@
   background: rgb(142, 167, 247);
 }
 
+.corto{
+  height: 200px;
+  width: 90%;
+  margin-bottom: 20px;
+  border-radius: 30px;
+  position: relative;
+}
+
+.largo{
+  width: 90%;
+  border-radius: 30px;
+  height: 250px;
+  border-radius: 30px;
+  position: relative;
+}
+
+@media (min-width: 500px) {
+  .corto{
+    height: 250px;
+  }
+
+  .largo{
+    height: 300px;
+  }
+}
+
+@media (min-width: 768px) {
+  .corto{
+    height: 300px;
+  }
+
+  .largo{
+    height: 400px;
+  }
+}
+
 .corto .flip-card-front {
   background: rgb(61, 61, 61);
 }
