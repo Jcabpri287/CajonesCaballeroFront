@@ -114,10 +114,6 @@
   line-height: 50px;
 }
 
-.divTexto{
-margin-top: -50px;
-}
-
 @media (min-width: 593px) {
   .texto1,.texto2
   {
