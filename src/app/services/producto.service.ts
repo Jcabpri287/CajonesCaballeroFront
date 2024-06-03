@@ -8,7 +8,7 @@ import { Producto } from '../interfaces/producto';
 })
 
 export class productoService {
-  private url="http://localhost:3000";
+  private url="https://cajonescaballeroback.onrender.com";
   private http = inject(HttpClient);
 
   getProductos():Observable<Producto[]>{

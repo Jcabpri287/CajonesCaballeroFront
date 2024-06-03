@@ -8,7 +8,7 @@ import { Marca } from '../interfaces/marca';
 })
 
 export class marcaService {
-  private url="http://localhost:3000";
+  private url="https://cajonescaballeroback.onrender.com";
   private http = inject(HttpClient);
 
   getMarcas():Observable<Marca[]>{
