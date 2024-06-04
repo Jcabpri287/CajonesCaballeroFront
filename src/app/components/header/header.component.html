@@ -10,37 +10,37 @@
           <li class="nav-item botones" [class.current]="checkUrl('/personalizar') || checkUrl('/personalizar/pintar') || checkUrl('/personalizar/finalizar')"><a class="nav-link"  [routerLink]="['/personalizar']">{{ 'CUSTOMIZATION' | translate }}</a></li>
           <li class="nav-item botones" [class.current]="checkUrl('/tutoriales')"><a class="nav-link"  [routerLink]="['/tutoriales']">{{ 'TUTORIALS' | translate }}</a></li>
           <li class="nav-item botones" [class.current]="checkUrl('/sobreNosotros')"><a class="nav-link"  [routerLink]="['/sobreNosotros']">{{ 'ABOUT_US' | translate }}</a></li>
-          <label class="popup" *ngIf="administrador">
-            <input type="checkbox" />
-            <div tabindex="0" class="burger">
-              <i class="fa-solid fa-wrench text-white"></i>
-            </div>
-            <nav class="popup-window">
-              <legend class="pb-2">{{"opcionesadministrador" | translate}}</legend>
-              <ul>
-                <li [class.borderRadius]="checkUrl('/gestionPedidos')" [routerLink]="['/gestionPedidos']">
-                  <button>
-                    <i class="fa-solid fa-cart-shopping" [class.textoBlanco]="checkUrl('/gestionPedidos')"></i>
-                    <span>{{"gestionPedidos" | translate}}</span>
-                  </button>
-                </li>
-                <li class="my-1"  [class.borderRadius]="checkUrl('/gestionProductos')" [routerLink]="['/gestionProductos']">
-                  <button>
-                    <i class="fa-solid fa-store" [class.textoBlanco]="checkUrl('/gestionProductos')"></i>
-                    <span>{{"gestionProductos" | translate}}</span>
-                  </button>
-                </li>
-                <li [class.borderRadius]="checkUrl('/gestionComentarios')" [routerLink]="['/gestionComentarios']">
-                  <button>
-                    <i class="fa-regular fa-comment" [class.textoBlanco]="checkUrl('/gestionComentarios')"></i>
-                    <span>{{"gestionComentarios" | translate}}</span>
-                  </button>
-                </li>
-              </ul>
-            </nav>
-          </label>
         </ul>
       </div>
+      <label class="popup" *ngIf="administrador">
+        <input type="checkbox" />
+        <div tabindex="0" class="burger">
+          <i class="fa-solid fa-wrench text-white"></i>
+        </div>
+        <nav class="popup-window">
+          <legend class="pb-2">{{"opcionesadministrador" | translate}}</legend>
+          <ul>
+            <li [class.borderRadius]="checkUrl('/gestionPedidos')" [routerLink]="['/gestionPedidos']">
+              <button>
+                <i class="fa-solid fa-cart-shopping" [class.textoBlanco]="checkUrl('/gestionPedidos')"></i>
+                <span>{{"gestionPedidos" | translate}}</span>
+              </button>
+            </li>
+            <li class="my-1"  [class.borderRadius]="checkUrl('/gestionProductos')" [routerLink]="['/gestionProductos']">
+              <button>
+                <i class="fa-solid fa-store" [class.textoBlanco]="checkUrl('/gestionProductos')"></i>
+                <span>{{"gestionProductos" | translate}}</span>
+              </button>
+            </li>
+            <li [class.borderRadius]="checkUrl('/gestionComentarios')" [routerLink]="['/gestionComentarios']">
+              <button>
+                <i class="fa-regular fa-comment" [class.textoBlanco]="checkUrl('/gestionComentarios')"></i>
+                <span>{{"gestionComentarios" | translate}}</span>
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </label>
       <div class="wrapper">
         <input type="checkbox" id="toogle" class="hidden-trigger">
         <label for="toogle" class="circle botonIdioma" style="display: grid; place-items: center; position: relative;">
@@ -52,19 +52,19 @@
           <button class="sub-circle">
             <input value="es" name="sub-circle" type="radio" id="sub1" class="hidden-sub-trigger" (change)="cambiarIdioma($event)">
             <label for="sub1" style="display: grid; place-items: center;">
-              <img src="assets/img/banderas/spain.svg" alt="" width="150%">
+              <img src="assets/img/banderas/spain.svg" alt="Imagen de cajon flamenco" width="150%">
             </label>
           </button>
           <button class="sub-circle">
             <input value="en" name="sub-circle" type="radio" id="sub2" class="hidden-sub-trigger" (change)="cambiarIdioma($event)">
             <label for="sub2" style="display: grid; place-items: center;">
-              <img src="assets/img/banderas/English.svg" alt="" width="200%">
+              <img src="assets/img/banderas/English.svg" alt="Imagen de cajon flamenco" width="200%">
             </label>
           </button>
           <button class="sub-circle">
             <input value="it" name="sub-circle" type="radio" id="sub3" class="hidden-sub-trigger" (change)="cambiarIdioma($event)">
             <label for="sub3" style="display: grid; place-items: center;">
-              <img src="assets/img/banderas/Italy.png" alt="" width="130%">
+              <img src="assets/img/banderas/Italy.png" alt="Imagen de cajon flamenco" width="130%">
             </label>
           </button>
         </div>
