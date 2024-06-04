@@ -97,7 +97,7 @@ export class RegisterComponent {
         console.log(response._id);
         console.log(this.registerForm.get('nombre')?.value);
         if (response) {
-          this.authService.login(false, "", "",this.registerForm.get('nombre')?.value,response._id);
+          this.authService.login(false, "", "",this.registerForm.get('nombre')?.value,response._id,false);
         }
         const Toast = Swal.mixin({
           toast: true,

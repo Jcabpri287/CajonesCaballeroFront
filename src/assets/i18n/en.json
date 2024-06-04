@@ -308,5 +308,31 @@
   "correo_existente" : "This email already exists.",
   "codigo_erroneo" : "Wrong verification code",
   "backgroundNormal" : "Normal background",
-  "backgroundWhite" : "White background"
+  "backgroundWhite" : "White background",
+  "opcionesadministrador": "Administrator Options",
+"gestionPedidos": "Order Management",
+"gestionComentarios": "Comment Management",
+"gestionProductos": "Product Management",
+  "OrderCompleted": "Order Completed",
+  "DeleteOrder": "Delete Order",
+  "AddProduct": "Add Product",
+  "ProductDetails": "Product Details",
+  "ProductName": "Product Name",
+  "RequiredDescription": "Description is required",
+  "RequiredPrice": "Price is required",
+  "BrandID": "Brand ID",
+  "RequiredBrandID": "Brand ID is required",
+  "Stock": "Stock",
+  "RequiredStock": "Stock is required",
+  "Category": "Category",
+  "RequiredCategory": "Category is required",
+  "RequiredReleaseDate": "Release Date is required",
+  "Image": "Image",
+  "RequiredImage": "Image is required",
+  "SelectCategory": "Select Category",
+  "Instrumentosmusicales": "Musical Instruments",
+  "Accesorio": "Accessory",
+  "SelectBrand": "Select brand"
 }
+
+

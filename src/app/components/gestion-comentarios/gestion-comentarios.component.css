@@ -1,0 +1,28 @@
+.CatalogoH1{
+  font-size: 40px;
+  margin: 0px;
+  font-weight: 800;
+  text-align: center;
+}
+@media (min-width: 500px) {
+  .CatalogoH1{
+    font-size: 55px;
+    margin-top: 20px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .CatalogoH1{
+    font-size: 70px;
+    margin-top: 50px;
+  }
+}
+
+.botonBorrar{
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.botonBorrar:hover{
+  transform: scale(1.1);
+}

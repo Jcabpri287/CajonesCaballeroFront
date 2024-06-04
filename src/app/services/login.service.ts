@@ -10,13 +10,15 @@ export class LoginService {
   private readonly mailKey = 'storedMail';
   private readonly idKey = 'storedId';
   private readonly nameKey = 'storedName';
+  private readonly adminKey = 'storedAdmin';
 
   constructor() {}
 
-  login(isLoggedIn: boolean, password: string, mail: string,username: string, userId: string | undefined): void {
+  login(isLoggedIn: boolean, password: string, mail: string,username: string, userId: string | undefined, admin: boolean): void {
     if (userId) {
       sessionStorage.setItem('username', username);
       sessionStorage.setItem('userId', userId);
+      sessionStorage.setItem('adminCookie', admin?"true":"false");
     }
 
     if (isLoggedIn) {
@@ -50,6 +52,8 @@ export class LoginService {
     sessionStorage.removeItem(this.storageKey);
     sessionStorage.removeItem("userId");
     sessionStorage.removeItem("username");
+    sessionStorage.removeItem('adminCookie');
+
   }
 
   isAuthenticated(): boolean {

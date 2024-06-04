@@ -17,6 +17,8 @@ import { CarritoService } from '../../services/carrito.service';
 export class HeaderComponent implements OnInit {
   tooltipText: string = '';
   totalProductos: number = 0;
+  showOptions: boolean = false;
+  administrador: boolean = false;
 
   sesionIniciada(): boolean {
     return this.authService.isAuthenticated();
@@ -62,6 +64,9 @@ export class HeaderComponent implements OnInit {
     this.translate.setDefaultLang(savedLang);
     this.translate.use(savedLang);
     this.setTooltipText(savedLang);
+    if (sessionStorage.getItem('adminCookie') && sessionStorage.getItem('adminCookie') == "true") {
+      this.administrador = true;
+    }
   }
 
   ngOnInit(): void {

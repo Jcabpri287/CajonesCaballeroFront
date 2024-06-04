@@ -1,0 +1,28 @@
+<div class="container mx-auto" style="min-height: 78.2vh; font-size: 14px; padding-top: 50px;">
+  <h1 class="mb-4 CatalogoH1">{{ 'gestionComentarios' | translate }}</h1>
+  <div style="margin-top: 50px;" class="row">
+    @for (comentario of comentarios; track $index) {
+      <div class="col-12 col-md-6" style="text-align: start; margin: 10px auto; ">
+        <div style="background-color: white; border-radius: 20px;padding: 15px; display: flex; justify-content: space-around;">
+          <div style="width: 50px; height: 50px; border-radius: 50%; background-color: rgb(180, 180, 180); display: grid; place-content: center;">
+            <i class="fa-regular fa-user fs-3 text-white"></i>
+          </div>
+          <div style="margin-left: 15px; width: 65%;">
+          <p style="font-size: 15px; margin: 0px 0px 3px 0px; font-weight: 800;">
+            {{comentario.nombreUsuario}}
+          </p>
+          <p style="font-size: 13px; margin: 0px; word-wrap: break-word;">
+            {{comentario.texto}}
+          </p>
+          </div>
+          <div class="botonBorrar" (click)="borrarComentario(comentario._id)">
+            <i class="fa-solid fa-trash-can" style="font-size: 20px; margin-top: 5px; background-color: rgb(92, 129, 249); color: white; padding: 10px; border-radius: 50%;"></i>
+          </div>
+      </div>
+        <p style="font-size: 10px; margin: 3px 0px 0px 0px; color: black; text-align: end; margin-right: 8px;">
+          {{comentario.fecha | date}}
+        </p>
+      </div>
+    }
+  </div>
+</div>

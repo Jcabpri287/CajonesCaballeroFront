@@ -5,4 +5,5 @@ export interface Usuario {
     contraseña: string;
     direccion: string;
     telefono: string;
+    rol?: string;
 }

@@ -1,0 +1,116 @@
+.CatalogoH1{
+  font-size: 40px;
+  margin: 0px;
+  font-weight: 800;
+  text-align: center;
+}
+@media (min-width: 500px) {
+  .CatalogoH1{
+    font-size: 55px;
+    margin-top: 20px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .CatalogoH1{
+    font-size: 50px;
+    margin-top: 50px;
+  }
+}
+
+.botonBorrar{
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.botonBorrar:hover{
+  transform: scale(1.1);
+}
+
+.CatalogoH1{
+  font-size: 40px;
+  margin: 0px;
+  font-weight: 800;
+}
+@media (min-width: 500px) {
+  .CatalogoH1{
+    margin-top: 45px;
+    font-size: 55px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .CatalogoH1{
+    margin-top: 45px;
+    font-size: 70px;
+  }
+}
+
+
+.tiptool {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  font-family: "Arial", sans-serif;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  position: absolute;
+  z-index: 5;
+  right: 15px; top: 40px;
+}
+
+.tiptool:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.tooltiptext {
+  visibility: hidden;
+  width: 200px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 10px;
+  position: absolute;
+  z-index: 6;
+  top: 125%;
+  left: 50%;
+  margin-left: -100px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  margin-left: -10px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent transparent #333 transparent;
+}
+
+.tiptool .icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: #af4c4c;
+  color: #fff;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 20px;
+}
+
+.botoncillo{
+  background-color: rgb(92, 129, 249);
+  color: white;
+  transition: 0.3s all ease;
+}
+
+
+.botoncillo:hover{
+  background-color: rgb(69, 100, 201);
+}

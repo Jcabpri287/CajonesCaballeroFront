@@ -8,7 +8,7 @@ import { Producto } from '../interfaces/producto';
 })
 
 export class productoService {
-  private url="https://cajonescaballeroback.onrender.com";
+  private url="http://localhost:3000";
   private http = inject(HttpClient);
 
   getProductos():Observable<Producto[]>{
@@ -42,16 +42,8 @@ export class productoService {
     );
   }
 
-  addProducto(productos:Producto):Observable<boolean>{
-    return this.http.post<Producto>(`${this.url}/productos`,productos).pipe(
-      map(res=>{
-        return true;
-     }),
-      catchError(error=>{
-        console.log(`Error al insertar el producto ${error}`);
-        return of (false)
-      })
-    );
+  addProducto(producto: Producto): Observable<Producto> {
+    return this.http.post<Producto>(`${this.url}/productos`, producto);
   }
 
   updateProducto(producto:Producto,id:string):Observable<boolean>{

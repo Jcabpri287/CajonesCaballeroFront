@@ -1,0 +1,98 @@
+<div class="container mx-auto" style="min-height: 78.2vh; font-size: 14px; padding: 30px 0px;">
+  <h1 class="mb-4 CatalogoH1">{{ 'gestionProductos' | translate }}</h1>
+    <div class="d-flex justify-content-center">
+      <div class="col-12 col-lg-8" style="margin-top: 50px; padding: 30px; background-color: rgba(0, 0, 0, 0.023); border-radius: 20px;">
+        <h2 class="mb-4">{{ 'ProductDetails' | translate }}:</h2>
+        <form [formGroup]="productoForm" (ngSubmit)="onSubmit()" class="row g-3">
+          <div class="mb-3 col-11 col-lg-6 mx-auto" style="position :relative;">
+            <label for="nombre" class="form-label">{{ 'ProductName' | translate }}</label>
+            <input type="text" id="nombre" class="form-control" formControlName="nombre">
+            <div *ngIf="productoForm.get('nombre')?.errors?.['required'] && productoForm.get('nombre')?.touched" class="tiptool">
+              <div class="icon">!</div>
+              <div class="tooltiptext">
+                <p style="font-size: 15px">{{ 'RequiredName' | translate }}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3 col-11 col-lg-6 mx-auto" style="position :relative;">
+            <label for="descripcion" class="form-label">{{ 'Description' | translate }}</label>
+            <input type="text" id="descripcion" class="form-control" formControlName="descripcion">
+            <div *ngIf="productoForm.get('descripcion')?.errors?.['required'] && productoForm.get('descripcion')?.touched" class="tiptool">
+              <div class="icon">!</div>
+              <div class="tooltiptext">
+                <p style="font-size: 15px">{{ 'RequiredDescription' | translate }}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3 col-11 col-lg-6 mx-auto" style="position :relative;">
+            <label for="precio" class="form-label">{{ 'Price' | translate }}</label>
+            <input type="number" id="precio" class="form-control" formControlName="precio">
+            <div *ngIf="productoForm.get('precio')?.errors?.['required'] && productoForm.get('precio')?.touched" class="tiptool">
+              <div class="icon">!</div>
+              <div class="tooltiptext">
+                <p style="font-size: 15px">{{ 'RequiredPrice' | translate }}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3 col-11 col-lg-6 mx-auto" style="position: relative;">
+            <label for="marca_id" class="form-label">{{ 'BrandID' | translate }}</label>
+            <select id="marca_id" class="form-control" formControlName="marca_id">
+              <option value="">{{ 'SelectBrand' | translate }}</option>
+              <option *ngFor="let marca of marcas" [value]="marca._id">{{ marca.nombre }}</option>
+            </select>
+            <div *ngIf="productoForm.get('marca_id')?.errors?.['required'] && productoForm.get('marca_id')?.touched" class="tiptool">
+              <div class="icon">!</div>
+              <div class="tooltiptext">
+                <p style="font-size: 15px">{{ 'RequiredBrandID' | translate }}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3 col-11 col-lg-6 mx-auto" style="position :relative;">
+            <label for="stock" class="form-label">{{ 'Stock' | translate }}</label>
+            <input type="number" id="stock" class="form-control" formControlName="stock">
+            <div *ngIf="productoForm.get('stock')?.errors?.['required'] && productoForm.get('stock')?.touched" class="tiptool">
+              <div class="icon">!</div>
+              <div class="tooltiptext">
+                <p style="font-size: 15px">{{ 'RequiredStock' | translate }}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3 col-11 col-lg-6 mx-auto" style="position :relative;">
+            <label for="categoria" class="form-label">{{ 'Category' | translate }}</label>
+            <select id="categoria" class="form-control" formControlName="categoria">
+              <option value="">{{ 'SelectCategory' | translate }}</option>
+              <option value="Instrumentos musicales">{{ 'Instrumentosmusicales' | translate }}</option>
+              <option value="Accesorio">{{ 'Accesorio' | translate }}</option>
+            </select>
+            <div *ngIf="productoForm.get('categoria')?.errors?.['required'] && productoForm.get('categoria')?.touched" class="tiptool">
+              <div class="icon">!</div>
+              <div class="tooltiptext">
+                <p style="font-size: 15px">{{ 'RequiredCategory' | translate }}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3 col-11 col-lg-6 mx-auto" style="position :relative;">
+            <label for="imagen_url" class="form-label">{{ 'Image' | translate }}</label>
+            <input type="file" id="imagen_url" class="form-control" (change)="onFileChange($event)">
+            <div *ngIf="productoForm.get('imagen_url')?.errors?.['required'] && productoForm.get('imagen_url')?.touched" class="tiptool">
+              <div class="icon">!</div>
+              <div class="tooltiptext">
+                <p style="font-size: 15px">{{ 'RequiredImage' | translate }}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3 col-11 col-lg-6 mx-auto text-center" style="margin-top: 40px;">
+            <button type="submit" class="btn w-100 mt-2 my-0 botoncillo">{{ 'AddProduct' | translate }}</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+</div>

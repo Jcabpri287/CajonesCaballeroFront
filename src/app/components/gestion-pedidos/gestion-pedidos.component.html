@@ -1,0 +1,63 @@
+<div class="container mx-auto" style="min-height: 78.2vh; font-size: 14px; padding-top: 50px;">
+  <h1 class="mb-4 CatalogoH1">{{ 'gestionPedidos' | translate }}</h1>
+  <ng-container *ngIf="pedidos.length > 0; else noPedidos">
+    <!-- Itera sobre cada pedido -->
+    <div *ngFor="let pedido of pedidos; trackBy: trackByPedidoId">
+      <div class="pedido-container" style="background-color: rgba(0, 0, 0, 0.015); padding: 30px; border-radius: 10px; margin-bottom: 20px;">
+        <h2 class="identificador">{{ 'OrderWithIdentifier' | translate }} {{ pedido._id }}</h2>
+        <div>
+          <p style="margin: 0px;">
+            <p>{{ 'Status' | translate }}:</p>
+            <select class="form-control mb-4 w-25" [(ngModel)]="pedido.estado" (change)="cambiarEstadoPedido(pedido)">
+              <option value="pendiente">{{ 'OrderPending' | translate }}</option>
+              <option value="listoParaRecoger">{{ 'OrderReadyForPickup' | translate }}</option>
+              <option value="completado">{{ 'OrderCompleted' | translate }}</option>
+            </select>
+          <p>{{ 'Total' | translate }}: {{ pedido | sumPrecio }}{{ 'precioSimbolo' | translate }}</p>
+          <!-- Botón para eliminar el pedido -->
+        </div>
+        <!-- Verifica si el pedido tiene productos -->
+        <ng-container *ngIf="pedido.productos.length > 0; else noProductos">
+          <!-- Itera sobre cada producto del pedido -->
+          <div class="row">
+            <div [ngClass]="pedido.productos.length > 1 ? 'col-lg-6 col-12' : 'col-12'" *ngFor="let producto of pedido.productos">
+              <div class="row flex justify-content-center align-baseline mx-auto">
+                <div class="row mb-3" style="display: flex; justify-content: space-around; background-color: rgba(210, 209, 209, 0.373); padding: 10px 0px; border-radius: 5px;">
+                  <div [ngClass]="pedido.productos.length > 1 ? 'col-lg-2' : 'col-lg-1'" class="ms-3 col-4" style="padding: 5px; border-radius: 15px;">
+                    <div style="background-color: white; display: grid; place-items: center; border-radius: 5px; min-height: 105px;">
+                      <img width="80%" [src]="producto.dataUrl || producto.imagen_url" alt="">
+                    </div>
+                  </div>
+                  <div [ngClass]="pedido.productos.length > 1 ? 'col-lg-8' : 'col-lg-10'" class="col-11" style="padding: 5px; border-radius: 15px;">
+                    <div style="background-color: white; border-radius: 5px; padding: 10px; min-height: 105px;">
+                      <p style="margin: 0px;">
+                        <span *ngIf="!producto.dataUrl">{{ producto.nombre }}</span>
+                        <span *ngIf="producto.dataUrl">{{ 'CustomCajon' | translate }}</span> |
+                        <b style="color: rgb(92, 129, 249); margin-right: 5px;">{{ producto.precio_unitario }}€</b> |
+                        <span>{{ 'Quantity' | translate }} : {{ producto.cantidad }}</span>
+                        <span *ngIf="producto.numero_cuerdas" class="letrapequeña" style="margin: 0px;"> | {{ 'StringType' | translate }}: <span style="color: rgb(92, 129, 249);">{{ producto.numero_cuerdas | cuerdas }}</span></span>
+                        <span *ngIf="producto.tipo_madera" class="letrapequeña" style="margin: 0px;"> | {{ 'WoodType' | translate }}: <span style="color: rgb(92, 129, 249);">{{ producto.tipo_madera }}</span></span>
+                      </p>
+                      <hr style="border: 1px solid rgb(92, 129, 249); margin: 5px 0px;">
+                      <p class="letrapequeña" style="margin: 0px;">{{ producto.descripcion }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button (click)="borrarPedido(pedido._id)" class="btn btn-danger">{{ 'DeleteOrder' | translate }}</button>
+
+        </ng-container>
+        <!-- Mensaje si el pedido no tiene productos -->
+        <ng-template #noProductos>
+          <p>{{ 'NoProductsInOrder' | translate }}</p>
+        </ng-template>
+      </div>
+    </div>
+  </ng-container>
+  <!-- Mensaje si no hay pedidos -->
+  <ng-template #noPedidos>
+    <p class="text-center">{{ 'NoOrdersYet' | translate }}</p>
+  </ng-template>
+</div>

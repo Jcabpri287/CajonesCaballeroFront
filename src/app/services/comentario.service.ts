@@ -8,7 +8,7 @@ import { Comentario } from '../interfaces/comentario';
 })
 
 export class comentarioService {
-  private url="https://cajonescaballeroback.onrender.com";
+  private url="http://localhost:3000";
   private http = inject(HttpClient);
 
   getComentarios():Observable<Comentario[]>{

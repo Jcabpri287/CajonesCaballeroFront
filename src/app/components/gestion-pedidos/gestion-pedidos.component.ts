@@ -1,0 +1,65 @@
+import { Component } from '@angular/core';
+import { HeaderComponent } from '../header/header.component';
+import { NgClass, NgFor, NgIf } from '@angular/common';
+import { pedidoService } from '../../services/pedido.service';
+import { Producto } from '../../interfaces/producto';
+import { Router } from '@angular/router';
+import { SumPrecioPipe } from '../../pipes/sum-precio.pipe';
+import { CuerdasPipe } from '../../pipes/cuerdas.pipe';
+import { TranslateModule } from '@ngx-translate/core';
+import { SpinnerService } from '../../services/spinner-service.service';
+import { FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';
+@Component({
+  selector: 'app-gestion-pedidos',
+  standalone: true,
+  imports: [TranslateModule, HeaderComponent, NgFor, NgIf, SumPrecioPipe, NgClass,CuerdasPipe, ReactiveFormsModule, FormsModule],
+  templateUrl: './gestion-pedidos.component.html',
+  styleUrl: './gestion-pedidos.component.css'
+})
+export class GestionPedidosComponent {
+  pedidos: any[] = [];
+  precioTotal = 0;
+  constructor(private pedidoService: pedidoService, private router : Router, private spinner : SpinnerService) { }
+
+  ngOnInit(): void {
+    this.obtenerPedidosUsuario();
+  }
+
+  obtenerPedidosUsuario(): void {
+    this.spinner.show()
+    this.pedidoService.obtenerPedidos().subscribe(
+      (response: any) => {
+        this.pedidos = response;
+        this.spinner.hide()
+      },
+      (error: any) => {
+        console.error('Error al obtener los pedidos:', error);
+        this.spinner.hide()
+      }
+    );
+  }
+  borrarPedido(id: string): void {
+    this.spinner.show();
+    this.pedidoService.delPedido(id).subscribe(() => {
+      this.pedidos = this.pedidos.filter(pedido => pedido._id !== id);
+      this.spinner.hide();
+    }, error => {
+      console.error('Error al borrar el pedido:', error);
+      this.spinner.hide();
+    });
+  }
+
+  cambiarEstadoPedido(pedido: any): void {
+    this.spinner.show();
+    this.pedidoService.updatePedido(pedido._id, { estado: pedido.estado }).subscribe(() => {
+      this.spinner.hide();
+    }, error => {
+      console.error('Error al cambiar el estado del pedido:', error);
+      this.spinner.hide();
+    });
+  }
+
+  trackByPedidoId(index: number, pedido: any): string {
+    return pedido._id;
+  }
+}

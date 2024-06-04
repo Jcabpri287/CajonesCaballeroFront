@@ -8,8 +8,7 @@ import { OrdenCompra } from '../interfaces/pedido';
 })
 
 export class pedidoService {
-  private url="https://cajonescaballeroback.onrender.com";
-  //inyectar HttpClient
+  private url="http://localhost:3000";
   private http = inject(HttpClient);
 
   enviarOrdenCompra(orden: OrdenCompra): Observable<any> {
@@ -20,14 +19,14 @@ export class pedidoService {
     return this.http.post(`${this.url}/confirmar`, data);
   }
 
-  //getTareas():Observable<Tarea[]>{
-  //  return this.http.get<Tarea[]>(`${this.url}/tareas`).pipe(
-  //    catchError(error=>{
-  //      console.log(`Error al obtener los clientes ${error}`);
-  //      return of ([])
-  //    })
-  //  );
-  //}
+  obtenerPedidos(): Observable<OrdenCompra[]> {
+    return this.http.get<OrdenCompra[]>(`${this.url}/pedidos`).pipe(
+      catchError(error => {
+        console.error('Error al obtener los pedidos del usuario:', error);
+        return of([] as OrdenCompra[]);
+      })
+    );
+  }
 
   obtenerPedidosUsuario(usuarioId: string): Observable<OrdenCompra[]> {
     console.log(usuarioId);
@@ -39,39 +38,11 @@ export class pedidoService {
     );
   }
 
-  //addTarea(tarea:Tarea):Observable<boolean>{
-  //  return this.http.post<Tarea>(`${this.url}/tarea`,tarea).pipe(
-  //    map(res=>{
-  //      return true;
-  //   }),
-  //    catchError(error=>{
-  //      console.log(`Error al insertar la tarea ${error}`);
-  //      return of (false)
-  //    })
-  //  );
-  //}
+  delPedido(id: string): Observable<any> {
+    return this.http.delete<any>(`${this.url}/pedidos/${id}`);
+  }
 
-  //updateTarea(tarea:Tarea,id:string):Observable<boolean>{
-  //  console.log(tarea);
-  //  return this.http.put<Tarea>(`${this.url}/tarea/${id}`,tarea).pipe(
-  //    map(res=>{
-  //      return true;
-  //    }),
-  //    catchError(error=>{
-  //      console.log(`Error al actualizar el cliente ${error}`);
-  //      return of (false)
-  //    })
-  //  );
-  //}
-
-  //delTarea(_id:string | undefined):Observable<boolean>{
-  //  console.log(_id);
-  //  return this.http.delete(`${this.url}/tarea/${_id}`).pipe(
-  //    map(()=>true),
-  //    catchError(error=>{
-  //      console.log(`Error al eliminar la tarea ${error}`);
-  //     return of (false);
-  //   })
-  //  );
-  // }
+  updatePedido(id: string, update: any): Observable<any> {
+    return this.http.put<any>(`${this.url}/pedidos/${id}`, update);
+  }
 }

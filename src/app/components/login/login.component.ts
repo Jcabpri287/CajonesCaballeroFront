@@ -55,10 +55,15 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
         this.userService.loginUsuario(correo, contraseña).subscribe(
           response => {
-            console.log(response);
+            console.log(response.rol);
             if(response._id){
-              this.authService.login(checked, CryptoJS.AES.encrypt(contraseña, 'secret key').toString(), correo, response.nombre, response._id);
+              if (response.rol == "admin") {
+                this.authService.login(checked, CryptoJS.AES.encrypt(contraseña, 'secret key').toString(), correo, response.nombre, response._id,true);
+              }else{
+                this.authService.login(checked, CryptoJS.AES.encrypt(contraseña, 'secret key').toString(), correo, response.nombre, response._id,false);
+              }
             }
+
             const Toast = Swal.mixin({
               toast: true,
               position: "top-end",

@@ -10,6 +10,35 @@
           <li class="nav-item botones" [class.current]="checkUrl('/personalizar') || checkUrl('/personalizar/pintar') || checkUrl('/personalizar/finalizar')"><a class="nav-link"  [routerLink]="['/personalizar']">{{ 'CUSTOMIZATION' | translate }}</a></li>
           <li class="nav-item botones" [class.current]="checkUrl('/tutoriales')"><a class="nav-link"  [routerLink]="['/tutoriales']">{{ 'TUTORIALS' | translate }}</a></li>
           <li class="nav-item botones" [class.current]="checkUrl('/sobreNosotros')"><a class="nav-link"  [routerLink]="['/sobreNosotros']">{{ 'ABOUT_US' | translate }}</a></li>
+          <label class="popup" *ngIf="administrador">
+            <input type="checkbox" />
+            <div tabindex="0" class="burger">
+              <i class="fa-solid fa-wrench text-white"></i>
+            </div>
+            <nav class="popup-window">
+              <legend class="pb-2">{{"opcionesadministrador" | translate}}</legend>
+              <ul>
+                <li [class.borderRadius]="checkUrl('/gestionPedidos')" [routerLink]="['/gestionPedidos']">
+                  <button>
+                    <i class="fa-solid fa-cart-shopping" [class.textoBlanco]="checkUrl('/gestionPedidos')"></i>
+                    <span>{{"gestionPedidos" | translate}}</span>
+                  </button>
+                </li>
+                <li class="my-1"  [class.borderRadius]="checkUrl('/gestionProductos')" [routerLink]="['/gestionProductos']">
+                  <button>
+                    <i class="fa-solid fa-store" [class.textoBlanco]="checkUrl('/gestionProductos')"></i>
+                    <span>{{"gestionProductos" | translate}}</span>
+                  </button>
+                </li>
+                <li [class.borderRadius]="checkUrl('/gestionComentarios')" [routerLink]="['/gestionComentarios']">
+                  <button>
+                    <i class="fa-regular fa-comment" [class.textoBlanco]="checkUrl('/gestionComentarios')"></i>
+                    <span>{{"gestionComentarios" | translate}}</span>
+                  </button>
+                </li>
+              </ul>
+            </nav>
+          </label>
         </ul>
       </div>
       <div class="wrapper">

@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { PermissionsService } from './guard/auth-guard.guard';
+import { AdminPermissionsService } from './guard/admin-guard.guard';
 
 export const routes: Routes = [
   {
@@ -50,6 +51,24 @@ export const routes: Routes = [
     canActivate: [PermissionsService],
     loadComponent: () =>
       import('./components/pedidos/pedidos.component').then((c) => c.PedidosComponent),
+  },
+  {
+    path: 'gestionPedidos',
+    canActivate: [AdminPermissionsService],
+    loadComponent: () =>
+      import('./components/gestion-pedidos/gestion-pedidos.component').then((c) => c.GestionPedidosComponent),
+  },
+  {
+    path: 'gestionProductos',
+    canActivate: [AdminPermissionsService],
+    loadComponent: () =>
+      import('./components/gestion-productos/gestion-productos.component').then((c) => c.GestionProductosComponent),
+  },
+  {
+    path: 'gestionComentarios',
+    canActivate: [AdminPermissionsService],
+    loadComponent: () =>
+      import('./components/gestion-comentarios/gestion-comentarios.component').then((c) => c.GestionComentariosComponent),
   },
   {
     path: 'producto',
