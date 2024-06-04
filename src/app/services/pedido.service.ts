@@ -8,7 +8,7 @@ import { OrdenCompra } from '../interfaces/pedido';
 })
 
 export class pedidoService {
-  private url="http://localhost:3000";
+  private url="https://cajonescaballeroback.onrender.com";
   private http = inject(HttpClient);
 
   enviarOrdenCompra(orden: OrdenCompra): Observable<any> {
