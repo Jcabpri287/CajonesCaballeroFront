@@ -1,6 +1,5 @@
 // src/app/services/compress-image.service.ts
 import { Injectable } from '@angular/core';
-import Compressor from 'canvas-compress';
 
 @Injectable({
   providedIn: 'root'
@@ -8,16 +7,12 @@ import Compressor from 'canvas-compress';
 export class CompressImageService {
   async compressImage(canvas: HTMLCanvasElement, quality: number = 0.8): Promise<string> {
     return new Promise<string>((resolve, reject) => {
-      const compressor = new Compressor(canvas, {
-        quality: quality,
-        mimeType: 'image/jpeg',
-        success(result: HTMLCanvasElement) {
-          resolve(result.toDataURL('image/jpeg', quality));
-        },
-        error(err: Error) {
-          reject(err);
-        }
-      });
+      try {
+        const dataUrl = canvas.toDataURL('image/jpeg', quality);
+        resolve(dataUrl);
+      } catch (error) {
+        reject(error);
+      }
     });
   }
 }
