@@ -7,14 +7,14 @@ import Compressor from 'canvas-compress';
 })
 export class CompressImageService {
   async compressImage(canvas: HTMLCanvasElement, quality: number = 0.8): Promise<string> {
-    return new Promise((resolve, reject) => {
+    return new Promise<string>((resolve, reject) => {
       const compressor = new Compressor(canvas, {
         quality: quality,
         mimeType: 'image/jpeg',
-        success(result) {
+        success(result: HTMLCanvasElement) {
           resolve(result.toDataURL('image/jpeg', quality));
         },
-        error(err) {
+        error(err: Error) {
           reject(err);
         }
       });
