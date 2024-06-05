@@ -14,7 +14,6 @@ export class comentarioService {
   getComentarios():Observable<Comentario[]>{
     return this.http.get<Comentario[]>(`${this.url}/comentarios`).pipe(
       catchError(error=>{
-        console.log(`Error al obtener los comentarios ${error}`);
         return of ([])
       })
     );
@@ -23,7 +22,6 @@ export class comentarioService {
   getComentariosProducto(id : string | undefined):Observable<Comentario[]>{
     return this.http.get<Comentario[]>(`${this.url}/comentarios/${id}`).pipe(
       catchError(error=>{
-        console.log(`Error al obtener los comentarios ${error}`);
         return of ([])
       })
     );
@@ -35,7 +33,6 @@ export class comentarioService {
         return true;
      }),
       catchError(error=>{
-        console.log(`Error al insertar el comentario ${error}`);
         return of (false)
       })
     );
@@ -47,7 +44,6 @@ export class comentarioService {
         return true;
       }),
       catchError(error=>{
-        console.log(`Error al actualizar el comentario ${error}`);
         return of (false)
       })
     );
@@ -57,7 +53,6 @@ export class comentarioService {
     return this.http.delete(`${this.url}/comentarios/${_id}`).pipe(
       map(()=>true),
       catchError(error=>{
-        console.log(`Error al eliminar el comentario ${error}`);
        return of (false);
      })
     );

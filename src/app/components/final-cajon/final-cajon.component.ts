@@ -142,7 +142,6 @@ export class FinalCajonComponent implements OnInit {
       tipoCuerdas: this.tipoCuerdas,
       dataUrl : this.dataUrl
     };
-    console.log(producto.dataUrl);
     this.router.navigate(['/personalizar/pintar'], { state: { producto } });
   }
 

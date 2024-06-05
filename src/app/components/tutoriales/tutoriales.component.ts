@@ -96,7 +96,6 @@ export class TutorialesComponent implements OnInit{
 
     const videoIds = ids[level] ?? [];
     if (!Array.isArray(titles) || titles.length !== videoIds.length) {
-      console.error(`Titles and IDs length mismatch for level: ${level}`);
       return [];
     }
 

@@ -120,7 +120,6 @@ export class ProductoComponent {
 
       this.comentariosService.addComentario(nuevoComentario).subscribe(
         error => {
-          console.log(error);
         }
       );
       this.nuevoComentario = '';

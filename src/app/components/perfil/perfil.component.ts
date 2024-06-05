@@ -79,7 +79,6 @@ export class PerfilComponent implements OnInit {
         this.spinner.hide()
   },
       (error) => {
-        console.error('Error al obtener el usuario:', error);
         this.spinner.hide()
       }
     );
@@ -118,11 +117,9 @@ export class PerfilComponent implements OnInit {
             });
           },
           (error) => {
-            console.error('Error al actualizar el usuario:', error);
           }
         );
       } else {
-        console.log("No hay cambios en el formulario.");
       }
     }
   }

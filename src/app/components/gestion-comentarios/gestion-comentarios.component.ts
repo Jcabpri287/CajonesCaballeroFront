@@ -42,13 +42,11 @@ export class GestionComentariosComponent implements OnInit{
                     this.spinner.hide();
                 },
                 error: err => {
-                    console.error('Error al obtener los comentarios:', err);
                     this.spinner.hide();
                 }
             });
         },
         error: err => {
-            console.error('Error al eliminar el comentario:', err);
             this.spinner.hide();
         }
     });

@@ -86,7 +86,6 @@ export class RegisterComponent {
         }
       },
       error => {
-        console.log(error.error.errors[0].msg);
       }
       );
   }
@@ -94,8 +93,6 @@ export class RegisterComponent {
   submitRegister(){
     this.userService.addUsuario(this.registerForm.value).subscribe(
       response => {
-        console.log(response._id);
-        console.log(this.registerForm.get('nombre')?.value);
         if (response) {
           this.authService.login(false, "", "",this.registerForm.get('nombre')?.value,response._id,false);
         }
@@ -118,7 +115,6 @@ export class RegisterComponent {
         this.router.navigate(['/']);
       },
       error => {
-        console.log(error.error.errors[0].msg);
       }
       );
   }
@@ -146,20 +142,16 @@ export class RegisterComponent {
   }
 
   submitVerificationCode() {
-    console.log(this.verificationSentCode + this.registerForm.get('correo')?.value);
     this.http.post<any>('https://cajonescaballeroback.onrender.com/verify-code', { code: this.verificationSentCode ,email : this.registerForm.get('correo')?.value })
       .subscribe(
         (response) => {
-          console.log(response);
         },
         (error) => {
-          console.error(error);
         }
       );
   }
 
   confirmVerificationCode() {
-    console.log(this.verificationCode);
     if (this.getVerificationCode() == this.verificationSentCode) {
       this.closeModal();
       this.register();

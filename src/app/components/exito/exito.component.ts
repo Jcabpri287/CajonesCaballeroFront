@@ -34,7 +34,6 @@ export class ExitoComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    console.log("ngOnInit start");
     const usuarioId = this.obtenerUsuarioId();
     const email = this.obtenerUsuarioEmail();
     let productos = JSON.parse(localStorage.getItem('compra') || '[]');
@@ -81,7 +80,6 @@ export class ExitoComponent implements OnInit {
               try {
                 const compressedDataUrl = await this.compressImageService.compressImage(canvas, 0.5); // Ajusta la calidad según sea necesario
                 productoOrden.imagen_url = compressedDataUrl; // Asignar el dataUrl comprimido a imagen_url
-                console.log("Compressed dataUrl assigned to imagen_url", productoOrden.imagen_url);
                 resolve();
               } catch (error) {
                 reject(error);
@@ -91,7 +89,6 @@ export class ExitoComponent implements OnInit {
             }
           };
           image.onerror = (err) => {
-            console.error("Image load error", err);
             reject(new Error('Image load error'));
           };
         });
@@ -102,7 +99,6 @@ export class ExitoComponent implements OnInit {
 
     try {
       const productosOrdenados = await Promise.all(productos.map(mapProducto));
-      console.log("Productos ordenados", productosOrdenados);
 
       let orden: OrdenCompra = {
         _id: '',
@@ -113,7 +109,6 @@ export class ExitoComponent implements OnInit {
 
       this.ordenCompraService.enviarOrdenCompra(orden).subscribe(
         response => {
-          console.log("Orden enviada", response);
           const productosEnCarrito = this.carritoService.obtenerCarritoDesdeLocalStorage();
 
           for (const productoCompra of productosCompra) {
@@ -131,22 +126,17 @@ export class ExitoComponent implements OnInit {
           this.enviarCorreoConfirmacion(orden, email);
         },
         error => {
-          console.error('Error al enviar la orden', error);
         }
       );
     } catch (error) {
-      console.error("Error processing productos", error);
     }
   }
 
   enviarCorreoConfirmacion(orden: OrdenCompra, email: string): void {
-    console.log("Enviando correo de confirmación", orden, email);
     this.ordenCompraService.confirmarPedido({ orden, email }).subscribe(
       response => {
-        console.log('Correo de confirmación enviado', response);
       },
       error => {
-        console.error('Error al enviar el correo de confirmación', error);
       }
     );
   }

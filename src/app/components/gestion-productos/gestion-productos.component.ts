@@ -24,9 +24,7 @@ export class GestionProductosComponent implements OnInit {
   cargarMarcas(): void {
     this.marcaService.getMarcas().subscribe(marcas => {
       this.marcas = marcas;
-      console.log(marcas);
     }, error => {
-      console.error('Error al cargar las marcas:', error);
     });
   }
 
@@ -63,11 +61,9 @@ export class GestionProductosComponent implements OnInit {
     };
 
     this.productoService.addProducto(nuevoProducto).subscribe(response => {
-      console.log('Producto agregado:', response);
       this.spinnerService.hide();
       Swal.fire("Producto añadido al carrito satisfactoriamente");
     }, error => {
-      console.error('Error al agregar el producto:', error);
       this.spinnerService.hide();
       Swal.fire("Error al añadir el producto");
     });

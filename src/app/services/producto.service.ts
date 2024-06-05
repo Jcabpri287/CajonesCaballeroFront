@@ -14,7 +14,6 @@ export class productoService {
   getProductos():Observable<Producto[]>{
     return this.http.get<Producto[]>(`${this.url}/productos`).pipe(
       catchError(error=>{
-        console.log(`Error al obtener los productos ${error}`);
         return of ([])
       })
     );
@@ -23,7 +22,6 @@ export class productoService {
   getCuatroProductos():Observable<Producto[]>{
     return this.http.get<Producto[]>(`${this.url}/productos`).pipe(
       catchError(error => {
-        console.log(`Error al obtener los productos ${error}`);
         return of([]);
       }),
       map(productos => productos.slice(0, 4))
@@ -36,7 +34,6 @@ export class productoService {
         return res as Producto;
       }),
       catchError(error=>{
-        console.log(`Error al obtener el producto ${error}`);
         return of ({} as Producto)
       })
     );
@@ -52,7 +49,6 @@ export class productoService {
         return true;
       }),
       catchError(error=>{
-        console.log(`Error al actualizar el producto ${error}`);
         return of (false)
       })
     );
@@ -62,7 +58,6 @@ export class productoService {
     return this.http.delete(`${this.url}/productos/${_id}`).pipe(
       map(()=>true),
       catchError(error=>{
-        console.log(`Error al eliminar el producto ${error}`);
        return of (false);
      })
     );

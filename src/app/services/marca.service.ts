@@ -14,7 +14,6 @@ export class marcaService {
   getMarcas():Observable<Marca[]>{
     return this.http.get<Marca[]>(`${this.url}/marcas`).pipe(
       catchError(error=>{
-        console.log(`Error al obtener las marcas ${error}`);
         return of ([])
       })
     );
@@ -26,7 +25,6 @@ export class marcaService {
         return res as Marca;
       }),
       catchError(error=>{
-        console.log(`Error al obtener la marca ${error}`);
         return of ({} as Marca)
       })
     );
@@ -38,7 +36,6 @@ export class marcaService {
         return true;
      }),
       catchError(error=>{
-        console.log(`Error al insertar la tarea ${error}`);
         return of (false)
       })
     );
@@ -50,7 +47,6 @@ export class marcaService {
         return true;
       }),
       catchError(error=>{
-        console.log(`Error al actualizar la marca ${error}`);
         return of (false)
       })
     );
@@ -60,7 +56,6 @@ export class marcaService {
     return this.http.delete(`${this.url}/marcas/${_id}`).pipe(
       map(()=>true),
       catchError(error=>{
-        console.log(`Error al eliminar la marca ${error}`);
        return of (false);
      })
     );

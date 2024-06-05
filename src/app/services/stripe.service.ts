@@ -10,7 +10,6 @@ export class StripeService {
 
   constructor(private http: HttpClient) {
     this.stripePromise = loadStripe('pk_test_51PH3iTDhgSdzhvGGCvnVPuFCZvl53BmRIBH7sSMWPXckQwjm7O0CsySiPOCOLO8g6pfdetInh607UxJXbheyUkDB00FSpIvhPq').catch(err => {
-      console.error('Error al cargar Stripe:', err);
       return null;
     });
   }
@@ -18,7 +17,6 @@ export class StripeService {
   async procesarPago(producto: { nombre: string, descripcion: string, precio: number }) {
     const stripe = await this.stripePromise;
     if (!stripe) {
-      console.error('Stripe no está disponible');
       return;
     }
 
@@ -33,8 +31,6 @@ export class StripeService {
 
       const sessionId = response.sessionId;
 
-      console.log(response.id);
-
       const result = await stripe.redirectToCheckout({
         sessionId: sessionId
       });
@@ -43,7 +39,6 @@ export class StripeService {
         throw new Error(result.error.message);
       }
     } catch (error) {
-      console.error('Error al procesar el pago:', error);
     }
   }
 }

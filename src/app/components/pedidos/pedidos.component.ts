@@ -37,7 +37,6 @@ export class PedidosComponent {
         this.spinner.hide()
       },
       (error: any) => {
-        console.error('Error al obtener los pedidos:', error);
         this.spinner.hide()
       }
     );

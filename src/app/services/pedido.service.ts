@@ -22,17 +22,14 @@ export class pedidoService {
   obtenerPedidos(): Observable<OrdenCompra[]> {
     return this.http.get<OrdenCompra[]>(`${this.url}/pedidos`).pipe(
       catchError(error => {
-        console.error('Error al obtener los pedidos del usuario:', error);
         return of([] as OrdenCompra[]);
       })
     );
   }
 
   obtenerPedidosUsuario(usuarioId: string): Observable<OrdenCompra[]> {
-    console.log(usuarioId);
     return this.http.get<OrdenCompra[]>(`${this.url}/pedidos/${usuarioId}`).pipe(
       catchError(error => {
-        console.error('Error al obtener los pedidos del usuario:', error);
         return of([] as OrdenCompra[]); // Devuelve un arreglo vacío en caso de error
       })
     );

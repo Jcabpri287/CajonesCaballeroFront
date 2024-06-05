@@ -277,7 +277,6 @@ export class PintarComponent implements OnInit{
     }
 
     cambiarGrosorPintura(): void {
-      console.log(this.grosorPincel);
       const objetoSeleccionado = this._canvas!.getActiveObject();
       if (objetoSeleccionado instanceof fabric.Textbox) {
         objetoSeleccionado.set({ strokeWidth: this.grosorPincel });
@@ -424,7 +423,6 @@ export class PintarComponent implements OnInit{
         tipoCuerdas: this.tipoCuerdas,
         dataUrl : this._canvas!.toDataURL()
       };
-      console.log(producto.dataUrl);
       this.router.navigate(['/personalizar/finalizar'], { state: { producto } });
     }
 

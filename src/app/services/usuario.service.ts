@@ -15,7 +15,6 @@ export class usuarioService {
   getUsuarios():Observable<Usuario[]>{
     return this.http.get<Usuario[]>(`${this.url}/usuarios`).pipe(
       catchError(error=>{
-        console.log(`Error al obtener los usuarios ${error}`);
         return of ([])
       })
     );
@@ -27,7 +26,6 @@ export class usuarioService {
         return res as Usuario;
       }),
       catchError(error=>{
-        console.log(`Error al obtener el usuario ${error}`);
         return of ({} as Usuario)
       })
     );
@@ -39,7 +37,6 @@ export class usuarioService {
         return res.found || false;
       }),
       catchError(error => {
-        console.log(`Error al obtener el usuario ${error}`);
         return of(false);
       })
     );
@@ -52,7 +49,6 @@ export class usuarioService {
         return res as Usuario;
       }),
       catchError(error => {
-        console.log(`Error en el inicio de sesión: ${error}`);
         throw error;
       })
     );
@@ -75,20 +71,17 @@ export class usuarioService {
         return res as String[];
       }),
       catchError(error=>{
-        console.log(`Error al obtener el usuario ${error}`);
         return of ({} as String[])
       })
     );
   }
 
   updateUsuario(usuario:Usuario,id:string):Observable<boolean>{
-    console.log(id);
     return this.http.put<Usuario>(`${this.url}/usuarios/${id}`,usuario).pipe(
       map(res=>{
         return true;
       }),
       catchError(error=>{
-        console.log(`Error al actualizar el usuario ${error}`);
         return of (false)
       })
     );
@@ -98,7 +91,6 @@ export class usuarioService {
     return this.http.delete(`${this.url}/usuarios/${_id}`).pipe(
       map(()=>true),
       catchError(error=>{
-        console.log(`Error al eliminar el usuario ${error}`);
         return of (false);
       })
     );

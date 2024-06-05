@@ -40,7 +40,6 @@ export class HomeComponent {
   }
 
   ngOnInit(): void {
-    console.log("Component initialized");
     this.ngZone.runOutsideAngular(() => {
       this.initThree();
     });
@@ -50,7 +49,6 @@ export class HomeComponent {
       this.cuatroProductos = productos;
       this.spinnerService.hide();
     }, error => {
-      console.error('Error al cargar los productos', error);
       this.spinnerService.hide();
     });
   }

@@ -33,7 +33,6 @@ export class GestionPedidosComponent {
         this.spinner.hide()
       },
       (error: any) => {
-        console.error('Error al obtener los pedidos:', error);
         this.spinner.hide()
       }
     );
@@ -44,7 +43,6 @@ export class GestionPedidosComponent {
       this.pedidos = this.pedidos.filter(pedido => pedido._id !== id);
       this.spinner.hide();
     }, error => {
-      console.error('Error al borrar el pedido:', error);
       this.spinner.hide();
     });
   }
@@ -54,7 +52,6 @@ export class GestionPedidosComponent {
     this.pedidoService.updatePedido(pedido._id, { estado: pedido.estado }).subscribe(() => {
       this.spinner.hide();
     }, error => {
-      console.error('Error al cambiar el estado del pedido:', error);
       this.spinner.hide();
     });
   }

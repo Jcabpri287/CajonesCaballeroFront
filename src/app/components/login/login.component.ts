@@ -55,7 +55,6 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
         this.userService.loginUsuario(correo, contraseña).subscribe(
           response => {
-            console.log(response.rol);
             if(response._id){
               if (response.rol == "admin") {
                 this.authService.login(checked, CryptoJS.AES.encrypt(contraseña, 'secret key').toString(), correo, response.nombre, response._id,true);
@@ -83,7 +82,6 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
             this.router.navigate(['/']);
           },
           error => {
-            console.log("error");
             Swal.fire({
               icon: 'error',
               iconColor: "#8ea7f7",
