@@ -1,10 +1,11 @@
+// src/app/components/exito/exito.component.ts
 import { Component, OnInit } from '@angular/core';
 import { OrdenCompra, ProductoOrden } from './../../interfaces/pedido';
 import { pedidoService } from '../../services/pedido.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterLink } from '@angular/router';
 import { CarritoService } from '../../services/carrito.service';
-
+import { CompressImageService } from '../../services/compressimage.service';
 @Component({
   selector: 'app-exito',
   standalone: true,
@@ -15,7 +16,8 @@ import { CarritoService } from '../../services/carrito.service';
 export class ExitoComponent implements OnInit {
   constructor(
     private ordenCompraService: pedidoService,
-    private carritoService: CarritoService
+    private carritoService: CarritoService,
+    private compressImageService: CompressImageService // Inyecta tu servicio
   ) {}
 
   obtenerUsuarioId(): string {
@@ -30,13 +32,12 @@ export class ExitoComponent implements OnInit {
     localStorage.removeItem('compra');
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     const usuarioId = this.obtenerUsuarioId();
     const email = this.obtenerUsuarioEmail();
     let productos = JSON.parse(localStorage.getItem('compra') || '[]');
     let productosCompra = JSON.parse(localStorage.getItem('compra') || '[]');
 
-    // Asegurarse de que productos y productosCompra sean arrays
     if (!Array.isArray(productos)) {
       productos = [productos];
     }
@@ -44,9 +45,7 @@ export class ExitoComponent implements OnInit {
       productosCompra = [productosCompra];
     }
 
-    let orden: OrdenCompra;
-
-    const mapProducto = (producto: any) => {
+    const mapProducto = async (producto: any): Promise<ProductoOrden> => {
       let productoOrden: ProductoOrden = {
         _id: producto.id,
         nombre: producto.nombre,
@@ -67,44 +66,60 @@ export class ExitoComponent implements OnInit {
       }
 
       if (producto.dataUrl) {
-        productoOrden.dataUrl = producto.dataUrl;
+        const image = new Image();
+        image.src = producto.dataUrl;
+        await new Promise<void>((resolve, reject) => {
+          image.onload = async () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = image.width;
+            canvas.height = image.height;
+            const ctx = canvas.getContext('2d');
+            if (ctx) {
+              ctx.drawImage(image, 0, 0);
+              producto.dataUrl = await this.compressImageService.compressImage(canvas, 0.8);
+              resolve();
+            } else {
+              reject(new Error('Unable to get canvas context'));
+            }
+          };
+        });
       }
 
       return productoOrden;
     };
 
-    orden = {
-      _id: '',
-      usuario_id: usuarioId,
-      productos: productos.map(mapProducto),
-      estado: 'pendiente'
-    };
+    Promise.all(productos.map(mapProducto)).then((productosOrdenados) => {
+      let orden: OrdenCompra = {
+        _id: '',
+        usuario_id: usuarioId,
+        productos: productosOrdenados,
+        estado: 'pendiente'
+      };
 
-    this.ordenCompraService.enviarOrdenCompra(orden).subscribe(
-      response => {
-        const productosEnCarrito = this.carritoService.obtenerCarritoDesdeLocalStorage();
+      this.ordenCompraService.enviarOrdenCompra(orden).subscribe(
+        response => {
+          const productosEnCarrito = this.carritoService.obtenerCarritoDesdeLocalStorage();
 
-        for (const productoCompra of productosCompra) {
-          for (let i = 0; i < productosEnCarrito.length; i++) {
-            if (productoCompra.id === productosEnCarrito[i].producto._id) {
-              productosEnCarrito.splice(i, 1);
-              break;
+          for (const productoCompra of productosCompra) {
+            for (let i = 0; i < productosEnCarrito.length; i++) {
+              if (productoCompra.id === productosEnCarrito[i].producto._id) {
+                productosEnCarrito.splice(i, 1);
+                break;
+              }
             }
           }
+
+          this.carritoService.actualizarCarrito(productosEnCarrito);
+          this.borrarPedido();
+
+          this.enviarCorreoConfirmacion(orden, email);
+        },
+        error => {
+          console.error('Error al enviar la orden', error);
         }
-
-        this.carritoService.actualizarCarrito(productosEnCarrito);
-        this.borrarPedido();
-
-        // Enviar correo electrónico de confirmación
-        this.enviarCorreoConfirmacion(orden, email);
-      },
-      error => {
-        console.error('Error al enviar la orden', error);
-      }
-    );
+      );
+    });
   }
-
 
   enviarCorreoConfirmacion(orden: OrdenCompra, email: string): void {
     console.log("LLegada");
