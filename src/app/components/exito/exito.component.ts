@@ -55,7 +55,8 @@ export class ExitoComponent implements OnInit {
         precio_unitario: producto.precio,
         total: producto.precio * producto.cantidad,
         estado: 'pendiente',
-        imagen_url: producto.imagen_url || ""
+        imagen_url: producto.imagen_url || "",
+        dataUrl: producto.dataUrl || "",
       };
 
       if (producto.tipoMadera) {
@@ -79,7 +80,7 @@ export class ExitoComponent implements OnInit {
               ctx.drawImage(image, 0, 0);
               try {
                 const compressedDataUrl = await this.compressImageService.compressImage(canvas, 0.5); // Ajusta la calidad según sea necesario
-                productoOrden.imagen_url = compressedDataUrl; // Asignar el dataUrl comprimido a imagen_url
+                productoOrden.dataUrl = compressedDataUrl; // Asignar el dataUrl comprimido a imagen_url
                 resolve();
               } catch (error) {
                 reject(error);

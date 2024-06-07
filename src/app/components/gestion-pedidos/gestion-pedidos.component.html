@@ -44,9 +44,13 @@
                   </div>
                 </div>
               </div>
+              <ng-container *ngIf="producto.dataUrl">
+                <button (click)="descargarImagen(producto.dataUrl)" class="btn btn-primary mb-2">{{ 'DownloadImage' | translate }}</button>
+              </ng-container>
             </div>
           </div>
           <button (click)="borrarPedido(pedido._id)" class="btn btn-danger">{{ 'DeleteOrder' | translate }}</button>
+          <!-- Botón para descargar la imagen si es un cajón personalizado -->
 
         </ng-container>
         <!-- Mensaje si el pedido no tiene productos -->

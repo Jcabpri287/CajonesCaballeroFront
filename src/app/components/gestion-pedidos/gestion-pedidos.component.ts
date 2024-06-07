@@ -59,4 +59,11 @@ export class GestionPedidosComponent {
   trackByPedidoId(index: number, pedido: any): string {
     return pedido._id;
   }
+
+  descargarImagen(dataUrl: string): void {
+    const link = document.createElement('a');
+    link.href = dataUrl;
+    link.download = 'custom_cajon_image.png';
+    link.click();
+  }
 }
