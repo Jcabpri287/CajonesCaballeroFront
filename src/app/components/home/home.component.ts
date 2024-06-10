@@ -1,13 +1,14 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Component, ElementRef, NgZone, Renderer2, ViewChild } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, ElementRef, NgZone, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import * as THREE from 'three';
 import { NgIf } from '@angular/common';
 import { productoService } from '../../services/producto.service';
 import { Producto } from '../../interfaces/producto';
 import { Router, RouterLink } from '@angular/router';
-import { TranslateCompiler, TranslateModule, TranslatePipe } from '@ngx-translate/core';
+import { TranslateCompiler, TranslateModule, TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { SpinnerService } from '../../services/spinner-service.service';
 import { FooterComponent } from '../footer/footer.component';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -18,16 +19,15 @@ import { FooterComponent } from '../footer/footer.component';
   standalone:true
 })
 
-export class HomeComponent {
+export class HomeComponent implements OnInit{
   showTerms: boolean = false;
   private isMouseDown: boolean = false;
   private mouseX: number = 0;
   cuatroProductos?: Producto[];
 
-
   @ViewChild('rendererContainer', { static: true }) rendererContainer!: ElementRef<HTMLDivElement>;
 
-  constructor(    private spinnerService: SpinnerService, private ngZone: NgZone, private renderer: Renderer2, private el: ElementRef, private productoService : productoService, private router: Router) {}
+  constructor(private translate: TranslateService,    private spinnerService: SpinnerService, private ngZone: NgZone, private renderer: Renderer2, private el: ElementRef, private productoService : productoService, private router: Router) {}
 
   toggleTerms(): void {
     this.showTerms = !this.showTerms;
@@ -52,6 +52,48 @@ export class HomeComponent {
     }, error => {
       this.spinnerService.hide();
     });
+
+    const showToast1 = localStorage.getItem('showToastRegister');
+    const showToast2 = localStorage.getItem('showToastLogin');
+    if (showToast1 === 'true') {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        }
+      });
+      Toast.fire({
+        icon: "success",
+        iconColor: "#8ea7f7",
+        title: this.translate.instant('registrado_correctamente')
+      });
+
+      localStorage.removeItem('showToastRegister');
+    }else if (showToast2 === 'true') {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        }
+      });
+      Toast.fire({
+        icon: "success",
+        iconColor: "#8ea7f7",
+        title: this.translate.instant('sesion.iniciada_correctamente')
+      });
+
+      localStorage.removeItem('showToastLogin');
+    }
   }
 
   verProducto(producto: Producto){

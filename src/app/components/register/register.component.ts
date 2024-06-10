@@ -119,6 +119,7 @@ export class RegisterComponent {
               iconColor: "#8ea7f7",
               title: this.translate.instant('registrado_correctamente')
             });
+            localStorage.setItem('showToastRegister', 'true');
           });
         });
 
