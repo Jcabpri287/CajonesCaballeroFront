@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone, inject } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 import { usuarioService } from '../../services/usuario.service';
 import { LoginService } from '../../services/login.service';
 import { NgIf } from '@angular/common';
-import { Observable, of } from 'rxjs';
+import { Observable, first, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { FooterComponent } from '../footer/footer.component';
@@ -26,7 +26,8 @@ export class RegisterComponent {
   private authService = inject(LoginService)
   private userService = inject(usuarioService)
 
-  constructor(private formBuilder: FormBuilder,private router:Router, private http : HttpClient, private translate: TranslateService) {
+  constructor(private formBuilder: FormBuilder,private router:Router, private http : HttpClient, private translate: TranslateService, private cd: ChangeDetectorRef,
+    private ngZone: NgZone) {
     this.registerForm = this.formBuilder.group({
       nombre: ['', Validators.required],
       correo: ['', [Validators.required, Validators.email]],
@@ -113,7 +114,12 @@ export class RegisterComponent {
           iconColor: "#8ea7f7",
           title: this.translate.instant('registrado_correctamente')
         });
-        this.router.navigate(['/']);
+        this.router.navigate(['/']).then(() => {
+          this.ngZone.onStable.asObservable().pipe(first()).subscribe(() => {
+            this.cd.detectChanges();
+            window.scrollTo(0, 0); // Forzar el scroll al principio
+          });
+        });
       },
       error => {
       }

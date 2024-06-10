@@ -1,7 +1,7 @@
 import { NgIf } from '@angular/common';
-import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, NgZone, OnInit, Renderer2 } from '@angular/core';
 import { Router, NavigationEnd, RouterLink } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { filter, first } from 'rxjs/operators';
 import { LoginService } from '../../services/login.service';
 import Swal from 'sweetalert2';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -37,7 +37,13 @@ export class HeaderComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.authService.logout();
-        this.router.navigate(['/']);
+        this.router.navigate(['/']).then(() => {
+          this.ngZone.onStable.asObservable().pipe(first()).subscribe(() => {
+            this.cd.detectChanges();
+            window.scrollTo(0, 0);
+            window.location.reload(); 
+          });
+        });
       }
     });
   }
@@ -58,7 +64,8 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  constructor(private carritoService: CarritoService, private translate: TranslateService, private router: Router, private renderer: Renderer2, private el: ElementRef, private authService: LoginService) {
+  constructor(private carritoService: CarritoService, private translate: TranslateService, private router: Router, private renderer: Renderer2, private el: ElementRef, private authService: LoginService, private cd: ChangeDetectorRef,
+    private ngZone: NgZone) {
     this.translate.addLangs(['en', 'es', 'it']);
     const savedLang = localStorage.getItem('appLang') || 'en';
     this.translate.setDefaultLang(savedLang);

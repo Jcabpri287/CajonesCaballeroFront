@@ -1,4 +1,4 @@
-  import { Component, NgModule, OnInit, inject } from '@angular/core';
+  import { ChangeDetectorRef, Component, NgModule, NgZone, OnInit, inject } from '@angular/core';
   import { HeaderComponent } from '../header/header.component';
   import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
   import { usuarioService } from '../../services/usuario.service';
@@ -9,6 +9,7 @@
   import CryptoJS from 'crypto-js';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { FooterComponent } from '../footer/footer.component';
+import { first } from 'rxjs';
 
   @Component({
     selector: 'app-login',
@@ -23,7 +24,8 @@ import { FooterComponent } from '../footer/footer.component';
     private authService = inject(LoginService)
     rememberPassword: boolean = false;
 
-    constructor(private formBuilder: FormBuilder,private router: Router,private translate: TranslateService) {
+    constructor(private formBuilder: FormBuilder,private router: Router,private translate: TranslateService, private cd: ChangeDetectorRef,
+      private ngZone: NgZone) {
       this.loginForm = this.formBuilder.group({
         correo: ['', [Validators.required, Validators.email]],
         contraseña: ['', Validators.required],
@@ -80,7 +82,12 @@ import { FooterComponent } from '../footer/footer.component';
               iconColor: "#8ea7f7",
               title: this.translate.instant('sesion.iniciada_correctamente')
             });
-            this.router.navigate(['/']);
+            this.router.navigate(['/']).then(() => {
+              this.ngZone.onStable.asObservable().pipe(first()).subscribe(() => {
+                this.cd.detectChanges();
+                window.scrollTo(0, 0); // Forzar el scroll al principio
+              });
+            });
           },
           error => {
             Swal.fire({
