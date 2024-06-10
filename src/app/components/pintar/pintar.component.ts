@@ -5,11 +5,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { fabric } from 'fabric';
 import * as THREE from 'three';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-pintar',
   standalone: true,
-  imports: [NgStyle,FormsModule, NgIf, TranslateModule],
+  imports: [NgStyle,FormsModule, NgIf, TranslateModule, FooterComponent],
   templateUrl: './pintar.component.html',
   styleUrl: './pintar.component.css'
 })

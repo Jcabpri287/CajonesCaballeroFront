@@ -8,11 +8,12 @@ import { marcaService } from '../../services/marca.service';
 import { Marca } from '../../interfaces/marca';
 import { SpinnerService } from '../../services/spinner-service.service';
 import Swal from 'sweetalert2';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-gestion-productos',
   standalone: true,
-  imports: [TranslateModule, ReactiveFormsModule, NgIf, NgFor],
+  imports: [TranslateModule, ReactiveFormsModule, NgIf, NgFor, FooterComponent],
   templateUrl: './gestion-productos.component.html',
   styleUrls: ['./gestion-productos.component.css']
 })

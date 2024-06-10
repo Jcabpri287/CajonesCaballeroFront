@@ -7,11 +7,12 @@ import { Observable, of } from 'rxjs';
 import { NgIf } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { SpinnerService } from '../../services/spinner-service.service';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-perfil',
   standalone: true,
-  imports: [ReactiveFormsModule, NgIf, TranslateModule],
+  imports: [ReactiveFormsModule, NgIf, TranslateModule, FooterComponent],
   templateUrl: './perfil.component.html',
   styleUrl: './perfil.component.css'
 })

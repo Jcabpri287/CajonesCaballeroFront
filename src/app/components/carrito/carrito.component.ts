@@ -7,11 +7,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StripeService } from '../../services/stripe.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { CarritoService } from '../../services/carrito.service';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-carrito',
   standalone: true,
-  imports: [HeaderComponent, DatePipe, FormsModule, TranslateModule],
+  imports: [HeaderComponent, DatePipe, FormsModule, TranslateModule, FooterComponent],
   templateUrl: './carrito.component.html',
   styleUrl: './carrito.component.css'
 })

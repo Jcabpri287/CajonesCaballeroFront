@@ -8,11 +8,12 @@
   import Swal from 'sweetalert2';
   import CryptoJS from 'crypto-js';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { FooterComponent } from '../footer/footer.component';
 
   @Component({
     selector: 'app-login',
     standalone: true,
-    imports: [TranslateModule, HeaderComponent, NgIf,ReactiveFormsModule, RouterLink],
+    imports: [TranslateModule, HeaderComponent, NgIf,ReactiveFormsModule, RouterLink, FooterComponent],
     templateUrl: './login.component.html',
     styleUrl: './login.component.css'
   })

@@ -3,13 +3,14 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { SwiperModule } from 'swiper/angular';
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y, SwiperOptions } from 'swiper';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { FooterComponent } from '../footer/footer.component';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
 @Component({
   selector: 'app-tutoriales',
   standalone: true,
-  imports: [NgFor, SwiperModule, TranslateModule, NgIf],
+  imports: [NgFor, SwiperModule, TranslateModule, NgIf, FooterComponent],
   templateUrl: './tutoriales.component.html',
   styleUrl: './tutoriales.component.css'
 })
@@ -96,7 +97,7 @@ export class TutorialesComponent implements OnInit{
 
     const videoIds = ids[level] ?? [];
     if (!Array.isArray(titles) || titles.length !== videoIds.length) {
-      return [];
+        return [];
     }
 
     return titles.map((title, index) => ({

@@ -1,10 +1,11 @@
 import { Component, ElementRef, Renderer2 } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-sobre-nosotros',
   standalone: true,
-  imports: [TranslateModule],
+  imports: [TranslateModule, FooterComponent],
   templateUrl: './sobre-nosotros.component.html',
   styleUrl: './sobre-nosotros.component.css'
 })

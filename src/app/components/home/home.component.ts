@@ -7,13 +7,14 @@ import { Producto } from '../../interfaces/producto';
 import { Router, RouterLink } from '@angular/router';
 import { TranslateCompiler, TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { SpinnerService } from '../../services/spinner-service.service';
+import { FooterComponent } from '../footer/footer.component';
 
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  imports : [HeaderComponent, NgIf , TranslateModule, RouterLink],
+  imports : [HeaderComponent, NgIf , TranslateModule, RouterLink, FooterComponent],
   standalone:true
 })
 

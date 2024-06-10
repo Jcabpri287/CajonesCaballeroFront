@@ -3,11 +3,12 @@ import { Router } from '@angular/router';
 import * as THREE from 'three';
 import { StripeService } from '../../services/stripe.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-final-cajon',
   standalone: true,
-  imports: [TranslateModule],
+  imports: [TranslateModule, FooterComponent],
   templateUrl: './final-cajon.component.html',
   styleUrl: './final-cajon.component.css'
 })

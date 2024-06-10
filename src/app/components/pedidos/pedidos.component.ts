@@ -8,11 +8,12 @@ import { SumPrecioPipe } from '../../pipes/sum-precio.pipe';
 import { CuerdasPipe } from '../../pipes/cuerdas.pipe';
 import { TranslateModule } from '@ngx-translate/core';
 import { SpinnerService } from '../../services/spinner-service.service';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-pedidos',
   standalone: true,
-  imports: [HeaderComponent, NgFor, NgIf, SumPrecioPipe, NgClass,CuerdasPipe, TranslateModule],
+  imports: [HeaderComponent, NgFor, NgIf, SumPrecioPipe, NgClass,CuerdasPipe, TranslateModule, FooterComponent],
   templateUrl: './pedidos.component.html',
   styleUrl: './pedidos.component.css'
 })

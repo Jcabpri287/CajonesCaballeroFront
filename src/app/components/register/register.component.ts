@@ -9,11 +9,12 @@ import { NgIf } from '@angular/common';
 import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [HeaderComponent, NgIf, ReactiveFormsModule, FormsModule, TranslateModule, RouterLink],
+  imports: [HeaderComponent, NgIf, ReactiveFormsModule, FormsModule, TranslateModule, RouterLink, FooterComponent],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })

@@ -6,11 +6,12 @@ import { TranslateModule } from '@ngx-translate/core';
 import { RouterLink } from '@angular/router';
 import { CarritoService } from '../../services/carrito.service';
 import { CompressImageService } from '../../services/compressimage.service';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-exito',
   standalone: true,
-  imports: [TranslateModule, RouterLink],
+  imports: [TranslateModule, RouterLink, FooterComponent],
   templateUrl: './exito.component.html',
   styleUrls: ['./exito.component.css']
 })

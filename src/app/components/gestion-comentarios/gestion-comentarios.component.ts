@@ -4,11 +4,12 @@ import { Comentario } from '../../interfaces/comentario';
 import { comentarioService } from '../../services/comentario.service';
 import { SpinnerService } from '../../services/spinner-service.service';
 import { DatePipe } from '@angular/common';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-gestion-comentarios',
   standalone: true,
-  imports: [TranslateModule, DatePipe],
+  imports: [TranslateModule, DatePipe, FooterComponent],
   templateUrl: './gestion-comentarios.component.html',
   styleUrl: './gestion-comentarios.component.css'
 })

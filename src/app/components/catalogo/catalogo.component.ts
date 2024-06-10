@@ -12,11 +12,12 @@ import Swal from 'sweetalert2';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { SpinnerService } from '../../services/spinner-service.service';
 import { CarritoService } from '../../services/carrito.service';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-catalogo',
   standalone: true,
-  imports: [TranslateModule,HeaderComponent, NgFor, PaginationModule, DatePipe, ReactiveFormsModule, FormsModule, PriceFilterPipe, NgIf],
+  imports: [TranslateModule,HeaderComponent,FooterComponent, NgFor, PaginationModule, DatePipe, ReactiveFormsModule, FormsModule, PriceFilterPipe, NgIf],
   templateUrl: './catalogo.component.html',
   styleUrl: './catalogo.component.css'
 })

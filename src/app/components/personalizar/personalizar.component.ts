@@ -7,11 +7,12 @@ import { FormsModule } from '@angular/forms';
 import * as THREE from 'three';
 import { SpinnerService } from '../../services/spinner-service.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-personalizar',
   standalone: true,
-  imports: [HeaderComponent, NgFor, FormsModule, NgClass, TranslateModule],
+  imports: [HeaderComponent, NgFor, FormsModule, NgClass, TranslateModule, FooterComponent],
   templateUrl: './personalizar.component.html',
   styleUrl: './personalizar.component.css'
 })
@@ -76,7 +77,7 @@ export class PersonalizarComponent implements OnInit, AfterViewInit{
       confirmButtonText: this.translate.instant('recomendacion.confirmar'),
       confirmButtonColor: "#8ea7f7",
       cancelButtonColor: "#252525",
-      cancelButtonText: this.translate.instant('recomendacion.cancelar')  
+      cancelButtonText: this.translate.instant('recomendacion.cancelar')
     }).then((result) => {
       if (!result.isConfirmed) {
         this.router.navigate(['/'])

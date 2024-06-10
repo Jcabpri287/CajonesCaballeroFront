@@ -9,10 +9,11 @@ import { CuerdasPipe } from '../../pipes/cuerdas.pipe';
 import { TranslateModule } from '@ngx-translate/core';
 import { SpinnerService } from '../../services/spinner-service.service';
 import { FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';
+import { FooterComponent } from '../footer/footer.component';
 @Component({
   selector: 'app-gestion-pedidos',
   standalone: true,
-  imports: [TranslateModule, HeaderComponent, NgFor, NgIf, SumPrecioPipe, NgClass,CuerdasPipe, ReactiveFormsModule, FormsModule],
+  imports: [TranslateModule, HeaderComponent, NgFor, NgIf, SumPrecioPipe, NgClass,CuerdasPipe, ReactiveFormsModule, FormsModule, FooterComponent],
   templateUrl: './gestion-pedidos.component.html',
   styleUrl: './gestion-pedidos.component.css'
 })

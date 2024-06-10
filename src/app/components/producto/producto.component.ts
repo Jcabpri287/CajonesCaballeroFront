@@ -13,11 +13,12 @@ import Swal from 'sweetalert2';
 import { StripeService } from '../../services/stripe.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { SpinnerService } from '../../services/spinner-service.service';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-producto',
   standalone: true,
-  imports: [HeaderComponent,DatePipe,FormsModule, DatePipe, TranslateModule, NgIf, NgFor, RouterLink],
+  imports: [HeaderComponent,DatePipe,FormsModule, DatePipe, TranslateModule, NgIf, NgFor, RouterLink, FooterComponent],
   templateUrl: './producto.component.html',
   styleUrl: './producto.component.css'
 })
