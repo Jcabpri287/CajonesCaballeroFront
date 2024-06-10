@@ -109,18 +109,19 @@ export class RegisterComponent {
             toast.onmouseleave = Swal.resumeTimer;
           }
         });
-        Toast.fire({
-          icon: "success",
-          iconColor: "#8ea7f7",
-          title: this.translate.instant('registrado_correctamente')
-        });
         this.router.navigate(['/']).then(() => {
           this.ngZone.onStable.asObservable().pipe(first()).subscribe(() => {
             this.cd.detectChanges();
             window.scrollTo(0, 0);
-            window.location.reload(); 
+            window.location.reload();
+            Toast.fire({
+              icon: "success",
+              iconColor: "#8ea7f7",
+              title: this.translate.instant('registrado_correctamente')
+            });
           });
         });
+
       },
       error => {
       }
