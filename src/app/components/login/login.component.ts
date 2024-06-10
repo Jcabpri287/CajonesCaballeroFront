@@ -85,7 +85,8 @@ import { first } from 'rxjs';
             this.router.navigate(['/']).then(() => {
               this.ngZone.onStable.asObservable().pipe(first()).subscribe(() => {
                 this.cd.detectChanges();
-                window.scrollTo(0, 0); // Forzar el scroll al principio
+                window.scrollTo(0, 0);
+                window.location.reload();
               });
             });
           },
