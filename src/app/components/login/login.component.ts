@@ -83,7 +83,6 @@ import { first } from 'rxjs';
                 this.cd.detectChanges();
                 window.scrollTo(0, 0);
                 window.location.reload();
-
                 localStorage.setItem('showToastLogin', 'true');
               });
             });

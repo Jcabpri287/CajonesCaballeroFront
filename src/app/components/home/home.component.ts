@@ -24,6 +24,8 @@ export class HomeComponent implements OnInit{
   private isMouseDown: boolean = false;
   private mouseX: number = 0;
   cuatroProductos?: Producto[];
+  messageRegister = "";
+  messageLogin = "";
 
   @ViewChild('rendererContainer', { static: true }) rendererContainer!: ElementRef<HTMLDivElement>;
 
@@ -55,6 +57,23 @@ export class HomeComponent implements OnInit{
 
     const showToast1 = localStorage.getItem('showToastRegister');
     const showToast2 = localStorage.getItem('showToastLogin');
+
+    if (this.translate.currentLang === 'es') {
+      this.messageRegister = "Usuario registrado correctamente";
+    } else if (this.translate.currentLang === 'en') {
+      this.messageRegister = "User registered successfully";
+    }else{
+      this.messageRegister = "Utente registrato con successo";
+    }
+
+    if (this.translate.currentLang === 'es') {
+      this.messageLogin = "Sesión iniciada correctamente";
+    } else if (this.translate.currentLang === 'en') {
+      this.messageLogin = "Session started successfully";
+    }else{
+      this.messageLogin = "Sessione avviata con successo";
+    }
+
     if (showToast1 === 'true') {
       const Toast = Swal.mixin({
         toast: true,
@@ -70,7 +89,7 @@ export class HomeComponent implements OnInit{
       Toast.fire({
         icon: "success",
         iconColor: "#8ea7f7",
-        title: this.translate.instant('registrado_correctamente')
+        title: this.messageRegister
       });
 
       localStorage.removeItem('showToastRegister');
@@ -89,7 +108,7 @@ export class HomeComponent implements OnInit{
       Toast.fire({
         icon: "success",
         iconColor: "#8ea7f7",
-        title: this.translate.instant('sesion.iniciada_correctamente')
+        title: this.messageLogin
       });
 
       localStorage.removeItem('showToastLogin');
