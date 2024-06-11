@@ -1,15 +1,15 @@
-<div class="container mx-auto" style="min-height: 76.3vh; padding-top: 30px; display: grid; place-items: center;">
-  <div style="background-color:rgb(232, 232, 232); padding: 30px 100px; border-radius: 20px; width: 100%;">
+<div class="container mx-auto responsive-container" style="min-height: 76.3vh; padding-top: 30px; display: grid; place-items: center;">
+  <div class="responsive-content" style="background-color:rgb(232, 232, 232); padding: 30px 100px; border-radius: 20px; width: 100%;">
     <h1 class="mb-4 CatalogoH1 text-center">{{ 'about.title' | translate }}</h1>
     <p class="lead mx-auto text-center">{{ 'about.subtitle' | translate }}</p>
   </div>
 
-  <section class="about-section text-center">
+  <section class="about-section text-center responsive-section">
     <div class="container">
-      <div class="row">
-        <div class="col-md-4" style="border-radius: 10px; background-image: url('assets/img/design/juan.jpg'); height: 500px; background-size: cover;">
+      <div class="row responsive-row">
+        <div class="col-md-4 responsive-img" style="border-radius: 10px; background-image: url('assets/img/design/juan.jpg'); background-size: cover;">
         </div>
-        <div class="col-md-8 mt-5 text-end">
+        <div class="col-md-8 mt-5 text-end responsive-text">
           <h2 class="mb-4 text-end" style="color: rgb(92, 129, 249);">{{ 'about.juanName' | translate }}</h2>
           <p class="lead mt-4 text-end ms-auto" style="width: 85%;">
             {{ 'about.juanDescription' | translate }}
@@ -22,7 +22,7 @@
 
   <span id="Logros" style="padding-top: 30px;"></span>
   <div class="container">
-    <section class="about-section text-center py-5">
+    <section class="about-section text-center py-5 responsive-section">
       <div class="container">
         <h2 class="mb-4">{{ 'about.historyTitle' | translate }}</h2>
         <p class="lead w-75 mx-auto">
@@ -31,11 +31,11 @@
       </div>
     </section>
 
-    <section class="about-section text-center py-5">
+    <section class="about-section text-center py-5 responsive-section">
       <div class="container">
         <h2 class="mb-4">{{ 'about.achievementsTitle' | translate }}</h2>
-        <div class="row">
-          <div class="col-md-4">
+        <div class="row responsive-row">
+          <div class="col-md-4 responsive-card">
             <div class="card mb-4">
               <img height="350px" src="assets/img/design/2.jpg" alt="Imagen de cajon flamenco">
               <div class="card-body">
@@ -44,7 +44,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-4 responsive-card">
             <div class="card mb-4">
               <div style="height: 325px; background-position: center; background-image: url('assets/img/design/3.jpg'); background-size: cover;"></div>
               <div class="card-body">
@@ -53,7 +53,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-4 responsive-card">
             <div class="card mb-4">
               <img height="350px" src="assets/img/design/1.jpg" alt="Imagen de cajon flamenco">
               <div class="card-body">

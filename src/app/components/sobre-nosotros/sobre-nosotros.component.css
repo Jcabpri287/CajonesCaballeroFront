@@ -33,3 +33,41 @@
   transform: scale(1.02);
 }
 
+.responsive-img {
+  height: 500px;
+}
+
+@media (max-width: 580px) {
+  .responsive-container {
+    padding: 10px;
+  }
+  .responsive-content {
+    padding: 20px;
+  }
+  .responsive-section {
+    padding: 10px;
+  }
+  .responsive-row {
+    display: flex;
+    flex-direction: column;
+  }
+  .responsive-img {
+    height: 400px;
+  }
+  .responsive-text {
+    text-align: center !important;
+    margin-top: 20px;
+  }
+  .responsive-text h2 {
+    font-size: 1.5rem;
+  }
+  .responsive-text p {
+    width: 100% !important;
+  }
+  .responsive-card {
+    margin-bottom: 20px;
+  }
+  .responsive-card .card img {
+    height: 200px !important;
+  }
+}
