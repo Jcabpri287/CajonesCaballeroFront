@@ -25,28 +25,45 @@ export class HeaderComponent implements OnInit {
   }
 
   cerrarSesion(): void {
+    let confirmTitle, confirmButtonText, cancelButtonText;
+
+    if (this.translate.currentLang === 'es') {
+        confirmTitle = "¿Estás seguro de que quieres cerrar sesión?";
+        confirmButtonText = "Sí";
+        cancelButtonText = "No";
+    } else if (this.translate.currentLang === 'en') {
+        confirmTitle = "Are you sure you want to log out?";
+        confirmButtonText = "Yes";
+        cancelButtonText = "No";
+    } else {
+        confirmTitle = "Sei sicuro di voler uscire?";
+        confirmButtonText = "Sì";
+        cancelButtonText = "No";
+    }
+
     Swal.fire({
-      title: this.translate.instant('logout.confirm_title'),
-      icon: "warning",
-      iconColor: "#8ea7f7",
-      showCancelButton: true,
-      confirmButtonColor: "#252525",
-      cancelButtonColor: "#8ea7f7",
-      confirmButtonText: this.translate.instant('logout.yes'),
-      cancelButtonText: this.translate.instant('logout.no')
+        title: confirmTitle,
+        icon: "warning",
+        iconColor: "#8ea7f7",
+        showCancelButton: true,
+        confirmButtonColor: "#252525",
+        cancelButtonColor: "#8ea7f7",
+        confirmButtonText: confirmButtonText,
+        cancelButtonText: cancelButtonText
     }).then((result) => {
-      if (result.isConfirmed) {
-        this.authService.logout();
-        this.router.navigate(['/']).then(() => {
-          this.ngZone.onStable.asObservable().pipe(first()).subscribe(() => {
-            this.cd.detectChanges();
-            window.scrollTo(0, 0);
-            window.location.reload(); 
-          });
-        });
-      }
+        if (result.isConfirmed) {
+            this.authService.logout();
+            this.router.navigate(['/']).then(() => {
+                this.ngZone.onStable.asObservable().pipe(first()).subscribe(() => {
+                    this.cd.detectChanges();
+                    window.scrollTo(0, 0);
+                    window.location.reload();
+                });
+            });
+        }
     });
-  }
+}
+
 
   checkSpecificUrl(): boolean {
     return this.router.url === '/';

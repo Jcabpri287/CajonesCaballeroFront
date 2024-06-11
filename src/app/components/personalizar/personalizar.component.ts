@@ -68,22 +68,42 @@ export class PersonalizarComponent implements OnInit, AfterViewInit{
   }
 
   mostrarAlerta() {
+    let titulo, mensaje, confirmar, cancelar;
+
+    if (this.translate.currentLang === 'es') {
+        titulo = "Recomendación";
+        mensaje = "Te recomendamos usar un ordenador para disfrutar de esta función de la mejor manera posible.";
+        confirmar = "Seguir";
+        cancelar = "Volver atrás";
+    } else if (this.translate.currentLang === 'en') {
+        titulo = "Recommendation";
+        mensaje = "We recommend using a computer to enjoy this feature in the best possible way.";
+        confirmar = "Continue";
+        cancelar = "Go back";
+    } else {
+        titulo = "Raccomandazione";
+        mensaje = "Ti consigliamo di usare un computer per goderti questa funzione nel miglior modo possibile.";
+        confirmar = "Continua";
+        cancelar = "Torna indietro";
+    }
+
     Swal.fire({
-      title: this.translate.instant('recomendacion.titulo'),
-      text: this.translate.instant('recomendacion.mensaje'),
-      icon: 'info',
-      iconColor: "#8ea7f7",
-      showCancelButton: true,
-      confirmButtonText: this.translate.instant('recomendacion.confirmar'),
-      confirmButtonColor: "#8ea7f7",
-      cancelButtonColor: "#252525",
-      cancelButtonText: this.translate.instant('recomendacion.cancelar')
+        title: titulo,
+        text: mensaje,
+        icon: 'info',
+        iconColor: "#8ea7f7",
+        showCancelButton: true,
+        confirmButtonText: confirmar,
+        confirmButtonColor: "#8ea7f7",
+        cancelButtonColor: "#252525",
+        cancelButtonText: cancelar
     }).then((result) => {
-      if (!result.isConfirmed) {
-        this.router.navigate(['/'])
-      }
+        if (!result.isConfirmed) {
+            this.router.navigate(['/']);
+        }
     });
-  }
+}
+
 
   private initThree(): void {
     if (typeof window !== 'undefined') {

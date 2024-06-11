@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { productoService } from '../../services/producto.service';
 import { Producto } from '../../interfaces/producto';
 import { NgFor, NgIf } from '@angular/common';
@@ -29,7 +29,7 @@ export class GestionProductosComponent implements OnInit {
     });
   }
 
-  constructor(private fb: FormBuilder, private productoService: productoService, private marcaService: marcaService, private spinnerService: SpinnerService) {
+  constructor(private fb: FormBuilder,private translate: TranslateService, private productoService: productoService, private marcaService: marcaService, private spinnerService: SpinnerService) {
     this.productoForm = this.fb.group({
       nombre: ['', Validators.required],
       descripcion: ['', Validators.required],
@@ -47,28 +47,37 @@ export class GestionProductosComponent implements OnInit {
 
   onSubmit(): void {
     if (this.productoForm.invalid) {
-      Swal.fire("Por favor, complete todos los campos requeridos");
-      return;
+        Swal.fire(this.translate.currentLang === 'es' ? "Por favor, complete todos los campos requeridos" :
+                  this.translate.currentLang === 'en' ? "Please complete all required fields" :
+                  "Si prega di compilare tutti i campi richiesti");
+        return;
     }
     if (!this.selectedFile) {
-      Swal.fire("Por favor, seleccione una imagen para el producto");
-      return;
+        Swal.fire(this.translate.currentLang === 'es' ? "Por favor, seleccione una imagen para el producto" :
+                  this.translate.currentLang === 'en' ? "Please select an image for the product" :
+                  "Si prega di selezionare un'immagine per il prodotto");
+        return;
     }
 
     this.spinnerService.show();
     const nuevoProducto: Producto = {
-      ...this.productoForm.value,
-      fecha_lanzamiento: new Date()
+        ...this.productoForm.value,
+        fecha_lanzamiento: new Date()
     };
 
     this.productoService.addProducto(nuevoProducto).subscribe(response => {
-      this.spinnerService.hide();
-      Swal.fire("Producto añadido al carrito satisfactoriamente");
+        this.spinnerService.hide();
+        Swal.fire(this.translate.currentLang === 'es' ? "Producto añadido al carrito satisfactoriamente" :
+                  this.translate.currentLang === 'en' ? "Product added to cart successfully" :
+                  "Prodotto aggiunto al carrello con successo");
     }, error => {
-      this.spinnerService.hide();
-      Swal.fire("Error al añadir el producto");
+        this.spinnerService.hide();
+        Swal.fire(this.translate.currentLang === 'es' ? "Error al añadir el producto" :
+                  this.translate.currentLang === 'en' ? "Error adding the product" :
+                  "Errore nell'aggiungere il prodotto");
     });
-  }
+}
+
 
   onFileChange(event: any): void {
     const file = event.target.files[0];

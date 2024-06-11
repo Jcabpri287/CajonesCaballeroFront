@@ -81,8 +81,11 @@ export class RegisterComponent {
             iconColor: "#8ea7f7",
             title: 'Error',
             confirmButtonColor: "#252525",
-            text: this.translate.instant('correo_existente')
-          });
+            text: this.translate.currentLang === 'es' ? 'Este email ya existe.' :
+                  this.translate.currentLang === 'en' ? 'This email already exists.' :
+                  'Questa email esiste già.'
+        });
+
         }else{
           this.submitRegister()
         }
@@ -117,7 +120,9 @@ export class RegisterComponent {
             Toast.fire({
               icon: "success",
               iconColor: "#8ea7f7",
-              title: this.translate.instant('registrado_correctamente')
+              title: this.translate.currentLang === 'es' ? 'Usuario registrado correctamente' :
+                     this.translate.currentLang === 'en' ? 'User registered successfully' :
+                     'Utente registrato con successo'
             });
             localStorage.setItem('showToastRegister', 'true');
           });
@@ -171,8 +176,11 @@ export class RegisterComponent {
         iconColor: "#8ea7f7",
         title: 'Error',
         confirmButtonColor: "#252525",
-        text: this.translate.instant('codigo_erroneo')
-      });
+        text: this.translate.currentLang === 'es' ? 'Código de verificación erróneo' :
+              this.translate.currentLang === 'en' ? 'Incorrect verification code' :
+              'Codice di verifica errato'
+    });
+    
     }
   }
 

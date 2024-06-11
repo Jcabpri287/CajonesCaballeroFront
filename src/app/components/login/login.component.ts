@@ -93,8 +93,10 @@ import { first } from 'rxjs';
               iconColor: "#8ea7f7",
               title: 'Error',
               confirmButtonColor: "#252525",
-              text: this.translate.instant('error.mensaje')
-            });
+              text: this.translate.currentLang === 'es' ? 'Ha ocurrido un error' :
+                    this.translate.currentLang === 'en' ? 'An error has occurred' :
+                    'Si è verificato un errore'
+          });
           }
         );
       }
