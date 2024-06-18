@@ -5,11 +5,11 @@
       <a *ngIf="!checkSpecificUrl()" class="navbar-brand titulo"  [routerLink]="['/']"><i class="fa-solid fa-cube"></i></a>
       <div class="navbar-collapse d-none d-lg-block" id="navbarResponsive">
         <ul class="navbar-nav ms-auto d-none d-lg-flex">
-          <li class="nav-item botones" [class.current]="checkUrl('/')"><a class="nav-link" [routerLink]="['/']">{{ 'HOME' | translate }}</a></li>
-          <li class="nav-item botones" [class.current]="checkUrl('/catalogo') || checkUrl('/producto')"><a class="nav-link" [routerLink]="['/catalogo']">{{ 'CATALOG' | translate }}</a></li>
-          <li class="nav-item botones" [class.current]="checkUrl('/personalizar') || checkUrl('/personalizar/pintar') || checkUrl('/personalizar/finalizar')"><a class="nav-link"  [routerLink]="['/personalizar']">{{ 'CUSTOMIZATION' | translate }}</a></li>
-          <li class="nav-item botones" [class.current]="checkUrl('/tutoriales')"><a class="nav-link"  [routerLink]="['/tutoriales']">{{ 'TUTORIALS' | translate }}</a></li>
-          <li class="nav-item botones" [class.current]="checkUrl('/sobreNosotros')"><a class="nav-link"  [routerLink]="['/sobreNosotros']">{{ 'ABOUT_US' | translate }}</a></li>
+          <li class="nav-item botones" [class.current]="checkUrl('/')"><a class="nav-link" href="/">{{ 'HOME' | translate }}</a></li>
+          <li class="nav-item botones" [class.current]="checkUrl('/catalogo') || checkUrl('/producto')"><a class="nav-link" href="/catalogo">{{ 'CATALOG' | translate }}</a></li>
+          <li class="nav-item botones" [class.current]="checkUrl('/personalizar') || checkUrl('/personalizar/pintar') || checkUrl('/personalizar/finalizar')"><a class="nav-link" href="/personalizar">{{ 'CUSTOMIZATION' | translate }}</a></li>
+          <li class="nav-item botones" [class.current]="checkUrl('/tutoriales')"><a class="nav-link" href="/tutoriales">{{ 'TUTORIALS' | translate }}</a></li>
+          <li class="nav-item botones" [class.current]="checkUrl('/sobreNosotros')"><a class="nav-link" href="/sobreNosotros">{{ 'ABOUT_US' | translate }}</a></li>
         </ul>
       </div>
       <label class="popup" *ngIf="administrador">
@@ -95,8 +95,8 @@
         <ng-container *ngIf="sesionIniciada(); else notLoggedIn">
           <ul class="navbar-nav ms-5">
             <li class="nav-item canvasList" [class.active]="checkUrl('/perfil')"><a class="nav-link"  [routerLink]="['/perfil']">{{ 'MY_PROFILE' | translate }}</a></li>
-            <li class="nav-item canvasList" style="display: flex; align-items: center;" [class.active]="checkUrl('/carrito')"><a class="nav-link"  [routerLink]="['/carrito']">{{ 'CART' | translate }}</a>  <span style="background-color:rgb(84, 112, 204); padding: 3px 7px; font-size: 13px; border-radius: 50%; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-weight: bold; margin-left: 10px; min-width: 25px; text-align: center;">{{totalProductos}}</span> </li>
-            <li class="nav-item canvasList" [class.active]="checkUrl('/pedidos')"><a class="nav-link"  [routerLink]="['/pedidos']">{{ 'MY_ORDERS' | translate }}</a></li>
+            <li class="nav-item canvasList" style="display: flex; align-items: center;" [class.active]="checkUrl('/carrito')"><a class="nav-link" href="/carrito">{{ 'CART' | translate }}</a>  <span style="background-color:rgb(84, 112, 204); padding: 3px 7px; font-size: 13px; border-radius: 50%; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-weight: bold; margin-left: 10px; min-width: 25px; text-align: center;">{{totalProductos}}</span> </li>
+            <li class="nav-item canvasList" [class.active]="checkUrl('/pedidos')"><a class="nav-link" href="/pedidos" >{{ 'MY_ORDERS' | translate }}</a></li>
             <li class="nav-item canvasList" style=" cursor: pointer;"><a class="nav-link" (click)="cerrarSesion()">{{ 'LOGOUT' | translate }}</a></li>
           </ul>
         </ng-container>
