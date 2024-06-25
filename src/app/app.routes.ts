@@ -30,13 +30,11 @@ export const routes: Routes = [
   },
   {
     path: 'personalizar',
-    canActivate: [PermissionsService],
     loadComponent: () =>
       import('./components/personalizar/personalizar.component').then((c) => c.PersonalizarComponent),
   },
   {
     path: 'personalizar/pintar',
-    canActivate: [PermissionsService],
     loadComponent: () =>
       import('./components/pintar/pintar.component').then((c) => c.PintarComponent),
   },
